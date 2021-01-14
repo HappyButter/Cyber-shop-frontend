@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { logout } from '../../state/auth/authActions';
 import { useDispatch } from 'react-redux';
 
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -69,10 +70,6 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionDesktop: {
     maxWidth: '1200px',
-    // display: 'none',
-    // [theme.breakpoints.up('md')]: {
-    //   display: 'flex',
-    // },
   },
 }));
 
@@ -103,7 +100,7 @@ const MenuAppBar = (props) => {
   const menuId = 'primary-search-account-menu';
 
   
-  const renderMenuLogged = (
+  const menuUserLoggedIn = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -119,7 +116,7 @@ const MenuAppBar = (props) => {
     </Menu>
   );
 
-  const renderMenuLogout = (
+  const menuUserLoggedOut = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -130,6 +127,7 @@ const MenuAppBar = (props) => {
       onClose={() => setAnchorEl(null)}
     >
       <MenuItem onClick={() => handleProfileMenuClick('/login')}>Zaloguj</MenuItem>
+      <MenuItem onClick={() => handleProfileMenuClick('/register')}>Zarejestruj się</MenuItem>
     </Menu>
   );
 
@@ -178,7 +176,7 @@ const MenuAppBar = (props) => {
           </div>
         </Toolbar>
       </AppBar>
-      {auth.isLoggedIn ? renderMenuLogged : renderMenuLogout}
+      { auth.isLoggedIn ? menuUserLoggedIn : menuUserLoggedOut }
     </div>
   );
 }

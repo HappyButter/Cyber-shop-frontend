@@ -3,20 +3,23 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { CustomTextField, SignInWrapper } from './logIn.css';
+import { SignInWrapper } from './login.css';
 import { withRouter, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../state/auth/authActions';
 
+
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(7),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    marginBottom: theme.spacing(7),
   },
   avatar: {
     margin: theme.spacing(1),
@@ -32,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LogIn = () => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -42,10 +45,10 @@ const LogIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+        // TO DO: client validation
     dispatch(login({email, password}));
-
   } 
-
 
   return (
     <SignInWrapper component="main" maxWidth="xs">
@@ -54,30 +57,28 @@ const LogIn = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Logowanie
         </Typography>
         <form 
           className={classes.form} 
           onSubmit={handleSubmit}>
-          <CustomTextField
-            variant="outlined"
+          <TextField
             margin="normal"
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             autoComplete="email"
             autoFocus
             onChange={(event) => setEmail(event.target.value)}
           />
-          <CustomTextField
-            variant="outlined"
+          <TextField
             margin="normal"
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Hasło"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -90,13 +91,13 @@ const LogIn = () => {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Zaloguj!
           </Button>
 
           <Grid container>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+              <Link href="/register" variant="body1">
+                {"Nie masz konta? Zarejestruj się!"}
               </Link>
             </Grid>
           </Grid>
@@ -107,4 +108,4 @@ const LogIn = () => {
   );
 }
 
-export default withRouter(LogIn);
+export default withRouter(Login);
