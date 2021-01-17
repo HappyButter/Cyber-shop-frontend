@@ -1,6 +1,8 @@
 import React from 'react';
 import { Paragraph, Middlepane } from './home.css';
-import { CategoriesBar, AppBar, AdsCarousel } from '../../components';
+import { CategoriesBar, AppBar, AdsCarousel, Recommended } from '../../components';
+
+
 
 const Home = () => {
     return (
@@ -14,6 +16,8 @@ const Home = () => {
                 <br/>
                 <br/>
                 <AdsCarousel/>
+                <br/><br/>
+                <Recommended/>
             </Middlepane>
         </>
     );
