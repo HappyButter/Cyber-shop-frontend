@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './global';
 import { theme } from './theme';
-import { Home, Offer, Login, Register } from './pages';
+import { Home, Offer, Login, Register, Promo, ProductDetails, Account, Orders } from './pages';
 import { ProtectedRoute } from './components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPromos } from './state/promo/promoActions';
+import { getRecommendedProducts } from './state/products/productActions';
 
 import {
   BrowserRouter as Router,
@@ -15,21 +17,35 @@ import {
 
 const App = () => {
   const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      dispatch(getPromos());
+      dispatch(getRecommendedProducts());
+  },[dispatch]);
 
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/Login" exact component={Login} />
+          <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
           <Route path="/offer/:categoryId" exact component={Offer} />
-          {/* <ProtectedRoute 
-                          path="/offer/:categoryId" 
+          <Route path="/promo/:promoId" exact component={Promo} />
+          <Route path="/productDetails/:productId" exact component={ProductDetails} />
+          <ProtectedRoute 
+                          path="/account" 
                           exact
-                          component={Offer} 
+                          component={Account} 
                           auth={auth.isLoggedIn}
-          /> */}
+          />
+          <ProtectedRoute 
+                          path="/orders" 
+                          exact
+                          component={Orders} 
+                          auth={auth.isLoggedIn}
+          />
         </Switch>
       </Router>
       <GlobalStyles />

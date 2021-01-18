@@ -9,4 +9,5 @@ export const GridContainer = styled.div`
 export const GridElement = styled.div`
 	border: 2px solid;
 	min-height: 100px;
+	background-color: blue;
 `;

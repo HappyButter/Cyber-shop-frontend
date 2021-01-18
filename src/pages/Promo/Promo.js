@@ -1,27 +1,27 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getProductsByCategoryId } from '../../state/products/productActions';
 import { CategoriesBar, AppBar } from '../../components';
+import { getPromoProducts } from 'state/products/productActions';
 
 
-const Offer = () => {
+const Promo = () => {
     const dispatch = useDispatch();
-    const { categoryId }= useParams();
+    const { promoId } = useParams();
     
     useEffect( () => {
-        dispatch(getProductsByCategoryId(categoryId));
-    },[dispatch, categoryId]);
+        dispatch(getPromoProducts(promoId));
+    }, [dispatch, promoId])
 
     return (
         <>
             <AppBar></AppBar>
             <CategoriesBar></CategoriesBar>
             <br/>
-            <h1>Offer {categoryId}</h1>
+            <h1>Promo {promoId}</h1>
             <br/>
-        </>
+        </> 
     );
 };
 
-export default Offer;
+export default Promo;

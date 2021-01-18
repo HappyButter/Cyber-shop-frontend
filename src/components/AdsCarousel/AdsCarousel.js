@@ -1,32 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 
-import { Box, CarouselWrapper } from './adsCarousel.css';
+import { Box, CarouselWrapper, CarouselLink } from './adsCarousel.css';
 
-import axios from '../../axios-config.js'
- 
+import {  useSelector } from 'react-redux';
 
 
 const Carousel = () => {
-    const [sales, setSales] = useState([]);
-    const getSales = () => {
-        axios.get('/products/sales')
-            .then(res => {
-                setSales(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    };
-
-    useEffect(() => {
-        getSales();
-    },[])
-
+    const promos = useSelector(state => state.promos.promosList);
     
-
-    const items = sales.map(sale => (<Box key={sale.id}>{sale.title}</Box>))
+    const items = promos.map(promo => ( 
+        <CarouselLink to={`/promo/${promo.id}`} onDragStart={e => e.preventDefault()}>
+            <Box key={promo.id}>
+                {promo.title}
+            </Box>
+        </CarouselLink>
+    ));
     
     return (
     <CarouselWrapper>

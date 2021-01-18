@@ -4,6 +4,7 @@ import { CategoriesBar, AppBar, AdsCarousel, Recommended } from '../../component
 
 
 
+
 const Home = () => {
     return (
         <>

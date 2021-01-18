@@ -1,14 +1,20 @@
 import {
     CREATE_PRODUCT,
     DELETE_PRODUCT,
-    GET_PRODUCTS_SUCCESS
+    GET_PRODUCTS_SUCCESS,
+    GET_PROMO_PRODUCTS_SUCCESS,
+    GET_RECOMMENDED_PRODUCTS_SUCCESS,
+    GET_PRODUCT_SUCCESS,
+    GET_CATEGORY_PRODUCTS_SUCCESS
 } from './productActions'; 
 
 let idGenerator = 1;
 
 const initialState = {
-    productList: JSON.parse(localStorage.getItem('products')) || [],
-    posts: [],
+    recommended : [],
+    promoProducts : [],
+    categoryProducts : [],
+    productDetails: {}
 }
 
 const productReducer = (state = initialState, action) => {
@@ -52,7 +58,39 @@ const productReducer = (state = initialState, action) => {
               ...state,
               posts,
             }
-          }
+        }
+        case GET_RECOMMENDED_PRODUCTS_SUCCESS: {
+            const recommended = action.payload.recommended;
+
+            return {
+              ...state,
+              recommended: recommended,
+            }
+        }
+        case GET_PROMO_PRODUCTS_SUCCESS: {
+            const promoProducts = action.payload.promoProducts;
+
+            return {
+                ...state,
+                promoProducts: promoProducts,
+            }
+        }
+        case GET_PRODUCT_SUCCESS: {
+            const productDetails = action.payload.productDetails;
+
+            return {
+                ...state,
+                productDetails: productDetails,
+            }
+        }
+        case GET_CATEGORY_PRODUCTS_SUCCESS: {
+            const categoryProducts = action.payload.categoryProducts;
+            
+            return {
+                ...state,
+                categoryProducts : categoryProducts,
+            }
+        }
         default:
             return state;
     }

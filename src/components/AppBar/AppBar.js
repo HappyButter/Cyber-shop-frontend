@@ -10,6 +10,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AdbIcon from '@material-ui/icons/Adb';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Badge from '@material-ui/core/Badge';
+
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { logout } from '../../state/auth/authActions';
@@ -165,6 +168,11 @@ const MenuAppBar = (props) => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
+          <IconButton aria-label="show 17 new notifications" color="inherit">
+              <Badge badgeContent={17} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
+            </IconButton>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton

@@ -1,27 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { GridContainer, GridElement } from './recommended.css';
-import axios from '../../axios-config.js';
 
 
 const Recommended = () => {
-    const [recommendedItems, setRecommendedItems] = useState([]);
-    const getRecommendedItems = () => {
-        axios.get('/products/recommended')
-            .then(res => {
-                setRecommendedItems(res.data);
-                console.log(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    };
-
-    useEffect( () => {
-        getRecommendedItems();
-    },[])
+    const recommendedItems = useSelector(state => state.products.recommended);
 
     const items = recommendedItems.map(item => (
-        <GridElement key={item.id}>{item.name}</GridElement>
+        <GridElement key={item.id}>
+            {item.name}
+            <br/><br/>
+            {"quantity: " + parseInt(item.inStock)}
+        </GridElement>
     ));
 
 

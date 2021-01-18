@@ -3,6 +3,9 @@ import axios from '../../axios-config.js';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
+export const USER_ACCOUNT_UPDATE_SUCCESS = 'USER_ACCOUNT_UPDATE_SUCCESS';
+export const USER_ACCOUNT_UPDATE_FAILURE = 'USER_ACCOUNT_UPDATE_FAILURE';
+
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -40,9 +43,25 @@ export const login = ( { email, password } ) => async dispatch => {
     });
 }
 
+export const updateAccountData = ( { name, surname, phoneNumber, userId } ) => async dispatch => {
+  axios.post(`/users/update/${userId}`, { name, surname, phoneNumber })
+    .then(res => {
+      dispatch({
+        type: USER_ACCOUNT_UPDATE_SUCCESS,
+        payload: { id:userId, name, surname, phoneNumber }
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: USER_ACCOUNT_UPDATE_FAILURE,
+        payload: err.message
+      })
+  });
+}
+
 export const logout = () => {
     return {
       type: LOGOUT_REQUEST,
       payload: null,
     }
-  }
+}

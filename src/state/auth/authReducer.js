@@ -3,8 +3,9 @@ import {
     LOGIN_FAILURE,
     LOGOUT_REQUEST,
     REGISTER_SUCCESS,
-    REGISTER_FAILURE
-} from './authActions'; 
+    REGISTER_FAILURE,
+    USER_ACCOUNT_UPDATE_SUCCESS
+} from './authActions';  
 
 const initialState = {
     user : JSON.parse(localStorage.getItem('user')) || null,
@@ -32,8 +33,8 @@ const authReducer = (state = initialState, action) => {
             }
         }
         case LOGIN_SUCCESS: {
-            const { id, isAdmin, name } = action.payload;
-            const user = { id, name };
+            const { id, isAdmin, name, surname, phoneNumber } = action.payload;
+            const user = { id, name, surname, phoneNumber };
 
             // update localStorage
             localStorage.setItem('user', JSON.stringify(user));
@@ -45,6 +46,19 @@ const authReducer = (state = initialState, action) => {
                 user,
                 isAdmin : isAdmin,
                 isLoggedIn : true
+            }
+        }
+        case USER_ACCOUNT_UPDATE_SUCCESS: {
+            const { id, name, surname, phoneNumber } = action.payload;
+            const user = { id, name, surname, phoneNumber };
+
+            // update localStorage
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('isLoggedIn', true);
+
+            return {
+                ...state,
+                user
             }
         }
         case LOGIN_FAILURE:
