@@ -82,7 +82,11 @@ const MenuAppBar = (props) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
-  const auth = useSelector(state => state.auth);
+
+  const state = useSelector(state => state); 
+  const count = state.cart.productList;
+  const auth = state.auth;
+
   const dispatch = useDispatch();
 
 
@@ -100,9 +104,7 @@ const MenuAppBar = (props) => {
     history.push('/');
   }
   
-  const menuId = 'primary-search-account-menu';
-
-  
+  const menuId = 'primary-search-account-menu';  
   const menuUserLoggedIn = (
     <Menu
       anchorEl={anchorEl}
@@ -168,9 +170,10 @@ const MenuAppBar = (props) => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <ShoppingCartIcon />
+          <IconButton aria-label="cart" color="inherit">
+              <Badge badgeContent={count.length} color="secondary">
+                <ShoppingCartIcon 
+                onClick={() => handleProfileMenuClick('/cart')}/>
               </Badge>
             </IconButton>
           <div className={classes.grow} />

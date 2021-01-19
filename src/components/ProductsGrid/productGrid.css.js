@@ -6,8 +6,3 @@ export const GridContainer = styled.div`
 	grid-gap: 50px;
 `;
 
-export const GridElement = styled.div`
-	border: 2px solid;
-	min-height: 100px;
-	background-color: blue;
-`;

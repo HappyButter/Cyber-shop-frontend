@@ -4,7 +4,7 @@ import { CategoriesBar, AppBar } from '../../components';
 import { addProductToCart,
         reduceProductQuantityFromCart,
         removeProductFromCart } from '../../state/cart/cartActions';
-
+import { Middlepane } from '../../styles/Middlepane.css';
 
 const Orders = () => {
     const dispatch = useDispatch();
@@ -17,22 +17,24 @@ const Orders = () => {
         <>
             <AppBar></AppBar>
             <CategoriesBar></CategoriesBar>
-            <br/>
-            <h1>Orders</h1>
-            <br/>
-            <button onClick={ e => dispatch(reduceProductQuantityFromCart({
-                productId : 2
-            }))}>-1</button>
-            
-            <button onClick={ e => dispatch(addProductToCart({
-                productId : 2,
-                productName : "a",
-                price : 5 
-            }))}>+1</button>
-                        
-            <button onClick={ e => dispatch(removeProductFromCart({
-                productId : 2
-            }))}>DELETE</button>
+            <Middlepane>
+                <br/>
+                <h1>Orders</h1>
+                <br/>
+                <button onClick={ e => dispatch(reduceProductQuantityFromCart({
+                    productId : 2
+                }))}>-1</button>
+                
+                <button onClick={ e => dispatch(addProductToCart({
+                    productId : 2,
+                    productName : "a",
+                    price : 5 
+                }))}>+1</button>
+                            
+                <button onClick={ e => dispatch(removeProductFromCart({
+                    productId : 2
+                }))}>DELETE</button>    
+            </Middlepane>
         </>
     );
 };

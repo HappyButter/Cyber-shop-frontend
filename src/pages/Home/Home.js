@@ -1,11 +1,14 @@
-import React from 'react';
-import { Paragraph, Middlepane } from './home.css';
-import { CategoriesBar, AppBar, AdsCarousel, Recommended } from '../../components';
-
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux'
+import { Paragraph } from './home.css';
+import { Middlepane } from '../../styles/Middlepane.css';
+import { CategoriesBar, AppBar, AdsCarousel, ProductGrid } from '../../components';
 
 
 
 const Home = () => {
+    const recommendedProducts = useSelector(state => state.products.recommended);
+
     return (
         <>
             <AppBar></AppBar>
@@ -18,7 +21,7 @@ const Home = () => {
                 <br/>
                 <AdsCarousel/>
                 <br/><br/>
-                <Recommended/>
+                <ProductGrid productsInfo={recommendedProducts}/>
             </Middlepane>
         </>
     );
