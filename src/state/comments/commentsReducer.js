@@ -12,7 +12,7 @@ const commentsReducer = (state = initialState, action) => {
             return action.payload;
         }case CREATE_COMMENT_SUCCES : {
             const comment = action.payload;
-            return [...state, comment];
+            return [...state, ...comment];
         }default:
             return state;
     }

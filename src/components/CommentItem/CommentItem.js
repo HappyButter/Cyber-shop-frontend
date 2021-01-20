@@ -4,8 +4,9 @@ import { Span } from './commentItem.css';
 const CommentItem = ({commentData}) => {
     
     return (
-        <article>
+        <article>            
             <hr/>
+            <br/>
             <header>
                 <Span>{commentData.nick}</Span>
                 <Rating name="read-only" 
@@ -15,6 +16,7 @@ const CommentItem = ({commentData}) => {
             <p>
                 {commentData.description}
             </p>
+            <br/>
         </article>
     )
 }
