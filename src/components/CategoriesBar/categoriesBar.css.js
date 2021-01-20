@@ -14,5 +14,6 @@ export const CustomIconButton = styled(IconButton)`
 export const CustomAppBar = styled(AppBar)`
     color: rgba(255,255,255,.75);
     align-items: center;
-    background-color: rgba(50,85,134,.90);
+    font-size: 90%;
+    margin-bottom: 10px;
 `

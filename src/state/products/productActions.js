@@ -45,14 +45,8 @@ export const deleteProduct = (productId) => {
 }
 
 export const getProductDetails = (productId) => async dispatch => {
-  dispatch({
-    type: GET_PRODUCT_REQUEST,
-    payload: {},
-  })
-
   axios.get(`/products/details/${productId}`)
     .then(res => {
-      console.log(res);
       dispatch({
         type: GET_PRODUCT_SUCCESS,
         payload: {

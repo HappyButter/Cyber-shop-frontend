@@ -33,7 +33,7 @@ const App = () => {
           <Route path="/register" exact component={Register} />
           <Route path="/offer/:categoryId" exact component={Offer} />
           <Route path="/promo/:promoId" exact component={Promo} />
-          <Route path="/productDetails/:productId" exact component={ProductDetails} />
+          <Route path="/product/:productId" exact component={ProductDetails} />
           <ProtectedRoute 
                           path="/account" 
                           exact

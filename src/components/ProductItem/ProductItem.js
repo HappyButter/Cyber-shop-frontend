@@ -13,6 +13,8 @@ import React from 'react';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 
+import { Link } from "react-router-dom";
+
 const ProductItem = ({ productInfo }) => {
     const dispatch = useDispatch();
     const getProductIcon = (category) => {
@@ -34,13 +36,15 @@ const ProductItem = ({ productInfo }) => {
     return (
         <GridElement key={productInfo.id}>
             <br/><br/>
-            {getProductIcon(productInfo.category_id)}
-            <br/><br/>
-            {productInfo.name}
-            <br/><br/>
-            {productInfo.promo_id 
-            ? productInfo.promo_price 
-            : productInfo.price + " zł"}
+            <Link to={`/product/${productInfo.id}`}>
+                {getProductIcon(productInfo.category_id)}
+                <br/><br/>
+                {productInfo.name}
+                <br/><br/>
+                {productInfo.promo_id 
+                ? productInfo.promo_price + " zł" 
+                : productInfo.price + " zł"}
+            </Link>
             <br/><br/>
             <button onClick={ e => dispatch(reduceProductQuantityFromCart({
                     productId : productInfo.id
@@ -58,7 +62,7 @@ const ProductItem = ({ productInfo }) => {
 
             <Box component="fieldset" mb={3} borderColor="transparent">
                 <Rating name="read-only" 
-                        value={productInfo.rating}
+                        value={parseFloat(productInfo.rating)}
                         readOnly
                         precision={0.5} />
             </Box>

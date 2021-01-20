@@ -10,9 +10,9 @@ const ProductGrid = ({ productsInfo }) => {
 
 
     return (
-    <GridContainer>
-        {items}
-    </GridContainer>
+        <GridContainer>
+            {items}
+        </GridContainer>
     );
 }
 

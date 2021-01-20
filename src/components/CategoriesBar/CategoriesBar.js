@@ -20,7 +20,7 @@ const CategoriesBar = (props) => {
 
   return (
     <div className={classes.root}>
-      <CustomAppBar position="static" color="transparent">
+      <CustomAppBar position="static" >
         <Toolbar>
           <CustomIconButton
               color="inherit"

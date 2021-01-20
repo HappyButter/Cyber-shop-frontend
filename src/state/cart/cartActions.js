@@ -1,5 +1,3 @@
-// import axios from '../../axios-config.js';
-
 export const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 export const REMOVE_PRODUCT_FROM_CART = 'REMOVE_PRODUCT_FROM_CART';
 export const REDUCE_PRODUCT_QUANTITY_FROM_CART = 'REDUCE_PRODUCT_QUANTITY_FROM_CART';
@@ -10,6 +8,7 @@ export const PLACE_ORDER_FAILURE = 'PLACE_ORDER_FAILURE';
 
 
 export const addProductToCart =  ({ productId, productName, price }) => {
+    // localStorage.setItem('user', JSON.stringify(user));
     return {
         type: ADD_PRODUCT_TO_CART,
         payload: {

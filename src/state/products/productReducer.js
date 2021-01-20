@@ -80,7 +80,7 @@ const productReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                productDetails: productDetails,
+                productDetails: productDetails[0],
             }
         }
         case GET_CATEGORY_PRODUCTS_SUCCESS: {

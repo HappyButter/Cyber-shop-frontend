@@ -6,8 +6,8 @@ import {
 
 
 const initialState = {
-    productList : [],
-    value : 0.0,
+    productList : JSON.parse(localStorage.getItem('cart')) || [],
+    value : parseFloat(localStorage.getItem('value')) || 0.0,
     address : {},
     payment : {}
 }
@@ -15,8 +15,8 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
     switch(action.type) {
         case ADD_PRODUCT_TO_CART: {
-
             const {  productId, productName, price } = action.payload;
+
             
             let cartProduct = state.productList.filter( 
                 product => product.id === productId
@@ -41,6 +41,9 @@ const cartReducer = (state = initialState, action) => {
             const cartValue = updatedProductList.reduce(
                 (val, product) => product.price * product.quantity + val, 0.0);
 
+            // update localStorage
+            localStorage.setItem('cart', JSON.stringify(updatedProductList));
+            localStorage.setItem('value', cartValue);
 
             return {
                 ...state,
@@ -72,6 +75,10 @@ const cartReducer = (state = initialState, action) => {
             const cartValue = updatedProductList.reduce(
                 (val, product) => product.price * product.quantity + val, 0.0);
 
+            // update localStorage
+            localStorage.setItem('cart', JSON.stringify(updatedProductList));
+            localStorage.setItem('value', cartValue);
+
             return {
                 ...state,
                 productList: updatedProductList,
@@ -86,6 +93,10 @@ const cartReducer = (state = initialState, action) => {
             const cartValue = state.productList.reduce(
                 (val, product) => product.price * product.quantity + val, 0.0);
 
+            // update localStorage
+            localStorage.setItem('cart', JSON.stringify(updatedProductList));
+            localStorage.setItem('value', cartValue);
+            
             return {
                 ...state,
                 productList: updatedProductList,

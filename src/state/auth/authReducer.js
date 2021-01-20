@@ -64,9 +64,7 @@ const authReducer = (state = initialState, action) => {
         case LOGIN_FAILURE:
         case REGISTER_FAILURE:
         case LOGOUT_REQUEST: {
-            localStorage.setItem('user', null);
-            localStorage.setItem('isAdmin', false);
-            localStorage.setItem('isLoggedIn', false);
+            localStorage.clear();
             return {
                 ...state,
                 user : null,

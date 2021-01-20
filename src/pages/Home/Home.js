@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux'
 import { Paragraph } from './home.css';
 import { Middlepane } from '../../styles/Middlepane.css';
@@ -21,6 +21,7 @@ const Home = () => {
                 <br/>
                 <AdsCarousel/>
                 <br/><br/>
+                <Paragraph>Polecane</Paragraph>
                 <ProductGrid productsInfo={recommendedProducts}/>
             </Middlepane>
         </>
