@@ -1,7 +1,8 @@
 import {
     ADD_PRODUCT_TO_CART,
     REMOVE_PRODUCT_FROM_CART,
-    REDUCE_PRODUCT_QUANTITY_FROM_CART
+    REDUCE_PRODUCT_QUANTITY_FROM_CART,
+    CLEAR_CART
 } from './cartActions'; 
 
 
@@ -14,6 +15,15 @@ const initialState = {
 
 const cartReducer = (state = initialState, action) => {
     switch(action.type) {
+        case CLEAR_CART : {
+            localStorage.clear();
+            return {
+                productList : [],
+                value : 0.0,
+                address : {},
+                payment : {}
+            }
+        }
         case ADD_PRODUCT_TO_CART: {
             const {  productId, productName, price } = action.payload;
 

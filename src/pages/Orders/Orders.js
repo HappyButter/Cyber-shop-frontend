@@ -9,9 +9,7 @@ import { Middlepane } from '../../styles/Middlepane.css';
 const Orders = () => {
     const dispatch = useDispatch();
     
-    useEffect( () => {
-        
-    }, [])
+
 
     return (
         <>

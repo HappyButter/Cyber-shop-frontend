@@ -58,6 +58,8 @@ const ProductDetails = () => {
             <CategoriesBar></CategoriesBar>
 
             <Middlepane>
+                <br/>
+                <br/>
                 {getProductIcon(product.category_id)}
                 <br/>
                 <br/>

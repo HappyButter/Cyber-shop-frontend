@@ -2,7 +2,16 @@ import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './global';
 import { theme } from './theme';
-import { Home, Offer, Login, Register, Promo, ProductDetails, Account, Orders } from './pages';
+import {  Home, 
+          Offer,
+          Login,
+          Register,
+          Promo,
+          ProductDetails,
+          Account,
+          Orders,
+          Cart } from './pages';
+
 import { ProtectedRoute } from './components';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPromos } from './state/promo/promoActions';
@@ -34,6 +43,7 @@ const App = () => {
           <Route path="/offer/:categoryId" exact component={Offer} />
           <Route path="/promo/:promoId" exact component={Promo} />
           <Route path="/product/:productId" exact component={ProductDetails} />
+          <Route path="/cart" exact component={Cart} />
           <ProtectedRoute 
                           path="/account" 
                           exact

@@ -5,17 +5,18 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import InputBase from '@material-ui/core/InputBase';
+// import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import AdbIcon from '@material-ui/icons/Adb';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
 
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { logout } from '../../state/auth/authActions';
+import { logout } from 'state/auth/authActions';
+import { clearCart } from 'state/cart/cartActions';
 import { useDispatch } from 'react-redux';
 
 
@@ -46,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(10),
       marginRight: theme.spacing(10),
-      // width: 'auto',
+      width: 'auto',
     },
   },
   searchIcon: {
@@ -100,6 +101,7 @@ const MenuAppBar = (props) => {
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(clearCart());
     setAnchorEl(null);
     history.push('/');
   }
@@ -156,8 +158,10 @@ const MenuAppBar = (props) => {
             CyberShop
           </Typography>
           </IconButton>
-
-          <div className={classes.search}>
+          
+          {/* Search bar has to be posponed */}
+          
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -169,15 +173,17 @@ const MenuAppBar = (props) => {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
-          <IconButton aria-label="cart" color="inherit">
+          </div> */}
+
+          <div className={classes.grow} />
+          <div className={classes.sectionDesktop}>
+            <IconButton aria-label="cart" 
+                        color="inherit">
               <Badge badgeContent={count.length} color="secondary">
                 <ShoppingCartIcon 
                 onClick={() => handleProfileMenuClick('/cart')}/>
               </Badge>
             </IconButton>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -185,6 +191,7 @@ const MenuAppBar = (props) => {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
+              className={classes.menuButton}
             >
               <AccountCircle />
             </IconButton>
