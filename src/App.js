@@ -43,7 +43,12 @@ const App = () => {
           <Route path="/offer/:categoryId" exact component={Offer} />
           <Route path="/promo/:promoId" exact component={Promo} />
           <Route path="/product/:productId" exact component={ProductDetails} />
-          <Route path="/cart" exact component={Cart} />
+          <ProtectedRoute 
+                          path="/cart" 
+                          exact
+                          component={Cart} 
+                          auth={auth.isLoggedIn}
+          />
           <ProtectedRoute 
                           path="/account" 
                           exact

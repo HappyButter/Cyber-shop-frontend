@@ -37,7 +37,7 @@ const ShippingForm = ({handleNext, handleBack}) => {
     const [street, setStreet] = useState('');
     const [building, setBuilding] = useState('');
     const [apartment, setApartment] = useState('');
-    const [shippingMethod, setShippingMethod] = useState('');
+    const [shippingMethod, setShippingMethod] = useState(15);
 
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -51,7 +51,7 @@ const ShippingForm = ({handleNext, handleBack}) => {
         setStreet(currentAddressState.street);
         setBuilding(currentAddressState.building);
         setApartment(currentAddressState.apartment);
-        setShippingMethod(currentAddressState.shippingMethod);
+        setShippingMethod(currentAddressState.shippingMethod || 15);
     },[currentAddressState])
 
     const handleSubmit = (e) => {
@@ -164,9 +164,9 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     value={shippingMethod}
                     onChange={e => setShippingMethod(e.target.value)}
                     >
-                    <MenuItem value={1}>Gołąb [5 zł]</MenuItem>
-                    <MenuItem value={2}>Sowa [10 zł]</MenuItem>
-                    <MenuItem value={3}>Jastrząb ekspres [15 zł]</MenuItem>
+                    <MenuItem value={5}>Gołąb [5 zł]</MenuItem>
+                    <MenuItem value={10}>Sowa [10 zł]</MenuItem>
+                    <MenuItem value={15}>Jastrząb ekspres [15 zł]</MenuItem>
                     </Select>
                     <hr/>
                 </Grid>

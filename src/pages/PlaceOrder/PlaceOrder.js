@@ -5,8 +5,14 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { CategoriesBar, AppBar, Cart, ShippingForm } from 'components';
+import { CategoriesBar, AppBar, Cart, ShippingForm, PaymentForm } from 'components';
 import { Middlepane } from 'styles/Middlepane.css';
+import { useDispatch, useSelector } from 'react-redux';
+import './placeOrder.css';
+import { placeOrder, addClientComments } from 'state/cart/cartActions';
+import { Redirect } from 'react-router-dom';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,17 +27,50 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function getSteps() {
-  return ['Koszyk', 'Dostawa', 'Płatność', 'I gotowe!'];
-}
 
 const PlaceOrder = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [activeStep, setActiveStep] = React.useState(0);
-  const steps = getSteps();
+  const [commentText, setCommentText] = React.useState('');
+  const steps = [ 'Koszyk', 
+                  'Dostawa', 
+                  'Płatność', 
+                  'I gotowe!'];
+
+  const userId = useSelector(state => state.auth.user.id); 
+  const addressData = useSelector(state => state.cart.address);
+  const paymentMethod = useSelector(state => state.cart.payment);
+  const productList = useSelector(state => state.cart.productList);
+  const cartValue = useSelector(state => state.cart.value);
+  const shippmentValue = useSelector(state => state.cart.address.shippingMethod);
+  const clientComments = useSelector(state => state.cart.clientComments);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const submitPlaceOrder = () => {
+    dispatch(addClientComments({clientComments: commentText}));
+    dispatch(placeOrder({
+      userId : userId,
+      addressData : addressData,
+      productList : productList,
+      paymentMethod : paymentMethod,
+      costs : {
+        productsValue : cartValue,
+        shippmentPrice : shippmentValue
+      },
+      clientComments : clientComments,
+    }));
+    handleNext();
+  }
+
+  const handleNextSuper = () => {
+    return ( activeStep === 3
+      ? submitPlaceOrder()
+      : handleNext()
+    )
   };
 
   const handleBack = () => {
@@ -64,11 +103,31 @@ const PlaceOrder = () => {
         </>
         );
       case 2:
-        return 'aaa';
+        return (
+          <>
+            Płatność
+            <br/><br/>
+            <PaymentForm handleNext={handleNext} handleBack={ handleBack}/>
+            <br/><br/>
+        </>
+        );
       case 3:
-        return 'This is the bit I really care about!';
+        return (
+          <>
+            <br/>
+                <textarea name="commentText" id="commentText" placeholder="Komentarz do zamówienia"
+                onChange={(event) => setCommentText(event.target.value)}/>
+            <br/>
+            <h2>
+              Do zapłaty: 
+              {" " + parseFloat(cartValue + shippmentValue).toFixed(2) + " zł"}
+            </h2>
+          </>
+        );
+      case 4: 
+        return (<Redirect to="/" /> );
       default:
-        return 'Unknown step';
+        return (<Redirect to="/" /> );
     }
   }
 
@@ -89,7 +148,7 @@ const PlaceOrder = () => {
         })}
       </Stepper>
       <div>
-        {activeStep === steps.length ? (
+        {activeStep === 10 ? (
           <div>
             <Typography className={classes.instructions}>
               All steps completed - you&apos;re finished
@@ -101,7 +160,7 @@ const PlaceOrder = () => {
         ) : (
           <Middlepane>
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            {activeStep === 1
+            {activeStep === 1 || activeStep === 2
             ? null
             : (<div>
             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
@@ -111,10 +170,10 @@ const PlaceOrder = () => {
             <Button
               variant="contained"
               color="primary"
-              onClick={handleNext}
+              onClick={handleNextSuper}
               className={classes.button}
             >
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              {activeStep === steps.length - 1 ? 'Złóż zamówienie' : 'Next'}
             </Button>
           </div>)
             }

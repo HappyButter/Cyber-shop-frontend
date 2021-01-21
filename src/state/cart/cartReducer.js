@@ -3,7 +3,10 @@ import {
     REMOVE_PRODUCT_FROM_CART,
     REDUCE_PRODUCT_QUANTITY_FROM_CART,
     CLEAR_CART,
-    ADD_ADDRESS
+    ADD_ADDRESS,
+    ADD_PAYMENT_METHOD,
+    PLACE_ORDER_SUCCESS,
+    ADD_CLIENT_COMMENTS
 } from './cartActions'; 
 
 
@@ -11,11 +14,36 @@ const initialState = {
     productList : JSON.parse(localStorage.getItem('cart')) || [],
     value : parseFloat(localStorage.getItem('value')) || 0.0,
     address : {},
-    payment : {}
+    payment : {},
+    clientComments : ''
 }
 
 const cartReducer = (state = initialState, action) => {
     switch(action.type) {
+        case ADD_CLIENT_COMMENTS: {
+            return {
+                ...state,
+                clientComments : action.payload,
+            }
+        }
+        case PLACE_ORDER_SUCCESS: {
+            console.log(action.payload)
+            localStorage.clear();
+            return {
+                productList : [],
+                value : 0.0,
+                address : {},
+                payment : {},
+                clientComments : ''
+            }
+        }
+        case ADD_PAYMENT_METHOD: {
+            const method = action.payload;
+            return {
+                ...state,
+                payment: method,
+            }
+        }
         case ADD_ADDRESS: {
             const { country, postcode, city, street, building, apartment, shippingMethod } = action.payload;
 
@@ -38,7 +66,8 @@ const cartReducer = (state = initialState, action) => {
                 productList : [],
                 value : 0.0,
                 address : {},
-                payment : {}
+                payment : {},
+                clientComments : ''
             }
         }
         case ADD_PRODUCT_TO_CART: {
