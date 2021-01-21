@@ -5,7 +5,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { CategoriesBar, AppBar, Cart } from 'components';
+import { CategoriesBar, AppBar, Cart, ShippingForm } from 'components';
 import { Middlepane } from 'styles/Middlepane.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,28 +25,6 @@ function getSteps() {
   return ['Koszyk', 'Dostawa', 'Płatność', 'I gotowe!'];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return (
-        <>
-          Twój Koszyk:
-            <br/><br/>
-            <Cart/>
-            <br/><br/>
-        </>
-        )
-    case 1:
-      return 'What is an ad group anyways?';
-    case 2:
-      return 'aaa';
-    case 3:
-      return 'This is the bit I really care about!';
-    default:
-      return 'Unknown step';
-  }
-}
-
 const PlaceOrder = () => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -64,6 +42,37 @@ const PlaceOrder = () => {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  const getStepContent = (step) => {
+    switch (step) {
+      case 0:
+        return (
+          <>
+            Twój Koszyk:
+              <br/><br/>
+              <Cart/>
+              <br/><br/>
+          </>
+          )
+      case 1:
+        return (
+          <>
+            Dostawa
+            <br/><br/>
+            <ShippingForm handleNext={handleNext} handleBack={ handleBack}/>
+            <br/><br/>
+        </>
+        );
+      case 2:
+        return 'aaa';
+      case 3:
+        return 'This is the bit I really care about!';
+      default:
+        return 'Unknown step';
+    }
+  }
+
+
 
   return (
     <div className={classes.root}>
@@ -92,20 +101,24 @@ const PlaceOrder = () => {
         ) : (
           <Middlepane>
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            <div>
-              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                Back
-              </Button>
+            {activeStep === 1
+            ? null
+            : (<div>
+            <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+              Back
+            </Button>
 
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Button>
-            </div>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNext}
+              className={classes.button}
+            >
+              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+            </Button>
+          </div>)
+            }
+            
           </Middlepane>
         )}
       </div>

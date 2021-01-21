@@ -47,14 +47,14 @@ const Account = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     
     const userData = useSelector( state => state.auth.user);
-
+    const auth = useSelector(state => state.auth);
+    
     useEffect( () => {
         setName(userData.name);
         setSurname(userData.surname);
         setPhoneNumber(userData.phoneNumber);
     },[userData])
 
-    const auth = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const handleSubmitRegister = (e) => {
         e.preventDefault();

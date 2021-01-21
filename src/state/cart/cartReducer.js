@@ -2,7 +2,8 @@ import {
     ADD_PRODUCT_TO_CART,
     REMOVE_PRODUCT_FROM_CART,
     REDUCE_PRODUCT_QUANTITY_FROM_CART,
-    CLEAR_CART
+    CLEAR_CART,
+    ADD_ADDRESS
 } from './cartActions'; 
 
 
@@ -15,6 +16,22 @@ const initialState = {
 
 const cartReducer = (state = initialState, action) => {
     switch(action.type) {
+        case ADD_ADDRESS: {
+            const { country, postcode, city, street, building, apartment, shippingMethod } = action.payload;
+
+            return {
+                ...state,
+                address : { 
+                    country,
+                    postcode, 
+                    city, 
+                    street, 
+                    building, 
+                    apartment,
+                    shippingMethod, 
+                }
+            }
+        }
         case CLEAR_CART : {
             localStorage.clear();
             return {

@@ -5,3 +5,4 @@ export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as ProductGrid } from './ProductsGrid';
 export { default as Comments } from './Comments';
 export { default as Cart } from './Cart'; 
+export { default as ShippingForm } from './ShippingForm';
