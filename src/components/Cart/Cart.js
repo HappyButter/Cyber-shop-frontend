@@ -120,7 +120,7 @@ const Cart = () => {
                 </TableCell>            
                 <TableCell align={'center'}
                            colSpan={2}>
-                    { cartValue.toFixed(2) + " zł"}
+                    { parseFloat(cartValue).toFixed(2) + " zł"}
                 </TableCell>
             </TableRow>
 

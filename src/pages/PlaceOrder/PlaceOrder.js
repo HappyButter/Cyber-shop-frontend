@@ -44,14 +44,12 @@ const PlaceOrder = () => {
   const productList = useSelector(state => state.cart.productList);
   const cartValue = useSelector(state => state.cart.value);
   const shippmentValue = useSelector(state => state.cart.address.shippingMethod);
-  const clientComments = useSelector(state => state.cart.clientComments);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const submitPlaceOrder = () => {
-    dispatch(addClientComments({clientComments: commentText}));
     dispatch(placeOrder({
       userId : userId,
       addressData : addressData,
@@ -61,7 +59,7 @@ const PlaceOrder = () => {
         productsValue : cartValue,
         shippmentPrice : shippmentValue
       },
-      clientComments : clientComments,
+      clientComments : commentText,
     }));
     handleNext();
   }

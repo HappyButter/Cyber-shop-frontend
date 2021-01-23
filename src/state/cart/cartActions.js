@@ -5,7 +5,6 @@ export const REMOVE_PRODUCT_FROM_CART = 'REMOVE_PRODUCT_FROM_CART';
 export const REDUCE_PRODUCT_QUANTITY_FROM_CART = 'REDUCE_PRODUCT_QUANTITY_FROM_CART';
 export const ADD_ADDRESS = 'ADD_ADDRESS';
 export const ADD_PAYMENT_METHOD = 'ADD_PAYMENT_METHOD';
-export const ADD_CLIENT_COMMENTS = 'ADD_CLIENT_COMMENTS';
 
 export const CLEAR_CART = 'CLEAR_CART';
 
@@ -14,16 +13,10 @@ export const PLACE_ORDER_SUCCESS = 'PLACE_ORDER_SUCCESS';
 export const PLACE_ORDER_FAILURE = 'PLACE_ORDER_FAILURE';
 
 
-export const addClientComments = ({ clientComments }) => {
-    return {
-        type: ADD_CLIENT_COMMENTS,
-        payload: clientComments,
-    }
-}
-
 export const placeOrder = ({ userId, addressData, productList, paymentMethod, costs, clientComments }) => async dispatch => {
     axios.post('/orders', { 
         userId,
+        addressId : null,
         country: addressData.country,
         postcode: addressData.postcode, 
         city: addressData.city, 

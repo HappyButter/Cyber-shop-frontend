@@ -11,6 +11,15 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 
+export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION'; 
+
+export const clearNotification = () => {
+  return {
+    type: CLEAR_NOTIFICATION,
+    payload: null,
+  }
+}
+
 export const register = ( { name, surname, phoneNumber, email, password } ) => async dispatch => {
   axios.post('/auth/register', { name, surname, phoneNumber, email, password })
     .then(res => {
@@ -20,6 +29,7 @@ export const register = ( { name, surname, phoneNumber, email, password } ) => a
       })
     })
     .catch(err => {
+      console.log(err);
       dispatch({
         type: REGISTER_FAILURE,
         payload: err.message

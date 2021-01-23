@@ -11,8 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { RegisterWrapper } from './register.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { register } from '../../state/auth/authActions';
+import { register, clearNotification } from 'state/auth/authActions';
 import { Redirect } from 'react-router-dom';
+import { SnackbarProvider, useSnackbar } from 'notistack';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,11 +50,18 @@ const Register = () => {
   
     const auth = useSelector(state => state.auth);
     const dispatch = useDispatch();
+    const { enqueueSnackbar } = useSnackbar();
+
     const handleSubmitRegister = (e) => {
         e.preventDefault();
 
         // TO DO: client validation
         dispatch(register({ name, surname, phoneNumber, email, password }));
+    }
+
+    const snacks = (msg) => {
+        enqueueSnackbar(msg);
+        dispatch(clearNotification());
     }
 
     return (
@@ -145,7 +153,8 @@ const Register = () => {
                     </Grid>
                 </form>
             </div>
-            { auth.isLoggedIn ? <Redirect to="/" /> : null  }
+            { auth.isLoggedIn === true ? <Redirect to="/" /> : null }
+            { auth.notification !== null ? snacks(auth.notification) : null }
         </RegisterWrapper>
     );
 }

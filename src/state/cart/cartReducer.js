@@ -5,30 +5,23 @@ import {
     CLEAR_CART,
     ADD_ADDRESS,
     ADD_PAYMENT_METHOD,
-    PLACE_ORDER_SUCCESS,
-    ADD_CLIENT_COMMENTS
+    PLACE_ORDER_SUCCESS
 } from './cartActions'; 
 
 
 const initialState = {
     productList : JSON.parse(localStorage.getItem('cart')) || [],
-    value : parseFloat(localStorage.getItem('value')) || 0.0,
+    value : parseFloat(localStorage.getItem('value')).toFixed(2) || 0.0,
     address : {},
-    payment : {},
-    clientComments : ''
+    addressId : null,
+    payment : {}
 }
 
 const cartReducer = (state = initialState, action) => {
     switch(action.type) {
-        case ADD_CLIENT_COMMENTS: {
-            return {
-                ...state,
-                clientComments : action.payload,
-            }
-        }
         case PLACE_ORDER_SUCCESS: {
-            console.log(action.payload)
-            localStorage.clear();
+            localStorage.removeItem('cart');
+            localStorage.removeItem('value');
             return {
                 productList : [],
                 value : 0.0,
@@ -61,7 +54,8 @@ const cartReducer = (state = initialState, action) => {
             }
         }
         case CLEAR_CART : {
-            localStorage.clear();
+            localStorage.removeItem('cart');
+            localStorage.removeItem('value');
             return {
                 productList : [],
                 value : 0.0,
@@ -84,7 +78,7 @@ const cartReducer = (state = initialState, action) => {
                 cartProduct = [{
                     id: productId,
                     name: productName,
-                    price: price,
+                    price: parseFloat(price).toFixed(2),
                     quantity: 1
                 }]
             }
@@ -99,12 +93,12 @@ const cartReducer = (state = initialState, action) => {
 
             // update localStorage
             localStorage.setItem('cart', JSON.stringify(updatedProductList));
-            localStorage.setItem('value', cartValue);
+            localStorage.setItem('value', parseFloat(cartValue).toFixed(2));
 
             return {
                 ...state,
                 productList: updatedProductList,
-                value: cartValue,
+                value: parseFloat(cartValue).toFixed(2),
             }
         }
         case REDUCE_PRODUCT_QUANTITY_FROM_CART: {
@@ -133,12 +127,12 @@ const cartReducer = (state = initialState, action) => {
 
             // update localStorage
             localStorage.setItem('cart', JSON.stringify(updatedProductList));
-            localStorage.setItem('value', cartValue);
+            localStorage.setItem('value', parseFloat(cartValue).toFixed(2));
 
             return {
                 ...state,
                 productList: updatedProductList,
-                value: cartValue,
+                value: parseFloat(cartValue).toFixed(2),
             }
         }case REMOVE_PRODUCT_FROM_CART: {
             const { productId } = action.payload;
@@ -151,12 +145,12 @@ const cartReducer = (state = initialState, action) => {
 
             // update localStorage
             localStorage.setItem('cart', JSON.stringify(updatedProductList));
-            localStorage.setItem('value', cartValue);
+            localStorage.setItem('value', parseFloat(cartValue).toFixed(2));
             
             return {
                 ...state,
                 productList: updatedProductList,
-                value: cartValue,
+                value: parseFloat(cartValue).toFixed(2),
             }
         }
         default:

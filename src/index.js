@@ -6,11 +6,14 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import store from './state/store';
 
+import { SnackbarProvider } from 'notistack';
 
 ReactDOM.render(
   <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <SnackbarProvider>
+              <App />
+          </SnackbarProvider>
       </Provider>
   </React.StrictMode>,
   document.getElementById('root')

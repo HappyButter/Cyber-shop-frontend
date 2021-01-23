@@ -4,7 +4,8 @@ import {
     LOGOUT_REQUEST,
     REGISTER_SUCCESS,
     REGISTER_FAILURE,
-    USER_ACCOUNT_UPDATE_SUCCESS
+    USER_ACCOUNT_UPDATE_SUCCESS,
+    CLEAR_NOTIFICATION
 } from './authActions';  
 
 const initialState = {
@@ -13,10 +14,17 @@ const initialState = {
     isAdmin : localStorage.getItem('isAdmin') == 'true',        // localStorage stores things in a string so could not use '==='   
     // eslint-disable-next-line eqeqeq
     isLoggedIn : localStorage.getItem('isLoggedIn') == 'true',
+    notification : null
 }
 
 const authReducer = (state = initialState, action) => {
     switch(action.type) {
+        case CLEAR_NOTIFICATION: {
+            return {
+                ...state,
+                notification: null,
+            }
+        }
         case REGISTER_SUCCESS: {
             const user = action.payload;
 
@@ -70,6 +78,7 @@ const authReducer = (state = initialState, action) => {
                 user : null,
                 isAdmin : false,
                 isLoggedIn : false,
+                notification : action.payload
             }
         }
         default:

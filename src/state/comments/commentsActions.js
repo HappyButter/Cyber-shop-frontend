@@ -3,6 +3,8 @@ import axios from '../../axios-config.js';
 export const CREATE_COMMENT_SUCCES = 'CREATE_COMMENT_SUCCES';
 export const CREATE_COMMENT_FAILURE = 'CREATE_COMMENT_FAILURE';
 
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+
 export const GET_COMMENTS_SUCCES = 'GET_COMMENTS_SUCCES';
 export const GET_COMMENTS_FAILURE = 'GET_COMMENTS_FAILURE';
 
