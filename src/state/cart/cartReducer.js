@@ -5,29 +5,59 @@ import {
     CLEAR_CART,
     ADD_ADDRESS,
     ADD_PAYMENT_METHOD,
-    PLACE_ORDER_SUCCESS
+    PLACE_ORDER_SUCCESS,
+    GET_USER_ADDRESSES_SUCCESS
 } from './cartActions'; 
 
 
 const initialState = {
     productList : JSON.parse(localStorage.getItem('cart')) || [],
     value : parseFloat(localStorage.getItem('value')).toFixed(2) || 0.0,
-    address : {},
-    addressId : null,
+    address : {
+        addressId: null,
+        country: null,
+        postcode: null, 
+        city: null, 
+        street: null, 
+        building: null, 
+        apartment: null,
+        shippingMethod: null, 
+        shippingValue: 0,
+    },
+    userAddresses : [],
+    clientComments : '',
     payment : {}
 }
 
 const cartReducer = (state = initialState, action) => {
     switch(action.type) {
+        case GET_USER_ADDRESSES_SUCCESS : {
+            return {
+                ...state,
+                userAddresses : action.payload
+            }
+        }
+        case CLEAR_CART :
         case PLACE_ORDER_SUCCESS: {
             localStorage.removeItem('cart');
             localStorage.removeItem('value');
             return {
                 productList : [],
                 value : 0.0,
-                address : {},
-                payment : {},
-                clientComments : ''
+                address : {
+                    addressId: null,
+                    country: null,
+                    postcode: null, 
+                    city: null, 
+                    street: null, 
+                    building: null, 
+                    apartment: null,
+                    shippingMethod: null, 
+                    shippingValue: 0,
+                },
+                userAddresses : [],
+                clientComments : '',
+                payment : {}
             }
         }
         case ADD_PAYMENT_METHOD: {
@@ -38,30 +68,21 @@ const cartReducer = (state = initialState, action) => {
             }
         }
         case ADD_ADDRESS: {
-            const { country, postcode, city, street, building, apartment, shippingMethod } = action.payload;
+            const { addressId, country, postcode, city, street, building, apartment, shippingMethod, shippingValue } = action.payload;
 
             return {
                 ...state,
-                address : { 
-                    country,
-                    postcode, 
-                    city, 
-                    street, 
-                    building, 
-                    apartment,
-                    shippingMethod, 
-                }
-            }
-        }
-        case CLEAR_CART : {
-            localStorage.removeItem('cart');
-            localStorage.removeItem('value');
-            return {
-                productList : [],
-                value : 0.0,
-                address : {},
-                payment : {},
-                clientComments : ''
+                address : {
+                    addressId: addressId,
+                    country: country,
+                    postcode: postcode, 
+                    city: city, 
+                    street: street, 
+                    building: building, 
+                    apartment: apartment,
+                    shippingMethod: shippingMethod, 
+                    shippingValue: shippingValue,
+                },
             }
         }
         case ADD_PRODUCT_TO_CART: {
@@ -140,7 +161,7 @@ const cartReducer = (state = initialState, action) => {
             const updatedProductList = state.productList.filter( 
                 product => product.id !== productId
             );
-            const cartValue = state.productList.reduce(
+            const cartValue = updatedProductList.reduce(
                 (val, product) => product.price * product.quantity + val, 0.0);
 
             // update localStorage

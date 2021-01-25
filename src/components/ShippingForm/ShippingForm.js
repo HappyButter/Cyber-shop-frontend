@@ -9,7 +9,7 @@ import { ShippingWrapper } from './shippingForm.css';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAdress } from 'state/cart/cartActions';
+import { addAdress, getUserAddresses } from 'state/cart/cartActions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,35 +30,85 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+const shippingMethods = [
+  {
+    price : 5,
+    name : 'Gołąb [5 zł]'
+  },
+  {
+    price : 10,
+    name : 'Sowa [10 zł]'
+  },  
+  {
+    price : 15,
+    name : 'Jastrząb ekspres [15 zł]'
+  }
+]
+
+
 const ShippingForm = ({handleNext, handleBack}) => {
+    const [addressId, setAddressId] = useState(-1);
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
     const [postcode, setPostcode] = useState('');
     const [street, setStreet] = useState('');
     const [building, setBuilding] = useState('');
     const [apartment, setApartment] = useState('');
-    const [shippingMethod, setShippingMethod] = useState(15);
+    const [shippingMethod, setShippingMethod] = useState(shippingMethods[0].name);
+    const [shippingValue, setShippingValue] = useState(shippingMethods[0].price);
 
     const dispatch = useDispatch();
     const classes = useStyles();
   
+    const userId = useSelector(state => state.auth.user.id);
     const currentAddressState = useSelector(state => state.cart.address);
+    const userAddresses = useSelector(state => state.cart.userAddresses);
 
     useEffect( () => {
+        dispatch(getUserAddresses({userId}));
+        setAddressId(currentAddressState.addressId || -1);
         setCountry(currentAddressState.country);
         setCity(currentAddressState.city);
         setPostcode(currentAddressState.postcode);
         setStreet(currentAddressState.street);
         setBuilding(currentAddressState.building);
         setApartment(currentAddressState.apartment);
-        setShippingMethod(currentAddressState.shippingMethod || 15);
-    },[currentAddressState])
+        setShippingMethod(currentAddressState.shippingMethod || shippingMethods[0].name);
+        setShippingValue(currentAddressState.shippingValue || shippingMethods[0].price);
+    },[currentAddressState, dispatch, userId]);
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      dispatch(addAdress({ country, postcode, city, street, building, apartment, shippingMethod }));
+      dispatch(addAdress({ addressId, country, postcode, city, street, building, apartment, shippingMethod, shippingValue }));
       handleNext();
     } 
+
+    const handleExistingAddressSelect = ({addressId}) => {
+      setAddressId(addressId);
+      if(addressId !== -1){
+        const address = userAddresses.filter(ad => ad.id === addressId)[0];
+        setCountry(address.country);
+        setCity(address.city);
+        setPostcode(address.postcode);
+        setStreet(address.street);
+        setBuilding(address.building);
+        setApartment(address.apartment);
+      }else{
+        setCountry('');
+        setCity('');
+        setPostcode('');
+        setStreet('');
+        setBuilding('');
+        setApartment('');
+      }
+    } 
+
+    const handleShippingChange = ({value}) => {
+      const method = shippingMethods.filter(record => record.price === value);
+      setShippingValue(value);
+      setShippingMethod(method[0].name);
+    }
   
     return (
       <ShippingWrapper component="main" maxWidth="xs">
@@ -68,6 +118,25 @@ const ShippingForm = ({handleNext, handleBack}) => {
             className={classes.form} 
             onSubmit={handleSubmit}>
             <Grid container spacing={2}>
+              <Grid item xs={12}>
+                  <hr/>
+                  <InputLabel id="shipping-label">Twoje adresy:</InputLabel>
+                  <Select
+                  labelId="shipping-label"
+                  id="shipping"
+                  fullWidth
+                  value={addressId}
+                  onChange={e => {
+                    handleExistingAddressSelect({addressId:e.target.value});
+                  }}
+                  >
+                    <MenuItem value={-1}>{"Nowy Adres"}</MenuItem>
+                    {userAddresses.map(address => (
+                      <MenuItem value={address.id}>{address.city + ", " + address.street}</MenuItem>
+                    ))}
+                  </Select>
+                  <hr/>
+                </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
                     value={country}
@@ -161,12 +230,12 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     labelId="shipping-label"
                     id="shipping"
                     fullWidth
-                    value={shippingMethod}
-                    onChange={e => setShippingMethod(e.target.value)}
+                    value={shippingValue}
+                    onChange={e => handleShippingChange({value:e.target.value})}
                     >
-                    <MenuItem value={5}>Gołąb [5 zł]</MenuItem>
-                    <MenuItem value={10}>Sowa [10 zł]</MenuItem>
-                    <MenuItem value={15}>Jastrząb ekspres [15 zł]</MenuItem>
+                      {shippingMethods.map(method => (
+                        <MenuItem value={method.price}>{method.name}</MenuItem>
+                      ))}
                     </Select>
                     <hr/>
                 </Grid>

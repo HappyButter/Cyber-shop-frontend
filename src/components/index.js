@@ -7,3 +7,4 @@ export { default as Comments } from './Comments';
 export { default as Cart } from './Cart'; 
 export { default as ShippingForm } from './ShippingForm';
 export { default as PaymentForm } from './PaymentForm';
+export { default as OrderList } from './OrderList';

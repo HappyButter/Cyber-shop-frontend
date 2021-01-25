@@ -5,13 +5,15 @@ import authReducer from './auth/authReducer';
 import promosReducer from './promo/promoReducer';
 import cartReducer from './cart/cartReducer';
 import commentsReducer from  './comments/commentsReducer';
+import ordersReducer from './orders/ordersReducer';
 
 const rootReducer = combineReducers({
     products: productReducer,
     promos: promosReducer,
     auth: authReducer,
     cart: cartReducer,
-    comments: commentsReducer
+    comments: commentsReducer,
+    orders: ordersReducer,
 });
 
 export default rootReducer;

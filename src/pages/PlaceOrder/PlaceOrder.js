@@ -9,7 +9,7 @@ import { CategoriesBar, AppBar, Cart, ShippingForm, PaymentForm } from 'componen
 import { Middlepane } from 'styles/Middlepane.css';
 import { useDispatch, useSelector } from 'react-redux';
 import './placeOrder.css';
-import { placeOrder, addClientComments } from 'state/cart/cartActions';
+import { placeOrder } from 'state/cart/cartActions';
 import { Redirect } from 'react-router-dom';
 
 
@@ -39,11 +39,7 @@ const PlaceOrder = () => {
                   'I gotowe!'];
 
   const userId = useSelector(state => state.auth.user.id); 
-  const addressData = useSelector(state => state.cart.address);
-  const paymentMethod = useSelector(state => state.cart.payment);
-  const productList = useSelector(state => state.cart.productList);
-  const cartValue = useSelector(state => state.cart.value);
-  const shippmentValue = useSelector(state => state.cart.address.shippingMethod);
+  const cart = useSelector(state => state.cart);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -52,13 +48,7 @@ const PlaceOrder = () => {
   const submitPlaceOrder = () => {
     dispatch(placeOrder({
       userId : userId,
-      addressData : addressData,
-      productList : productList,
-      paymentMethod : paymentMethod,
-      costs : {
-        productsValue : cartValue,
-        shippmentPrice : shippmentValue
-      },
+      cart : cart,
       clientComments : commentText,
     }));
     handleNext();
@@ -75,10 +65,6 @@ const PlaceOrder = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
 
   const getStepContent = (step) => {
     switch (step) {
@@ -105,7 +91,7 @@ const PlaceOrder = () => {
           <>
             Płatność
             <br/><br/>
-            <PaymentForm handleNext={handleNext} handleBack={ handleBack}/>
+            <PaymentForm handleNext={handleNext} handleBack={handleBack}/>
             <br/><br/>
         </>
         );
@@ -118,7 +104,7 @@ const PlaceOrder = () => {
             <br/>
             <h2>
               Do zapłaty: 
-              {" " + parseFloat(cartValue + shippmentValue).toFixed(2) + " zł"}
+              {" " + parseFloat(cart.value + cart.shippingValue).toFixed(2) + " zł"}
             </h2>
           </>
         );
@@ -146,38 +132,26 @@ const PlaceOrder = () => {
         })}
       </Stepper>
       <div>
-        {activeStep === 10 ? (
-          <div>
-            <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
-          </div>
-        ) : (
-          <Middlepane>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            {activeStep === 1 || activeStep === 2
-            ? null
-            : (<div>
-            <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-              Back
-            </Button>
+        <Middlepane>
+          <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+          {activeStep === 1 || activeStep === 2
+          ? null
+          : (<div>
+          <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+            Back
+          </Button>
 
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleNextSuper}
-              className={classes.button}
-            >
-              {activeStep === steps.length - 1 ? 'Złóż zamówienie' : 'Next'}
-            </Button>
-          </div>)
-            }
-            
-          </Middlepane>
-        )}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleNextSuper}
+            className={classes.button}
+          >
+            {activeStep === steps.length - 1 ? 'Złóż zamówienie' : 'Next'}
+          </Button>
+        </div>)
+          } 
+        </Middlepane>
       </div>
     </div>
   );

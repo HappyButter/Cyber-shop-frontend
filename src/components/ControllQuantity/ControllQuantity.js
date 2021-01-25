@@ -31,6 +31,7 @@ const ControllQuantity = ({productId, quantity}) => {
                     size="4"
                     pattern=""
                     inputmode=""/>
+                    
               <input type="button" 
                     value="+" 
                     class="plus"

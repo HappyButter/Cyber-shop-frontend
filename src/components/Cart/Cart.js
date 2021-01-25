@@ -11,40 +11,40 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import { removeProductFromCart } from 'state/cart/cartActions';
-import ControllQuantity from '../ControllQuantity/ControllQuantity'; 
+import ControllQuantity from '../ControllQuantity/ControllQuantity';
 
 
 const columns = [
-    {   
-        id: 'spanLeft', 
-        minWidth: 30 
-    },
-    { 
-        id: 'name',
-        label: 'Produkt',
-        minWidth: 300 
-    },
-    {
-        id: 'price',
-        label: 'Cena',
-        minWidth: 100,
-        align: 'right',
-    },
-    {
-        id: 'quantity',
-        label: 'Ilość',
-        minWidth: 70,
-        align: 'center',
-    },
-    {
-        id: 'delete',
-        minWidth: 70,
-        align: 'right',
-    },
-    {   
-        id: 'spanRight', 
-        minWidth: 30 
-    },
+  {
+    id: 'spanLeft',
+    minWidth: 30
+  },
+  {
+    id: 'name',
+    label: 'Produkt',
+    minWidth: 300
+  },
+  {
+    id: 'price',
+    label: 'Cena',
+    minWidth: 100,
+    align: 'right',
+  },
+  {
+    id: 'quantity',
+    label: 'Ilość',
+    minWidth: 70,
+    align: 'center',
+  },
+  {
+    id: 'delete',
+    minWidth: 70,
+    align: 'right',
+  },
+  {
+    id: 'spanRight',
+    minWidth: 30
+  },
 ];
 
 const useStyles = makeStyles({
@@ -64,24 +64,24 @@ const Cart = () => {
   const cartValue = useSelector(state => state.cart.value);
   cartItems.sort((a, b) => a.id - b.id);
 
-    const handleCellType = (type, product) => {
-        switch(type) {
-            case 'quantity' : {
-                return <ControllQuantity 
-                    productId={product.id}
-                    quantity={product.quantity}
-                />
-            }case 'delete': {
-                return <button onClick={ e => dispatch(removeProductFromCart({
-                    productId : product.id
-                        }))}><DeleteIcon/></button>
-            }case 'price' : {
-                return product.price.toFixed(2) + " zł";
-            }
-            default :
-                return product[type];
-        }
+  const handleCellType = (type, product) => {
+    switch (type) {
+      case 'quantity': {
+        return <ControllQuantity
+          productId={product.id}
+          quantity={product.quantity}
+        />
+      } case 'delete': {
+        return <button onClick={e => dispatch(removeProductFromCart({
+          productId: product.id
+        }))}><DeleteIcon /></button>
+      } case 'price': {
+        return product.price + " zł";
+      }
+      default:
+        return product[type];
     }
+  }
 
   return (
     <Paper className={classes.root}>
@@ -106,7 +106,7 @@ const Cart = () => {
                 <TableRow hover key={product.id}>
                   {columns.map((column) => {
                     return (
-                      <TableCell key={column.id} align={column.align}>
+                      <TableCell align={column.align}>
                         {handleCellType(column.id, product)}
                       </TableCell>
                     );
@@ -114,14 +114,14 @@ const Cart = () => {
                 </TableRow>
               );
             })}
-            <TableRow  style={{ backgroundColor: 'yellow' }}>
-                <TableCell colSpan={4} align={'right'}>
-                        Suma
-                </TableCell>            
-                <TableCell align={'center'}
-                           colSpan={2}>
-                    { parseFloat(cartValue).toFixed(2) + " zł"}
+            <TableRow style={{ backgroundColor: 'yellow' }}>
+              <TableCell colSpan={4} align={'right'}>
+                Suma
                 </TableCell>
+              <TableCell align={'center'}
+                colSpan={2}>
+                {parseFloat(cartValue).toFixed(2) + " zł"}
+              </TableCell>
             </TableRow>
 
           </TableBody>
