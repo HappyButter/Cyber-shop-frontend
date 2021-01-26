@@ -7,3 +7,5 @@ export { default as Account } from './Account';
 export { default as Orders } from './Orders';
 export { default as Register } from './Register';
 export { default as Cart } from './PlaceOrder';
+export { default as ProductManagement } from './ProductManagement';
+export { default as PromoManagement } from './PromoManagement';

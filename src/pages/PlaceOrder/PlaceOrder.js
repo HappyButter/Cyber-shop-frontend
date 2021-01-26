@@ -33,12 +33,12 @@ const PlaceOrder = () => {
   const dispatch = useDispatch();
   const [activeStep, setActiveStep] = React.useState(0);
   const [commentText, setCommentText] = React.useState('');
-  const steps = [ 'Koszyk', 
-                  'Dostawa', 
-                  'Płatność', 
-                  'I gotowe!'];
+  const steps = ['Koszyk',
+    'Dostawa',
+    'Płatność',
+    'I gotowe!'];
 
-  const userId = useSelector(state => state.auth.user.id); 
+  const userId = useSelector(state => state.auth.user.id);
   const cart = useSelector(state => state.cart);
 
   const handleNext = () => {
@@ -47,15 +47,15 @@ const PlaceOrder = () => {
 
   const submitPlaceOrder = () => {
     dispatch(placeOrder({
-      userId : userId,
-      cart : cart,
-      clientComments : commentText,
+      userId: userId,
+      cart: cart,
+      clientComments: commentText,
     }));
     handleNext();
   }
 
   const handleNextSuper = () => {
-    return ( activeStep === 3
+    return (activeStep === 3
       ? submitPlaceOrder()
       : handleNext()
     )
@@ -72,46 +72,46 @@ const PlaceOrder = () => {
         return (
           <>
             Twój Koszyk:
-              <br/><br/>
-              <Cart/>
-              <br/><br/>
+            <br /><br />
+            <Cart />
+            <br /><br />
           </>
-          )
+        )
       case 1:
         return (
           <>
             Dostawa
-            <br/><br/>
-            <ShippingForm handleNext={handleNext} handleBack={ handleBack}/>
-            <br/><br/>
-        </>
+            <br /><br />
+            <ShippingForm handleNext={handleNext} handleBack={handleBack} />
+            <br /><br />
+          </>
         );
       case 2:
         return (
           <>
             Płatność
-            <br/><br/>
-            <PaymentForm handleNext={handleNext} handleBack={handleBack}/>
-            <br/><br/>
-        </>
+            <br /><br />
+            <PaymentForm handleNext={handleNext} handleBack={handleBack} />
+            <br /><br />
+          </>
         );
       case 3:
         return (
           <>
-            <br/>
-                <textarea name="commentText" id="commentText" placeholder="Komentarz do zamówienia"
-                onChange={(event) => setCommentText(event.target.value)}/>
-            <br/>
+            <br />
+            <textarea name="commentText" id="commentText" placeholder="Komentarz do zamówienia"
+              onChange={(event) => setCommentText(event.target.value)} />
+            <br />
             <h2>
-              Do zapłaty: 
+              Do zapłaty:
               {" " + parseFloat(cart.value + cart.shippingValue).toFixed(2) + " zł"}
             </h2>
           </>
         );
-      case 4: 
-        return (<Redirect to="/" /> );
+      case 4:
+        return (<Redirect to="/" />);
       default:
-        return (<Redirect to="/" /> );
+        return (<Redirect to="/" />);
     }
   }
 
@@ -119,8 +119,8 @@ const PlaceOrder = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar/>
-      <CategoriesBar/>
+      <AppBar />
+      <CategoriesBar />
       <Stepper activeStep={activeStep}
         style={{ backgroundColor: "gray" }}>
         {steps.map((label, index) => {
@@ -131,28 +131,26 @@ const PlaceOrder = () => {
           );
         })}
       </Stepper>
-      <div>
-        <Middlepane>
-          <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-          {activeStep === 1 || activeStep === 2
+      <Middlepane>
+        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+        {activeStep === 1 || activeStep === 2
           ? null
           : (<div>
-          <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-            Back
-          </Button>
+            <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+              Back
+            </Button>
 
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleNextSuper}
-            className={classes.button}
-          >
-            {activeStep === steps.length - 1 ? 'Złóż zamówienie' : 'Next'}
-          </Button>
-        </div>)
-          } 
-        </Middlepane>
-      </div>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNextSuper}
+              className={classes.button}
+            >
+              {activeStep === steps.length - 1 ? 'Złóż zamówienie' : 'Next'}
+            </Button>
+          </div>)
+        }
+      </Middlepane>
     </div>
   );
 }

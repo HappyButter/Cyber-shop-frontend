@@ -10,7 +10,9 @@ import {  Home,
           ProductDetails,
           Account,
           Orders,
-          Cart } from './pages';
+          Cart,
+          ProductManagement,
+          PromoManagement } from './pages';
 
 import { ProtectedRoute } from './components';
 import { useSelector, useDispatch } from 'react-redux';
@@ -61,6 +63,19 @@ const App = () => {
                           component={Orders} 
                           auth={auth.isLoggedIn}
           />
+          <ProtectedRoute 
+                          path="/products" 
+                          exact
+                          component={ProductManagement} 
+                          auth={auth.isAdmin}
+          />
+          <ProtectedRoute 
+                          path="/management/promo" 
+                          exact
+                          component={PromoManagement} 
+                          auth={auth.isAdmin}
+          />
+
         </Switch>
       </Router>
       <GlobalStyles />

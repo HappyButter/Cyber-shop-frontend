@@ -8,3 +8,5 @@ export { default as Cart } from './Cart';
 export { default as ShippingForm } from './ShippingForm';
 export { default as PaymentForm } from './PaymentForm';
 export { default as OrderList } from './OrderList';
+export { default as PromoList } from './PromoList';
+export { default as PromoForm } from './PromoForm';

@@ -5,7 +5,8 @@ import {
     GET_PROMO_PRODUCTS_SUCCESS,
     GET_RECOMMENDED_PRODUCTS_SUCCESS,
     GET_PRODUCT_SUCCESS,
-    GET_CATEGORY_PRODUCTS_SUCCESS
+    GET_CATEGORY_PRODUCTS_SUCCESS,
+    GET_PROMO_PRODUCTS_FAILURE
 } from './productActions'; 
 
 let idGenerator = 1;
@@ -89,6 +90,12 @@ const productReducer = (state = initialState, action) => {
             return {
                 ...state,
                 categoryProducts : categoryProducts,
+            }
+        }
+        case GET_PROMO_PRODUCTS_FAILURE : {
+            return {
+                ...state,
+                promoProducts : [],
             }
         }
         default:

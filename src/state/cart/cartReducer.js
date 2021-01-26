@@ -12,7 +12,7 @@ import {
 
 const initialState = {
     productList : JSON.parse(localStorage.getItem('cart')) || [],
-    value : parseFloat(localStorage.getItem('value')).toFixed(2) || 0.0,
+    value : parseFloat( localStorage.getItem('value') || 0.0 ).toFixed(2),
     address : {
         addressId: null,
         country: null,

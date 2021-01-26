@@ -21,7 +21,7 @@ const Promo = () => {
             <CategoriesBar></CategoriesBar>
             <Middlepane>
                 <br/>
-                <h1>Offer {promoId}</h1>
+                <h1>Promo {promoId}</h1>
                 <br/>
                 <ProductGrid productsInfo={promoProducts}></ProductGrid>
             </Middlepane>
