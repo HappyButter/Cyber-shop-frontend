@@ -10,9 +10,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import InfoRoundedIcon from '@material-ui/icons/InfoRounded';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { Link } from 'react-router-dom';
+
 
 const useRowStyles = makeStyles({
     root: {
@@ -26,6 +29,12 @@ const Row = ({ rowData }) => {
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
     const datePlaced = rowData.datePlaced.split('T')[0];
+
+    const handleInfoBtn = () => {
+        return (
+            <Link to={`/order/details/${rowData.order_id}`} />
+        );
+    }
 
     return (
         <React.Fragment>
@@ -45,10 +54,17 @@ const Row = ({ rowData }) => {
                     ? <CheckCircleOutlineIcon />
                     : <HighlightOffIcon />}</TableCell>
                 <TableCell align="right">{rowData.orderStatus}</TableCell>
+                <TableCell align="right">
+                    <IconButton aria-label="info">
+                        <Link to={`/order/details/${rowData.order_id}`}>               
+                            <InfoRoundedIcon />
+                        </Link>         
+                    </IconButton>    
+                </TableCell>
             </TableRow>
 
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
                             <Typography variant="h6" gutterBottom component="div">

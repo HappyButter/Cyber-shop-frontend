@@ -24,7 +24,7 @@ export const getAllOrders = () => async dispatch => {
         });
 }
 
-export const getUserOrders = (userId) => async dispatch => {
+export const getUserOrders = ({userId}) => async dispatch => {
     axios.get(`/orders/${userId}`)
         .then(res => {
             dispatch({

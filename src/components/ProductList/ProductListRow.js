@@ -5,21 +5,24 @@ import InfoRoundedIcon from '@material-ui/icons/InfoRounded';
 import IconButton from '@material-ui/core/IconButton';
 
 import { useDispatch } from 'react-redux';
-import { setToEditionPromo } from 'state/promo/promoActions';
+import { setToEditProduct } from 'state/products/productActions';
 
-const Row = ({promoData}) => {
+const Row = ({productData}) => {
     const dispatch = useDispatch();
 
     const handleInfoBtn = () => {
-        dispatch(setToEditionPromo(promoData));
+        dispatch(setToEditProduct(productData))
     }
 
     return (
-        <TableRow hover key={promoData.title}>
+        <TableRow hover key={productData.id}>
             <TableCell component="th" scope="row">
-            {promoData.title}
+            {productData.id}
             </TableCell>
-            <TableCell align="right">{parseFloat(promoData.discount * 100) + "%"}</TableCell>
+            <TableCell align="left">{productData.name}</TableCell>
+            <TableCell align="right">{productData.promo_id}</TableCell>
+            <TableCell align="right">{productData.inStock}</TableCell>
+            <TableCell align="right">{productData.category_group}</TableCell>
             <TableCell align="right">
                 <IconButton aria-label="info"
                             onClick={handleInfoBtn}>

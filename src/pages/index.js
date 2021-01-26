@@ -9,3 +9,4 @@ export { default as Register } from './Register';
 export { default as Cart } from './PlaceOrder';
 export { default as ProductManagement } from './ProductManagement';
 export { default as PromoManagement } from './PromoManagement';
+export { default as OrderDetails } from './OrderDetails';

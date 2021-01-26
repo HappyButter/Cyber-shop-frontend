@@ -1,5 +1,5 @@
-import { CommentItem } from '../CommentItem';
-import { CommentForm } from '../CommentForm';
+import CommentItem from './CommentItem';
+import CommentForm from './CommentForm';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
 import { getCommentsToProduct } from 'state/comments/commentsActions';

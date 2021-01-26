@@ -119,10 +119,9 @@ const MenuAppBar = (props) => {
       onClose={() => setAnchorEl(null)}
     >
       { auth.isAdmin ? <MenuItem onClick={() => handleProfileMenuClick('/finaces')}>Finanse</MenuItem> : null }
-      { auth.isAdmin ? <MenuItem onClick={() => handleProfileMenuClick('/users')}>Użytkownicy</MenuItem> : null }
       { auth.isAdmin ? <MenuItem onClick={() => handleProfileMenuClick('/products')}>Zarządzaj produkatami</MenuItem> : null }
-      { auth.isAdmin ? <MenuItem onClick={() => handleProfileMenuClick('/service')}>Produkty w serwisie</MenuItem> : null }
       { auth.isAdmin ? <MenuItem onClick={() => handleProfileMenuClick('/management/promo')}>Zarządzaj promocjami</MenuItem> : null }
+      { auth.isAdmin ? <MenuItem onClick={() => handleProfileMenuClick('/service')}>Zarządzaj serwisem</MenuItem> : null }
       <MenuItem onClick={() => handleProfileMenuClick('/orders')}>Zamówienia</MenuItem>
       <MenuItem onClick={() => handleProfileMenuClick('/account')}>Konto</MenuItem>
       <MenuItem onClick={() => handleLogout()}>Wyloguj</MenuItem>

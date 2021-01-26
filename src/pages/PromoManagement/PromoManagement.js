@@ -1,6 +1,6 @@
 import { AppBar, CategoriesBar, PromoList, PromoForm } from 'components'
 import { Middlepane } from 'styles/Middlepane.css';
-import './promoManagement.css';
+import 'styles/verticalBoxes.css';
 
 const PromoManagement = () => {
     return (

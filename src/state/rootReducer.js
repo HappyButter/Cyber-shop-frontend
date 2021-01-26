@@ -6,6 +6,7 @@ import promosReducer from './promo/promoReducer';
 import cartReducer from './cart/cartReducer';
 import commentsReducer from  './comments/commentsReducer';
 import ordersReducer from './orders/ordersReducer';
+import categoriesReducer from './categories/categoriesReducer';
 
 const rootReducer = combineReducers({
     products: productReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     cart: cartReducer,
     comments: commentsReducer,
     orders: ordersReducer,
+    categories: categoriesReducer,
 });
 
 export default rootReducer;

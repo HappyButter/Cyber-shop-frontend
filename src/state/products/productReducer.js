@@ -1,63 +1,58 @@
 import {
-    CREATE_PRODUCT,
-    DELETE_PRODUCT,
-    GET_PRODUCTS_SUCCESS,
+    GET_ALL_PRODUCTS_SUCCESS,
     GET_PROMO_PRODUCTS_SUCCESS,
     GET_RECOMMENDED_PRODUCTS_SUCCESS,
     GET_PRODUCT_SUCCESS,
     GET_CATEGORY_PRODUCTS_SUCCESS,
-    GET_PROMO_PRODUCTS_FAILURE
+    GET_PROMO_PRODUCTS_FAILURE,
+    SET_TO_EDIT_PRODUCT,
+    CREATE_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT_SUCCESS
 } from './productActions'; 
 
-let idGenerator = 1;
 
 const initialState = {
     recommended : [],
     promoProducts : [],
     categoryProducts : [],
-    productDetails: {}
+    productDetails : {},
+    allProducts : [],
+    currentlyEdited : {}
 }
 
 const productReducer = (state = initialState, action) => {
     switch(action.type) {
-        case CREATE_PRODUCT: {
-            const { name, price } = action.payload;
-
-            const createdProduct = {
-                id : idGenerator++,
-                name, 
-                price,
-            };
-
-            // update localStorage
-            const products = JSON.parse(localStorage.getItem('products')) || [];
-            localStorage.setItem('products', JSON.stringify(
-              [...products, createdProduct]
-            ));
+        case UPDATE_PRODUCT_SUCCESS : {
+            const updatedProduct = action.payload;
+            const reducedPromoList = state.allProducts.filter(
+                prod => prod.id !== updatedProduct.id 
+            );
 
             return {
                 ...state,
-                productList: [...state.productList, createdProduct]
+                allProducts: [...reducedPromoList, ...updatedProduct],
+                currentlyEdited : {}
             }
         }
-        case DELETE_PRODUCT: {
-            const { productId } = action.payload;
-            
-            const filteredProducts = state.productList.filter( product => product.id !== productId);
-
-            localStorage.setItem('products', JSON.stringify(filteredProducts));
-
+        case CREATE_PRODUCT_SUCCESS : {
+            const product = action.payload;
             return {
                 ...state,
-                productList: filteredProducts,
-            };
+                allProducts: [...state.allProducts, ...product],
+            }
         }
-        case GET_PRODUCTS_SUCCESS: {
-            const posts = action.payload.posts;
+        case SET_TO_EDIT_PRODUCT: {
+            return {
+                ...state,
+                currentlyEdited : action.payload
+            }
+        }
+        case GET_ALL_PRODUCTS_SUCCESS: {
+            const productList = action.payload;
       
             return {
               ...state,
-              posts,
+              allProducts: productList,
             }
         }
         case GET_RECOMMENDED_PRODUCTS_SUCCESS: {

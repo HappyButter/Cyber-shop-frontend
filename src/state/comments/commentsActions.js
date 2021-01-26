@@ -18,7 +18,6 @@ export const getCommentsToProduct = (productId) => async dispatch => {
           })
         })
         .catch(err => {
-          console.log(err);
           dispatch({
             type: GET_COMMENTS_FAILURE,
             payload: {

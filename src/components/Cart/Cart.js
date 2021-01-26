@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import { removeProductFromCart } from 'state/cart/cartActions';
-import ControllQuantity from '../ControllQuantity/ControllQuantity';
+import ControllQuantity from './ControllQuantity';
 
 
 const columns = [

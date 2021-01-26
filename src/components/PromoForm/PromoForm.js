@@ -10,7 +10,7 @@ const PromoForm = () => {
     return (
         <>
             <ButtonGroup disableElevation variant="contained" color="primary">
-                <Button onClick={() => setIsEditFormOpen(false)}>Dodaj promocję</Button>
+                <Button onClick={() => setIsEditFormOpen(false)}>Dodaj nową promocję</Button>
                 <Button onClick={() => setIsEditFormOpen(true)}>Edytuj istniejącą</Button>
             </ButtonGroup>
             <hr/>

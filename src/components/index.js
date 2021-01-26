@@ -10,3 +10,5 @@ export { default as PaymentForm } from './PaymentForm';
 export { default as OrderList } from './OrderList';
 export { default as PromoList } from './PromoList';
 export { default as PromoForm } from './PromoForm';
+export { default as ProductList } from './ProductList';
+export { default as ProductForm } from './ProductForm';

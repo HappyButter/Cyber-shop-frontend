@@ -52,7 +52,7 @@ export const editPromo = ({ id, title, description, discountValue }) => async di
     });
 }
 
-export const setToEdition = (promo) => {
+export const setToEditionPromo = (promo) => {
   return {
     type : SET_TO_EDIT_PROMO,
     payload : promo

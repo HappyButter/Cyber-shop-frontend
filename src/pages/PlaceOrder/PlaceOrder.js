@@ -104,7 +104,7 @@ const PlaceOrder = () => {
             <br />
             <h2>
               Do zapłaty:
-              {" " + parseFloat(cart.value + cart.shippingValue).toFixed(2) + " zł"}
+              {" " + parseFloat(cart.value + cart.address.shippingValue).toFixed(2) + " zł"}
             </h2>
           </>
         );
