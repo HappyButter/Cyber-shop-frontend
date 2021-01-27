@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CategoriesBar, AppBar, Comments } from '../../components';
 import { getProductDetails } from 'state/products/productActions';
 import { addProductToCart } from '../../state/cart/cartActions';
-import { Paragraph } from './productDetails.css';
+import { Paragraph, Btn } from './productDetails.css';
 import { Middlepane } from 'styles/Middlepane.css';
 import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import CategoryIcon from '@material-ui/icons/Category';
@@ -12,8 +12,6 @@ import WatchIcon from '@material-ui/icons/Watch';
 import ComputerIcon from '@material-ui/icons/Computer';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import Rating from '@material-ui/lab/Rating';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
 
 
 const ProductDetails = () => {
@@ -63,29 +61,27 @@ const ProductDetails = () => {
                 {getProductIcon(product.category_id)}
                 <br/>
                 <br/>
+                <hr/>
                 <Paragraph>
                     {product.name}
-                    <Rating 
+
+                </Paragraph>
+                <Rating 
                         value={parseFloat(product.rating)}
                         readOnly
                         precision={0.5}
                         size="large" />
-                </Paragraph>
-
                 <br/><br/>
-                {product.promo_id 
-                ? product.promo_price + " zł" 
-                : product.price + " zł"}
-                <IconButton
-                    style={{ color: "green" }}
-                    aria-label="open drawer"
-                    onClick={handleAddToCart}
-                    >
-                     <AddShoppingCartIcon style={{ color: "green" }}/>
-                    <Typography variant="h6" noWrap>
+                <h2>
+                    {product.promo_id 
+                    ? product.promo_price + " zł" 
+                    : product.price + " zł"}
+                </h2>
+                <Btn onClick={handleAddToCart}>
+                    <AddShoppingCartIcon/>
+                    {" "}
                     Dodaj do koszyka
-                </Typography>
-                </IconButton>
+                </Btn>
                 <br/><br/>
                 <hr/>
                 <div className="description">

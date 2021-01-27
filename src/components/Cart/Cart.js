@@ -13,7 +13,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { removeProductFromCart } from 'state/cart/cartActions';
 import ControllQuantity from './ControllQuantity';
 
-
 const columns = [
   {
     id: 'spanLeft',
@@ -95,7 +94,7 @@ const Cart = () => {
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
-                  {column.label}
+                  <h4>{column.label}</h4>
                 </TableCell>
               ))}
             </TableRow>
@@ -103,7 +102,7 @@ const Cart = () => {
           <TableBody>
             {cartItems.map((product) => {
               return (
-                <TableRow hover key={product.id}>
+                <TableRow key={product.id}>
                   {columns.map((column) => {
                     return (
                       <TableCell align={column.align}>
@@ -114,7 +113,7 @@ const Cart = () => {
                 </TableRow>
               );
             })}
-            <TableRow style={{ backgroundColor: 'yellow' }}>
+            <TableRow>
               <TableCell colSpan={4} align={'right'}>
                 Suma
                 </TableCell>

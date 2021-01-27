@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './placeOrder.css';
 import { placeOrder } from 'state/cart/cartActions';
 import { Redirect } from 'react-router-dom';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 
 
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 const PlaceOrder = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [commentText, setCommentText] = React.useState('');
   const steps = ['Koszyk',
@@ -39,10 +41,11 @@ const PlaceOrder = () => {
     'I gotowe!'];
 
   const userId = useSelector(state => state.auth.user.id);
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector(state => state.cart);  
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if(cart.productList.length > 0)
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const submitPlaceOrder = () => {
@@ -71,7 +74,8 @@ const PlaceOrder = () => {
       case 0:
         return (
           <>
-            Twój Koszyk:
+            <h3>Twój Koszyk</h3>
+            <ShoppingBasketIcon  fontSize="large"/>
             <br /><br />
             <Cart />
             <br /><br />
@@ -80,8 +84,7 @@ const PlaceOrder = () => {
       case 1:
         return (
           <>
-            Dostawa
-            <br /><br />
+            <h3>Dostawa</h3>
             <ShippingForm handleNext={handleNext} handleBack={handleBack} />
             <br /><br />
           </>
@@ -89,8 +92,7 @@ const PlaceOrder = () => {
       case 2:
         return (
           <>
-            Płatność
-            <br /><br />
+            <h3>Płatność</h3>
             <PaymentForm handleNext={handleNext} handleBack={handleBack} />
             <br /><br />
           </>
@@ -104,12 +106,11 @@ const PlaceOrder = () => {
             <br />
             <h2>
               Do zapłaty:
-              {" " + parseFloat(cart.value + cart.address.shippingValue).toFixed(2) + " zł"}
+              {" " + (parseFloat(cart.value) + parseFloat(cart.address.shippingValue)).toFixed(2) + " zł"}
             </h2>
           </>
         );
       case 4:
-        return (<Redirect to="/" />);
       default:
         return (<Redirect to="/" />);
     }

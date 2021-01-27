@@ -1,9 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { addProductToCart,
-    reduceProductQuantityFromCart,
-    removeProductFromCart } from '../../state/cart/cartActions';
+import { addProductToCart } from '../../state/cart/cartActions';
 
-import { GridElement } from './productItem.css';
+import { GridElement, CustomLink, Btn } from './productItem.css';
 import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import CategoryIcon from '@material-ui/icons/Category';
 import WatchIcon from '@material-ui/icons/Watch';
@@ -12,8 +10,7 @@ import ComputerIcon from '@material-ui/icons/Computer';
 import React from 'react';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
-
-import { Link } from "react-router-dom";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const ProductItem = ({ productInfo }) => {
     const dispatch = useDispatch();
@@ -33,10 +30,18 @@ const ProductItem = ({ productInfo }) => {
         }
     } 
 
+    const handleAddToCart = () => {
+        dispatch(addProductToCart({
+            productId : productInfo.id,
+            productName : productInfo.name,
+            price : productInfo.promo_id ? productInfo.promo_price : productInfo.price,
+        }))
+    }
+
     return (
         <GridElement key={productInfo.id}>
-            <br/><br/>
-            <Link to={`/product/${productInfo.id}`}>
+            <br/>
+            <CustomLink to={`/product/${productInfo.id}`}>
                 {getProductIcon(productInfo.category_id)}
                 <br/><br/>
                 {productInfo.name}
@@ -44,29 +49,21 @@ const ProductItem = ({ productInfo }) => {
                 {productInfo.promo_id 
                 ? productInfo.promo_price + " zł" 
                 : productInfo.price + " zł"}
-            </Link>
+            </CustomLink>
             <br/><br/>
-            <button onClick={ e => dispatch(reduceProductQuantityFromCart({
-                    productId : productInfo.id
-                }))}>-1</button>
-                
-                <button onClick={ e => dispatch(addProductToCart({
-                    productId : productInfo.id,
-                    productName : productInfo.name,
-                    price : productInfo.promo_id ? productInfo.promo_price : productInfo.price,
-                }))}>+1</button>
-                            
-                <button onClick={ e => dispatch(removeProductFromCart({
-                    productId : productInfo.id
-                }))}>DELETE</button>
-
-            <Box component="fieldset" mb={3} borderColor="transparent">
+            <Box component="fieldset" mb={1} borderColor="transparent">
                 <Rating name="read-only" 
                         value={parseFloat(productInfo.rating)}
                         readOnly
                         precision={0.5} />
+                <hr/>
             </Box>
+
+            <Btn onClick={ handleAddToCart }>
+                <ShoppingCartIcon/>
+            </Btn>
         </GridElement>
+        
     );
 }
 

@@ -44,7 +44,7 @@ const AddProductForm = () => {
             <h3><span class="productFormSpan">Szczegóły nowego produktu:</span></h3>
             <form id="addProductForm" class="addProductForm" onSubmit={handleSubmit}>
 
-                <input type="text" name="name" id="name" placeholder="Nazwa produktu" required 
+                <input type="text" name="name-form" id="name-form" placeholder="Nazwa produktu" required 
                 onChange={(event) => setName(event.target.value)}/>
                 
                 <input type="text" name="producer" id="producer" placeholder="Producent" required 

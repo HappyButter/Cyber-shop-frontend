@@ -2,29 +2,30 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Box = styled.div`
-    background-color: red;
-    position: relative;
+    background-color: white;
     height: 300px;
-    /* width: 100%; */
-    /* height: 100%; */
-    // width: '50px'
+    border-radius: 30px;
+    text-align: center;
+    color: palevioletred;
+    background: papayawhip;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 `;
 
 export const CarouselWrapper = styled.div`
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* align-items: center; */
     width: 100%;
-    /* border: 3px solid; */
-    
+    font-size: 3em;
     li.alice-carousel__stage-item :not(.__cloned) {
         width: auto !important;
-        /* width: 100%; */
-        /* height: 300px; */
   }
 `;
 
 export const CarouselLink = styled(Link)`
-   /* -webkit-user-drag: none;
-   user-select: none; */
+    text-decoration: none;
+
+    &:hover {
+        color: red; // <Thing> when hovered
+    }
 `;

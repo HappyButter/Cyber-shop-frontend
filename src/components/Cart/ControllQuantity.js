@@ -3,6 +3,7 @@ import { addProductToCart,
          reduceProductQuantityFromCart} from 'state/cart/cartActions';
     
 import { useDispatch } from 'react-redux';
+import { Input } from './cart.css';
 
 const ControllQuantity = ({productId, quantity}) => {
     const dispatch = useDispatch();
@@ -21,13 +22,13 @@ const ControllQuantity = ({productId, quantity}) => {
                     }
                 }
                 />
-              <input type="number" 
-                    step="1" 
+              <Input type="number" 
+                    step="1"
                     min="1" 
                     name="quantity" 
                     value={count} 
                     title="Qty" 
-                    class="input-text qty text"
+                    class="quantity"
                     size="4"
                     pattern=""
                     inputmode=""/>

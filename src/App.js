@@ -19,6 +19,7 @@ import { ProtectedRoute } from './components';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPromos } from './state/promo/promoActions';
 import { getRecommendedProducts } from './state/products/productActions';
+import { getAllCategories } from './state/categories/categoriesActions';
 
 import {
   BrowserRouter as Router,
@@ -34,6 +35,7 @@ const App = () => {
   useEffect(() => {
       dispatch(getPromos());
       dispatch(getRecommendedProducts());
+      dispatch(getAllCategories());
   },[dispatch]);
 
   return (

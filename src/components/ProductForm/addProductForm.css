@@ -2,7 +2,6 @@
     padding: 20px;
 }
 
-#name, 
 #producer,
 #description,
 #price,
@@ -10,7 +9,8 @@
 #warranty,
 #promoId,
 #categoryId,
-#quantity {
+#quantity,
+#name-form {
     width: 100%;
     padding: 12px; /* Some padding */ 
     margin-bottom: 16px; /* Bottom margin */
