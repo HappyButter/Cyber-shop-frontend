@@ -28,13 +28,19 @@ const OutcomeBox = styled.div`
     border-radius: 1em;
 `;
 
+const BalanceeBox = styled.div`
+    background-color: rgba(255,255,255,0.2);
+    padding: 1em;
+    border-radius: 1em;
+`;
+
+
 const Finances = () => {
     const [balance, setBalance] = useState({});
 
     useEffect( () => {
         axios.get('/orders/shop/balance')
         .then(res => {
-            console.log(res.data)
             setBalance(res.data)
         })
         .catch(err => {
@@ -60,6 +66,11 @@ const Finances = () => {
                     <h1>Liczba transakcji: {balance.outcomeCount}</h1>
                 </OutcomeBox>
                 <hr/>
+                <BalanceeBox>
+                    <h1>Saldo: {parseFloat(balance.income) + parseFloat(balance.outcome)} zł</h1>
+                    <h1>Wszystkich transakcji: {parseInt(balance.incomeCount) + parseInt(balance.outcomeCount)}</h1>
+                </BalanceeBox>
+                
             </Middlepane>
         </>
     );

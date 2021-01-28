@@ -72,6 +72,6 @@ export const updateAccountData = ( { name, surname, phoneNumber, userId } ) => a
 export const logout = () => {
     return {
       type: LOGOUT_REQUEST,
-      payload: null,
+      payload: "wylogowano",
     }
 }

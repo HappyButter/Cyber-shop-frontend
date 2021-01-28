@@ -10,5 +10,6 @@ export const EditBtn = styled.button`
 `;
 
 export const PaymentStatusWrapper = styled.div`
-    padding-left: 10px;
+    padding: 10px;
+    background-color: rgba(255,255,255,0.2);
 `;

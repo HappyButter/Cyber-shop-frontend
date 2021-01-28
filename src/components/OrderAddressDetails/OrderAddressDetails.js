@@ -8,6 +8,9 @@ const OrderAddressDetails = ({orderData}) => {
 
     return (
         <DetailsWrapper>
+            <h3>Szczegóły</h3>
+            <hr/>
+            <br/>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                     <TextField
@@ -159,9 +162,9 @@ const OrderAddressDetails = ({orderData}) => {
                         <TextField
                             disabled
                             fullWidth
-                            name="phoneNumber"
-                            label="Numer telefonu"
-                            id="phoneNumber"
+                            name="dateFulfillment"
+                            label="Data zrealizowania"
+                            id="dateFulfillment"
                             variant="outlined"
                             value={orderData.dateFulfillment.split('T')[0]}
                         />

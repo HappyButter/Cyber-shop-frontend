@@ -52,16 +52,23 @@ const PaymentStatus = ({orderId, auth}) => {
         )
     ); 
 
-    useEffect(() => {
-        setIsPaid(currentlyWatched.isPaid || false);
-        setPaymentMethod(currentlyWatched.paymentMethod || '');
-    }, [currentlyWatched]);
 
-
-    const orderStatusTranslator = (k) => {
+    const orderStatusKeyToValue = (k) => {
         const res = orderStatusList.find(stat => stat.key === k);
         return res.value;
     }
+
+    const orderStatusValueToKey = (v) => {
+        const res = orderStatusList.find(stat => stat.value === v);
+        return res.key;
+    }
+
+
+    useEffect(() => {
+        setIsPaid(currentlyWatched.isPaid || false);
+        setPaymentMethod(currentlyWatched.paymentMethod || '');
+        setOrderStatus( orderStatusValueToKey(currentlyWatched.orderStatus) || orderStatusList[0].key)
+    }, [currentlyWatched]);
 
     const handlePaymentSubmit = (e) => {
         e.preventDefault();
@@ -74,7 +81,7 @@ const PaymentStatus = ({orderId, auth}) => {
     const handleStatus = (e) => {
         e.preventDefault();
 
-        const status = orderStatusTranslator(orderStatus);
+        const status = orderStatusKeyToValue(orderStatus);
 
         if(currentlyWatched.orderStatus !== status){
             dispatch(updateOrderStatus({status, orderId}));
@@ -85,6 +92,8 @@ const PaymentStatus = ({orderId, auth}) => {
     const handlePayment = () => {
         return (
         <>
+            <br/>
+            <hr/>
             <h4>Czy zapłacone:</h4>
             <form onSubmit={handlePaymentSubmit}>
                 <Select
@@ -108,6 +117,8 @@ const PaymentStatus = ({orderId, auth}) => {
     const handleOrderStatus = () => {
         return (
         <>
+            <br/>
+            <hr/>
             <h4>Status zamówienia:</h4>
             <form onSubmit={handleStatus}>
                 <Select
@@ -160,7 +171,7 @@ const PaymentStatus = ({orderId, auth}) => {
                         label="Status zamówienia"
                         id="orderStatus"
                         variant="outlined"
-                        value={orderStatusTranslator(orderStatus)}
+                        value={orderStatusKeyToValue(orderStatus)}
                     />
                 </Grid> 
             </Grid>
@@ -187,11 +198,14 @@ const PaymentStatus = ({orderId, auth}) => {
                 </Grid> 
             </Grid>
             <br/>
-            <hr/>
-            {auth ? handlePayment() : basicUserPayment()}
+            {basicUserPayment()}
+            {basicUserOrderStatus()}
             <br/>
             <hr/>
-            {auth ? handleOrderStatus() : basicUserOrderStatus()}
+            <br/>
+            <h3>Zarządzaj zamówieniem:</h3>
+            {auth ? handlePayment() : null}
+            {auth ? handleOrderStatus() : null}
 
         </PaymentStatusWrapper>
     )

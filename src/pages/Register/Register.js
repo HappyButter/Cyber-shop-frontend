@@ -13,7 +13,7 @@ import { RegisterWrapper } from './register.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { register, clearNotification } from 'state/auth/authActions';
 import { Redirect } from 'react-router-dom';
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 
 
 const useStyles = makeStyles((theme) => ({

@@ -10,10 +10,8 @@ import {
 
 const initialState = {
     user : JSON.parse(localStorage.getItem('user')) || null,
-    // eslint-disable-next-line eqeqeq
-    isAdmin : localStorage.getItem('isAdmin') == 'true',        // localStorage stores things in a string so could not use '==='   
-    // eslint-disable-next-line eqeqeq
-    isLoggedIn : localStorage.getItem('isLoggedIn') == 'true',
+    isAdmin : Boolean(localStorage.getItem('isAdmin')) === true, 
+    isLoggedIn : Boolean(localStorage.getItem('isLoggedIn')) === true,
     notification : null
 }
 
