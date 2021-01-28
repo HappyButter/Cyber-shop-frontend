@@ -4,7 +4,6 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import { CategoriesBar, AppBar, Cart, ShippingForm, PaymentForm } from 'components';
 import { Middlepane } from 'styles/Middlepane.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -133,7 +132,7 @@ const PlaceOrder = () => {
         })}
       </Stepper>
       <Middlepane>
-        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+        {getStepContent(activeStep)}
         {activeStep === 1 || activeStep === 2
           ? null
           : (<div>

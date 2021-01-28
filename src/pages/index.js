@@ -10,3 +10,5 @@ export { default as Cart } from './PlaceOrder';
 export { default as ProductManagement } from './ProductManagement';
 export { default as PromoManagement } from './PromoManagement';
 export { default as OrderDetails } from './OrderDetails';
+export { default as ServiceManagement } from './ServiceManagement';
+export { default as Finances } from './Finances';

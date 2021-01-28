@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { removeProductFromCart } from 'state/cart/cartActions';
 import ControllQuantity from './ControllQuantity';
+import { Btn } from './cart.css'
 
 const columns = [
   {
@@ -71,9 +72,9 @@ const Cart = () => {
           quantity={product.quantity}
         />
       } case 'delete': {
-        return <button onClick={e => dispatch(removeProductFromCart({
+        return <Btn onClick={e => dispatch(removeProductFromCart({
           productId: product.id
-        }))}><DeleteIcon /></button>
+        }))}><DeleteIcon /></Btn>
       } case 'price': {
         return product.price + " zł";
       }
@@ -87,7 +88,7 @@ const Cart = () => {
       <TableContainer className={classes.container}>
         <Table stickyHeader>
           <TableHead >
-            <TableRow>
+            <TableRow key="main">
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
@@ -113,7 +114,7 @@ const Cart = () => {
                 </TableRow>
               );
             })}
-            <TableRow>
+            <TableRow key="summary">
               <TableCell colSpan={4} align={'right'}>
                 Suma
                 </TableCell>

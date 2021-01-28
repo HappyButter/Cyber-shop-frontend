@@ -3,7 +3,7 @@ import { addProductToCart,
          reduceProductQuantityFromCart} from 'state/cart/cartActions';
     
 import { useDispatch } from 'react-redux';
-import { Input } from './cart.css';
+import { Btn, ControllBtn } from './cart.css';
 
 const ControllQuantity = ({productId, quantity}) => {
     const dispatch = useDispatch();
@@ -11,9 +11,9 @@ const ControllQuantity = ({productId, quantity}) => {
 
     return (
           <>
-              <input type="button" 
+              <Btn type="button" 
                     value="-" 
-                    class="minus"
+                    className="minus"
                     onClick={ e => {
                         dispatch(reduceProductQuantityFromCart({
                             productId
@@ -21,21 +21,12 @@ const ControllQuantity = ({productId, quantity}) => {
                         setCount(count-1);
                     }
                 }
-                />
-              <Input type="number" 
-                    step="1"
-                    min="1" 
-                    name="quantity" 
-                    value={count} 
-                    title="Qty" 
-                    class="quantity"
-                    size="4"
-                    pattern=""
-                    inputmode=""/>
+                >-</Btn>
                     
-              <input type="button" 
-                    value="+" 
-                    class="plus"
+                {count}
+                    
+              <ControllBtn type="button" 
+                    className="plus"
                     onClick={ e => {
                         dispatch(addProductToCart({
                             productId
@@ -43,7 +34,7 @@ const ControllQuantity = ({productId, quantity}) => {
                         setCount(count+1);
                     }
                 }
-                />
+                >+</ControllBtn>
           </>
       )
 }

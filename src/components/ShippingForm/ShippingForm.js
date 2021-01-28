@@ -130,9 +130,9 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     handleExistingAddressSelect({addressId:e.target.value});
                   }}
                   >
-                    <MenuItem value={-1}>{"Nowy Adres"}</MenuItem>
+                    <MenuItem value={-1} key={-1}>{"Nowy Adres"}</MenuItem>
                     {userAddresses.map(address => (
-                      <MenuItem value={address.id}>{address.city + ", " + address.street}</MenuItem>
+                      <MenuItem value={address.id} key={address.id}>{address.city + ", " + address.street}</MenuItem>
                     ))}
                   </Select>
                   <hr/>

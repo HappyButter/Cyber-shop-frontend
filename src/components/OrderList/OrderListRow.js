@@ -30,15 +30,9 @@ const Row = ({ rowData }) => {
     const classes = useRowStyles();
     const datePlaced = rowData.datePlaced.split('T')[0];
 
-    const handleInfoBtn = () => {
-        return (
-            <Link to={`/order/details/${rowData.order_id}`} />
-        );
-    }
-
     return (
         <React.Fragment>
-            <TableRow className={classes.root} hover>
+            <TableRow  className={classes.root} hover>
                 <TableCell>
                     <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -50,20 +44,31 @@ const Row = ({ rowData }) => {
                 <TableCell align="right">{datePlaced}</TableCell>
                 <TableCell align="right">{rowData.email}</TableCell>
                 <TableCell align="right">{rowData.productsCost + " zł"}</TableCell>
-                <TableCell align="right">{rowData.isPaid
-                    ? <CheckCircleOutlineIcon />
-                    : <HighlightOffIcon />}</TableCell>
-                <TableCell align="right">{rowData.orderStatus}</TableCell>
-                <TableCell align="right">
-                    <IconButton aria-label="info">
-                        <Link to={`/order/details/${rowData.order_id}`}>               
-                            <InfoRoundedIcon />
-                        </Link>         
-                    </IconButton>    
-                </TableCell>
+                
+                {rowData.address_id !== null 
+                    ? <>
+                        <TableCell align="right">
+                            { rowData.isPaid
+                                ? <CheckCircleOutlineIcon />
+                                : <HighlightOffIcon />
+                            }
+                        </TableCell>
+                        <TableCell align="right">{rowData.orderStatus}</TableCell>
+
+                        <TableCell align="right">
+                            <IconButton aria-label="info">
+                                <Link to={`/order/details/${rowData.order_id}`}>               
+                                    <InfoRoundedIcon />
+                                </Link>         
+                            </IconButton>    
+                        </TableCell>
+                        </>
+                    : <><TableCell/><TableCell/><TableCell/></>
+                }
+
             </TableRow>
 
-            <TableRow>
+            <TableRow >
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
@@ -72,7 +77,7 @@ const Row = ({ rowData }) => {
                             </Typography>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
-                                    <TableRow>
+                                    <TableRow >
                                         <TableCell>Nazwa</TableCell>
                                         <TableCell>Cena</TableCell>
                                         <TableCell align="right">Ilość</TableCell>
@@ -81,7 +86,7 @@ const Row = ({ rowData }) => {
                                 </TableHead>
                                 <TableBody>
                                     {rowData.productList.map((product) => (
-                                        <TableRow>
+                                        <TableRow >
                                             <TableCell component="th" scope="row">
                                                 {product.name}
                                             </TableCell>

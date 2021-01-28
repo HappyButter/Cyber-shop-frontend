@@ -17,7 +17,7 @@ const OrderList = () => {
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
                 <TableHead>
-                    <TableRow>
+                    <TableRow key="title">
                         <TableCell />
                         <TableCell>Tytuł</TableCell>
                         <TableCell align="right">Data złożenia</TableCell>

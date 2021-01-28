@@ -30,13 +30,8 @@ export const Btn = styled.div`
 	padding: 8px 20px;
 	text-decoration:none;
     text-shadow:-7px 1px 30px #2f6627;
-    
-    &:hover {
-        background-color:#5cbf2a;
-    }
 
     &:active {
-        position:relative;
-        top:1px;
+        top:2px;
     }
 ` 

@@ -37,7 +37,7 @@ const PaymentForm = ({handleNext, handleBack}) => {
     const currentPaymentState = useSelector(state => state.cart.payment);
 
     useEffect( () => {
-        setPaymentMethod(currentPaymentState || "Blik");
+        setPaymentMethod(currentPaymentState ? "Blik" : currentPaymentState);
     },[currentPaymentState]);
 
     const handleSubmit = (e) => {

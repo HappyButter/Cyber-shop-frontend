@@ -12,7 +12,7 @@ const initialState = {
     currentlyEdited: {}
 }
 
-const promosReducer = ( state=initialState, action) => {
+const promosReducer = ( state=initialState, action ) => {
     switch(action.type) {
         case DELETE_PROMO_SUCCESS: {
             const promoId = action.payload;
