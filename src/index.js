@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import store from './state/store';
 
 import { SnackbarProvider } from 'notistack';
+import 'font/Cyberpunk.ttf';
+
 
 ReactDOM.render(
   <React.StrictMode>

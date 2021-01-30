@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import { createProduct } from 'state/products/productActions';
@@ -41,7 +40,7 @@ const AddProductForm = () => {
     return (
         <>
             <br/>
-            <h3><span class="productFormSpan">Szczegóły nowego produktu:</span></h3>
+            <h2><span class="productFormSpan">Szczegóły nowego produktu:</span></h2>
             <form id="addProductForm" class="addProductForm" onSubmit={handleSubmit}>
 
                 <input type="text" name="name-form" id="name-form" placeholder="Nazwa produktu" required 
@@ -68,10 +67,13 @@ const AddProductForm = () => {
                 onChange={(event) => setWarranty(event.target.value)}/>
                 <span class="productFormSpan">[w miesiącach]</span> 
 
-                <Grid container spacing={1} id="promoId">
+
+                <br/><br/>
+                Promocja:
+                <Grid container id="promoId">
                     <Grid item xs={12}>
-                        <InputLabel id="promoId-label">Promocja</InputLabel>
                         <Select
+                        style={{background:'rgb(60, 78, 177)'}}
                         labelId="promoId-label"
                         fullWidth
                         value={promo_id}
@@ -83,10 +85,13 @@ const AddProductForm = () => {
                     </Grid>
                 </Grid>
 
-                <Grid container spacing={1} id="categoryId">
+
+                <br/>
+                Kategoria:
+                <Grid container id="categoryId">
                     <Grid item xs={12}>
-                        <InputLabel id="categoryId-label">Kategoria</InputLabel>
                         <Select
+                        style={{background:'rgb(60, 78, 177)'}}
                         labelId="categoryId-label"
                         fullWidth
                         value={category_id}

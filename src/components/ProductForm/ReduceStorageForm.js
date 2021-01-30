@@ -45,7 +45,7 @@ const ReduceStorageForm = () => {
     return (
         <>
             <br/>
-            <h3><span class="productFormSpan">Aktualizacja stanu magazynowego produktu:</span></h3>
+            <h2><span class="productFormSpan">Aktualizacja stanu magazynowego produktu:</span></h2><br/>
             <form id="reduceStorageForm" class="reduceStorageForm" onSubmit={handleSubmit}>
 
                 <h4 id="productName"><span class="productFormSpan">{name}</span></h4>
@@ -53,12 +53,14 @@ const ReduceStorageForm = () => {
                 <span class="productFormSpan">Dodaj/usuń z magazynu:</span>
                 <input type="number" class="quantity" id="quantity" value={quantity} required onChange={(e) => setQuantity(e.target.value)}/>
 
+                <br/>
                 <span class="productFormSpan">Po cenie:</span>
                 <input type="text" name="price" id="price" value={price} required 
                 onChange={(event) => setPrice(event.target.value)}/> 
                 <span class="productFormSpan">[zł]</span>
                 <br/>
-                <button type="submit" id="updateStorageBtn">Aktualizuj</button>
+                <br/>
+                {productEdit.id ? <button type="submit" id="updateStorageBtn">Aktualizuj</button> : null}
             </form>
         </>
     );

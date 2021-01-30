@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { CategoriesBar, AppBar, Comments } from '../../components';
+import { AppBar, Comments } from '../../components';
 import { getProductDetails } from 'state/products/productActions';
 import { addProductToCart } from '../../state/cart/cartActions';
 import { Paragraph, Btn } from './productDetails.css';
@@ -53,7 +53,6 @@ const ProductDetails = () => {
     return(
         <>
             <AppBar></AppBar>
-            <CategoriesBar></CategoriesBar>
 
             <Middlepane>
                 <br/>

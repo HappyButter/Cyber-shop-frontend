@@ -11,7 +11,7 @@ const ordersReducer = (state = initialState, action) => {
     switch(action.type) {
         case UPDATE_ORDER_STATUS_SUCCESS: {
             const {status, orderId} = action.payload;
-            
+            alert("Order status updated successfully!");
             const currentState = state.filter(order => parseInt(order.order_id) !== parseInt(orderId));
             let updated = state.find(order => parseInt(order.order_id) === parseInt(orderId));
             updated.orderStatus = status;
@@ -20,6 +20,7 @@ const ordersReducer = (state = initialState, action) => {
         }
         case UPDATE_PAYMENT_STATUS_SUCCESS: {
             const {isPaid, orderId} = action.payload;
+            alert("Payment status updated successfully!");
             
             const currentState = state.filter(order => parseInt(order.order_id) !== parseInt(orderId));
             let updated = state.find(order => parseInt(order.order_id) === parseInt(orderId));

@@ -3,35 +3,40 @@ import { Link } from "react-router-dom";
 
 export const GridElement = styled.div`
 	min-height: 300px;
-	background: rgba( 255, 255, 255, 0.25 );
-	box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-	backdrop-filter: blur( 13.5px );
-	-webkit-backdrop-filter: blur( 13.5px );
-	border-radius: 10px;
+	background-color: rgba( 255, 255, 255, 0.1 );
+	position: relative;
+
+	&:before {
+    	content: '';
+		position: absolute;
+		bottom: 0; left: 0;
+		border-bottom: 40px solid rgb(32, 32, 32);
+		border-right: 40px solid transparent;
+		width: 0;
+    }
 `;
 
 export const CustomLink = styled(Link)`
     text-decoration: none;
-
-	&:visited {
-		text-decoration: none;	
-	}
+	color: rgba(255,255,255,.75);
+	font-size: 1.1em;
 `;
 
 export const Btn = styled.div`
-	background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
-	background-color:#44c767;
-	border-radius:10px;
+	background-color: #33C333;
 	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
 	font-size:18px;
 	padding: 8px 20px;
 	text-decoration:none;
-    text-shadow:-7px 1px 30px #2f6627;
-
+	position: relative;
+	cursor: pointer;   
+	
+    &:hover {
+        background-color:#269126;
+    }
+    
     &:active {
+        position:relative;
         top:2px;
     }
 ` 

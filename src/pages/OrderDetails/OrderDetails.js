@@ -1,6 +1,6 @@
 import React  from 'react';
 import { useSelector } from 'react-redux';
-import { CategoriesBar, AppBar, PaymentStatus, OrderAddressDetails, OrderProductList } from 'components';
+import { AppBar, PaymentStatus, OrderAddressDetails, OrderProductList } from 'components';
 import { Middlepane } from 'styles/Middlepane.css';
 import { ContentWrapper, ContentLeft, ContentMid, ContentRight, Paragraph, MidContentWrapper } from './orderDetails.css';
 import { useParams } from 'react-router-dom';
@@ -19,7 +19,6 @@ const OrderDetails = () => {
     return (
         <>
             <AppBar></AppBar>
-            <CategoriesBar></CategoriesBar>
             <Middlepane>
 
                 <Paragraph>{order.title}</Paragraph>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { CategoriesBar, AppBar, ProductGrid } from 'components';
+import { AppBar, ProductGrid } from 'components';
 import { getPromoProducts } from 'state/products/productActions';
 import { Middlepane } from 'styles/Middlepane.css';
 
@@ -34,7 +34,6 @@ const Promo = () => {
     return (
         <>
             <AppBar></AppBar>
-            <CategoriesBar></CategoriesBar>
             <Middlepane>
                 <hr/>
                 <br/>

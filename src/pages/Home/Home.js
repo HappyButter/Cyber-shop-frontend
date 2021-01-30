@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
 import { Paragraph } from './home.css';
-import { Middlepane } from '../../styles/Middlepane.css';
-import { CategoriesBar, AppBar, AdsCarousel, ProductGrid } from '../../components';
+import { MiddlepaneOffer } from 'styles/Middlepane.css';
+import { AppBar, AdsCarousel, ProductGrid } from 'components';
 
 
 
@@ -12,8 +12,7 @@ const Home = () => {
     return (
         <>
             <AppBar></AppBar>
-            <CategoriesBar></CategoriesBar>
-            <Middlepane>
+            <MiddlepaneOffer>
                 <br/>
                 <br/>
                 <Paragraph>Welcome to CyberShop!</Paragraph>
@@ -23,7 +22,7 @@ const Home = () => {
                 <br/><br/>
                 <Paragraph>Polecane</Paragraph>
                 <ProductGrid productsInfo={recommendedProducts}/>
-            </Middlepane>
+            </MiddlepaneOffer>
         </>
     );
 };

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import { updateProduct } from 'state/products/productActions';
@@ -57,20 +56,19 @@ const EditProductDetailsForm = () => {
     return (
         <>
             <br/>
-            <h3><span class="productFormSpan">Aktualizacja danych produktu:</span></h3>
+            <h2><span class="productFormSpan">Aktualizacja danych produktu:</span></h2>
             <form id="addProductForm" class="addProductForm" onSubmit={handleSubmit}>
-
-                <input type="text" name="name-form" id="name-form" value={name} required 
-                onChange={(event) => setName(event.target.value)}/>
                 
-                <input type="text" name="producer" id="producer" value={producer} required 
-                onChange={(event) => setProducer(event.target.value)}/>
+                <h4 id="productName"><span class="productFormSpan">{name}</span></h4>
+                <h4 id="productName"><span class="productFormSpan">{producer}</span></h4>
+                
 
                 <span class="productFormSpan">Cena:</span>
                 <input type="text" name="price" id="price" value={price} required 
                 onChange={(event) => setPrice(event.target.value)}/> 
                 <span class="productFormSpan">[zł]</span>
 
+                <br/>
                 <span class="productFormSpan">Marża:</span>
                 <input type="number" name="profitMargin" id="profitMargin" value={profitMargin} required 
                 onChange={(event) => setProfitMargin(event.target.value)}/> 
@@ -84,10 +82,12 @@ const EditProductDetailsForm = () => {
                 onChange={(event) => setWarranty(event.target.value)}/>
                 <span class="productFormSpan">[w miesiącach]</span> 
 
-                <Grid container spacing={1} id="promoId">
+                <br/><br/>
+                Promocja:
+                <Grid container id="promoId">
                     <Grid item xs={12}>
-                        <InputLabel id="promoId-label">Promocja</InputLabel>
                         <Select
+                        style={{background:'rgb(60, 78, 177)'}}
                         labelId="promoId-label"
                         fullWidth
                         value={promo_id}
@@ -99,10 +99,13 @@ const EditProductDetailsForm = () => {
                     </Grid>
                 </Grid>
 
-                <Grid container spacing={1} id="categoryId">
+
+                <br/>
+                Kategoria:
+                <Grid container id="categoryId">
                     <Grid item xs={12}>
-                        <InputLabel id="categoryId-label">Kategoria</InputLabel>
                         <Select
+                        style={{background:'rgb(60, 78, 177)'}}
                         labelId="categoryId-label"
                         fullWidth
                         value={category_id}
@@ -112,8 +115,8 @@ const EditProductDetailsForm = () => {
                         </Select>
                     </Grid>
                 </Grid>
-
-                <button type="submit" id="updateProductBtn">Edytuj</button>
+                <br/>
+                {productEdit.id ? <button type="submit" id="updateProductBtn">Edytuj</button> : null}
             </form>
         </>
     );

@@ -48,12 +48,11 @@ const columns = [
 ];
 
 const useStyles = makeStyles({
-  root: {
-    borderRadius: '15px',
-  },
   container: {
     backgroundColor: 'gray',
-    borderRadius: '15px',
+  },
+  head: {
+    backgroundColor: 'gray',
   },
 });
 
@@ -84,10 +83,10 @@ const Cart = () => {
   }
 
   return (
-    <Paper className={classes.root}>
+    <Paper>
       <TableContainer className={classes.container}>
-        <Table stickyHeader>
-          <TableHead >
+        <Table stickyHeader >
+          <TableHead  className={classes.head}>
             <TableRow key="main">
               {columns.map((column) => (
                 <TableCell

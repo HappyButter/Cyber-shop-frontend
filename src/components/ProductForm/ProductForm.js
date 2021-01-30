@@ -11,13 +11,25 @@ const ProductForm = () => {
     return (
         <>
             <ButtonGroup disableElevation variant="contained" color="primary">
-                <Button onClick={() => setIsDetailsFormOpen(false)}>Dodaj nowy produkt</Button>
-                <Button onClick={() => setIsDetailsFormOpen(true)}>Edytuj produkt</Button>
+            
+                <Button style={isDetailsFormOpen ? {background:'rgb(60, 78, 177)'} : {background:'rgba(60, 78, 177, 0.3)'}}
+                        onClick={() => setIsDetailsFormOpen(false)}>
+                            Dodaj nowy produkt
+                </Button>
+                <Button style={!isDetailsFormOpen ? {background:'rgb(60, 78, 177)'} : {background:'rgba(60, 78, 177, 0.3)'}}
+                        onClick={() => setIsDetailsFormOpen(true)}
+                        >Edytuj produkt
+                </Button>
+            
             </ButtonGroup>
+
+            
             <hr/>
-            {isDetailsFormOpen 
-            ? <><EditProductDetailsForm/><hr/><ReduceStorageForm/></> 
-            : <AddProductForm/>}
+            {
+                isDetailsFormOpen 
+                ? <><EditProductDetailsForm/><hr/><ReduceStorageForm/></> 
+                : <AddProductForm/>
+            }
             <hr/>
         </>
     )

@@ -34,7 +34,8 @@ const ProductList = () => {
                         <TableCell align="left">Nazwa</TableCell>
                         <TableCell align="right">ID promocji</TableCell>
                         <TableCell align="right">Stan magazynowy</TableCell>
-                        <TableCell align="right">Typ</TableCell>
+                        <TableCell align="center">Typ</TableCell>
+                        <TableCell align="right">Kliknij by edytować</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

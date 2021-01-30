@@ -31,7 +31,9 @@ const PromoList = () => {
                     <TableRow>
                         <TableCell>Nazwa promocji</TableCell>
                         <TableCell align="right">Wartość zniżki</TableCell>
-                        <TableCell align="right"></TableCell></TableRow>
+                        <TableCell align="right">Kliknij by edytować</TableCell>
+                        
+                    </TableRow>
                 </TableHead>
                 <TableBody>
                     { promos.map(promo => <Row promoData={promo}/>)}

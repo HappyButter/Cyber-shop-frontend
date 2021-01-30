@@ -203,7 +203,7 @@ const PaymentStatus = ({orderId, auth}) => {
             <br/>
             <hr/>
             <br/>
-            <h3>Zarządzaj zamówieniem:</h3>
+            {auth ? <h3>Zarządzaj zamówieniem:</h3> : null}
             {auth ? handlePayment() : null}
             {auth ? handleOrderStatus() : null}
 

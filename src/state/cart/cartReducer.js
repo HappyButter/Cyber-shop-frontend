@@ -41,6 +41,7 @@ const cartReducer = (state = initialState, action) => {
         case PLACE_ORDER_SUCCESS: {
             localStorage.removeItem('cart');
             localStorage.removeItem('value');
+            
             return {
                 productList : [],
                 value : 0.0,

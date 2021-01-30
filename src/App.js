@@ -22,6 +22,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getPromos } from './state/promo/promoActions';
 import { getRecommendedProducts } from './state/products/productActions';
 import { getAllCategories } from './state/categories/categoriesActions';
+import './index.css';
+
 
 import {
   BrowserRouter as Router,

@@ -7,7 +7,8 @@ import {
     GET_PROMO_PRODUCTS_FAILURE,
     SET_TO_EDIT_PRODUCT,
     CREATE_PRODUCT_SUCCESS,
-    UPDATE_PRODUCT_SUCCESS
+    UPDATE_PRODUCT_SUCCESS,
+    UPDATE_STORAGE_SUCCESS
 } from './productActions'; 
 
 
@@ -22,12 +23,26 @@ const initialState = {
 
 const productReducer = (state = initialState, action) => {
     switch(action.type) {
+        case UPDATE_STORAGE_SUCCESS : {
+            const updatedProduct = action.payload;
+            
+            state.allProducts.forEach(prod => 
+                prod.id === updatedProduct.id 
+                ? prod.quantity += updatedProduct.quantity 
+                : null
+            )
+
+            return {
+                ...state,
+                currentlyEdited : {}
+            }
+        }
         case UPDATE_PRODUCT_SUCCESS : {
             const updatedProduct = action.payload;
             const reducedPromoList = state.allProducts.filter(
-                prod => prod.id !== updatedProduct.id 
+                prod => prod.id !== updatedProduct[0].id 
             );
-
+            
             return {
                 ...state,
                 allProducts: [...reducedPromoList, ...updatedProduct],

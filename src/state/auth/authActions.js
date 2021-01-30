@@ -23,13 +23,14 @@ export const clearNotification = () => {
 export const register = ( { name, surname, phoneNumber, email, password } ) => async dispatch => {
   axios.post('/auth/register', { name, surname, phoneNumber, email, password })
     .then(res => {
+      alert(`Witaj w serwisie ${name}!`);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
       })
     })
     .catch(err => {
-      console.log(err);
+      alert("Wpisz poprawne dane");
       dispatch({
         type: REGISTER_FAILURE,
         payload: err.message
@@ -40,12 +41,14 @@ export const register = ( { name, surname, phoneNumber, email, password } ) => a
 export const login = ( { email, password } ) => async dispatch => {
     axios.post('/auth/login', {email, password})
       .then(res => {
+        alert('Witaj ponownie!');
         dispatch({
           type: LOGIN_SUCCESS,
           payload: res.data
         })
       })
       .catch(err => {
+        alert("Wpisz poprawne dane");
         dispatch({
           type: LOGIN_FAILURE,
           payload: err.message
@@ -56,6 +59,7 @@ export const login = ( { email, password } ) => async dispatch => {
 export const updateAccountData = ( { name, surname, phoneNumber, userId } ) => async dispatch => {
   axios.post(`/users/update/${userId}`, { name, surname, phoneNumber })
     .then(res => {
+      alert("Zaktualizowano");
       dispatch({
         type: USER_ACCOUNT_UPDATE_SUCCESS,
         payload: { id:userId, name, surname, phoneNumber }
@@ -70,7 +74,8 @@ export const updateAccountData = ( { name, surname, phoneNumber, userId } ) => a
 }
 
 export const logout = () => {
-    return {
+  alert("Okazje czekają ;) Wróć jak najszybciej.");
+  return {
       type: LOGOUT_REQUEST,
       payload: "wylogowano",
     }

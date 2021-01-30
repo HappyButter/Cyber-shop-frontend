@@ -54,7 +54,10 @@ export const updateStorage = ( updateData ) => async dispatch => {
   .then(res => {
     dispatch({
         type: UPDATE_STORAGE_SUCCESS,
-        payload: res.data
+        payload: {
+          quantity: updateData.quantity,
+          id : updateData.id,
+        }
       })
     })
     .catch(err => {

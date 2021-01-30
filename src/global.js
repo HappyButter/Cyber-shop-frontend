@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
+
 export const GlobalStyles = createGlobalStyle`
   html, body {
     margin: 0;
@@ -11,11 +12,12 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    /* align-items: center; */
-    /* justify-content: center; */
     background: ${({ theme }) => theme.primaryDark};
     color: ${({ theme }) => theme.primaryLight};
+    scroll-behavior: smooth;
+    
+    color: rgba(255,255,255,.75);
+    font-family: Lato, sans-serif;
 
-  	scroll-behavior: smooth;
-  }
-  `
+  }    
+`

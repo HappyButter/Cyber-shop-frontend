@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { AppBar, 
-    CategoriesBar, 
+import { AppBar,  
     ProductsInServiceList,
     ProductInServiceForm } from 'components';
 import { Middlepane } from 'styles/Middlepane.css';
@@ -19,7 +18,6 @@ const ServiceManagement = () => {
     return (
         <>
             <AppBar/> 
-            <CategoriesBar/>
             <Middlepane>
                 <ProductsInServiceList/>
                 <ProductInServiceForm/>

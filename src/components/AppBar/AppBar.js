@@ -5,11 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-// import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-// import SearchIcon from '@material-ui/icons/Search';
-import AdbIcon from '@material-ui/icons/Adb';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Badge from '@material-ui/core/Badge';
 
@@ -19,17 +16,27 @@ import { useSelector } from 'react-redux';
 import { logout } from 'state/auth/authActions';
 import { clearCart } from 'state/cart/cartActions';
 import { useDispatch } from 'react-redux';
+import SmartphoneIcon from '@material-ui/icons/Smartphone';
+import ComputerIcon from '@material-ui/icons/Computer';
+import MemoryIcon from '@material-ui/icons/Memory';
 
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
+  root: {
+    background: 'rgb(252, 238, 9)',
+    color: 'black',
+  },
   menuButton: {
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
   },
   title: {
+    fontFamily: 'CyberSans',
+    fontSize: 40,
+    fontWeight: 100,
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
@@ -65,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -76,6 +82,13 @@ const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
     maxWidth: '1200px',
   },
+  categories : {
+    justifyContent: 'center',
+  },
+  categoriesTitle : {
+    fontSize: 17,
+	  fontFamily: ['BlenderProBold','sans-serif'].join(','),
+  }
 }));
 
 
@@ -117,6 +130,8 @@ const MenuAppBar = (props) => {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={() => setAnchorEl(null)}
+      style={{
+        color: 'black',}}
     >
       { auth.isAdmin ? <MenuItem onClick={() => handleProfileMenuClick('/finaces')}>Finanse</MenuItem> : null }
       { auth.isAdmin ? <MenuItem onClick={() => handleProfileMenuClick('/products')}>Zarządzaj produkatami</MenuItem> : null }
@@ -145,16 +160,14 @@ const MenuAppBar = (props) => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.root}>
         <Toolbar>
           <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
-            aria-label="open drawer"
-            onClick={() => handleProfileMenuClick('/')}
+            onClick={(e) => {e.preventDefault(); handleProfileMenuClick('/');}}
           >
-            <AdbIcon/>
             <Typography className={classes.title} variant="h6" noWrap>
             CyberShop
           </Typography>
@@ -182,7 +195,7 @@ const MenuAppBar = (props) => {
                         color="inherit">
               <Badge badgeContent={count.length} color="secondary">
                 <ShoppingCartIcon 
-                onClick={() => handleProfileMenuClick('/cart')}/>
+                onClick={(e) => {e.preventDefault(); handleProfileMenuClick('/cart');}}/>
               </Badge>
             </IconButton>
             <IconButton
@@ -197,6 +210,41 @@ const MenuAppBar = (props) => {
               <AccountCircle />
             </IconButton>
           </div>
+        </Toolbar>
+
+        <Toolbar align="center" className={classes.categories}>
+          <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={() => history.push('/offer/1')}
+          >
+              <ComputerIcon/> 
+              <Typography className={classes.categoriesTitle}>
+                Laptopy i komputery
+              </Typography> 
+          </IconButton>
+          
+          <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={() => history.push('/offer/2')}
+            >
+              <SmartphoneIcon/>  
+              <Typography className={classes.categoriesTitle}>
+                Smartfony i smartwatche
+              </Typography> 
+          </IconButton>
+          
+          <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={() => history.push('/offer/3')}
+            >
+              <MemoryIcon/> 
+              <Typography className={classes.categoriesTitle}>
+                Podzespoły komputerowe 
+              </Typography> 
+          </IconButton>
         </Toolbar>
       </AppBar>
       { auth.isLoggedIn ? menuUserLoggedIn : menuUserLoggedOut }

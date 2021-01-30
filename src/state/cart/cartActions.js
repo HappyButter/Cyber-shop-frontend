@@ -52,10 +52,10 @@ export const placeOrder = ({ userId, cart, clientComments }) => async dispatch =
         paymentMethod : cart.payment,
         productList: cart.productList,
      }
-     console.log(body);
 
     axios.post('/orders', body)
       .then(res => {
+        alert("Zamówienie przyjęte do realizacji.");
         dispatch({
           type: PLACE_ORDER_SUCCESS,
           payload: res.data

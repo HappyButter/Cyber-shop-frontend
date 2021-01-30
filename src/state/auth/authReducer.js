@@ -10,8 +10,8 @@ import {
 
 const initialState = {
     user : JSON.parse(localStorage.getItem('user')) || null,
-    isAdmin : Boolean(localStorage.getItem('isAdmin')) === true, 
-    isLoggedIn : Boolean(localStorage.getItem('isLoggedIn')) === true,
+    isAdmin : localStorage.getItem('isAdmin') === 'true' || false, 
+    isLoggedIn : localStorage.getItem('isLoggedIn') === 'true' || false,
     notification : null
 }
 
@@ -71,6 +71,7 @@ const authReducer = (state = initialState, action) => {
         case REGISTER_FAILURE:
         case LOGOUT_REQUEST: {
             localStorage.clear();
+
             return {
                 ...state,
                 user : null,
