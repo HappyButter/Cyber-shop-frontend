@@ -54,13 +54,37 @@ const Account = () => {
         setPhoneNumber(userData.phoneNumber);
     },[userData])
 
+    const validateName = () => {
+        const regName = /[0-9]+/g;
+        return ( !regName.test(name) && name.length > 2 )
+    }
+
+    const validateSurname = () => {
+        const regName = /[0-9]+/g;
+        return ( !regName.test(surname) && surname.length > 2 )
+    }
+  
+    const validatePhoneNumber = () => {
+        const regPhoneNumber = /[0-9]{3}-[0-9]{3}-[0-9]{3}/;
+        return (regPhoneNumber.test(phoneNumber) && phoneNumber.length === 11);
+    }
+
+    const validate = () => {
+        let isValid = validateName()
+                        && validateSurname()
+                        && validatePhoneNumber();
+        return isValid; 
+    }
+
     const dispatch = useDispatch();
     const handleSubmitRegister = (e) => {
         e.preventDefault();
 
-        // TO DO: client validation
         const userId = userData.id;
-        dispatch(updateAccountData({ userId, name, surname, phoneNumber }));
+
+        validate()
+        ? dispatch(updateAccountData({ userId, name, surname, phoneNumber }))
+        : alert("Popraw dane i spróbuj ponownie");
     }
 
     return (
@@ -88,6 +112,8 @@ const Account = () => {
                                 label="Imię"
                                 variant="filled"
                                 value={name}
+                                helperText={validateName() ? null : "Imię powinno być dłuższe niż 2 znaki i nie powinno zawierać cyfr"}
+                                error={!validateName()}
                                 onChange={(event) => setName(event.target.value)}
                             />
                         </Grid>
@@ -101,6 +127,8 @@ const Account = () => {
                                 name="lastName"
                                 variant="filled"
                                 value={surname}
+                                helperText={validateSurname() ? null : "Nazwisko powinno być dłuższe niż 2 znaki i nie powinno zawierać cyfr"}
+                                error={!validateSurname()}
                                 onChange={(event) => setSurname(event.target.value)}
                             />
                         </Grid>
@@ -116,6 +144,8 @@ const Account = () => {
                                 autoComplete="tel-national"
                                 variant="filled"
                                 value={phoneNumber}
+                                helperText={validatePhoneNumber() ? null :"format: 123-123-123"}
+                                error={!validatePhoneNumber()}
                                 onChange={(event) => setPhoneNumber(event.target.value)}
                             />
                         </Grid>

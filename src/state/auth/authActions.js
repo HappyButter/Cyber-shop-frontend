@@ -20,7 +20,7 @@ export const clearNotification = () => {
   }
 }
 
-export const register = ( { name, surname, phoneNumber, email, password } ) => async dispatch => {
+export const submitRegister = ( { name, surname, phoneNumber, email, password } ) => async dispatch => {
   axios.post('/auth/register', { name, surname, phoneNumber, email, password })
     .then(res => {
       alert(`Witaj w serwisie ${name}!`);
@@ -30,7 +30,7 @@ export const register = ( { name, surname, phoneNumber, email, password } ) => a
       })
     })
     .catch(err => {
-      alert("Wpisz poprawne dane");
+      alert("Użytkownik o podanym adresie już istnieje");
       dispatch({
         type: REGISTER_FAILURE,
         payload: err.message

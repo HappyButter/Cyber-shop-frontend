@@ -33,7 +33,7 @@ const OrderDetails = () => {
                         <h3>Kupione produkty</h3>
                         <hr/>
                         <br/>
-                        <OrderProductList productList={order.productList} auth={auth.isAdmin}/>
+                        <OrderProductList productList={order.productList} auth={auth.isAdmin} fulfilmentDate={order.dateFulfillment}/>
                         <br/>
                         <hr/>
                         <h2>

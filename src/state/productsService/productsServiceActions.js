@@ -44,7 +44,7 @@ export const addProductToService = ({ orderLineId, description, status }) => asy
             })
         })
         .catch(err => {
-            alert("Produkt jest już w serwisie lub jego okres gwarancji wygasł");
+            alert("Produkt jest już w serwisie lub jego okres gwarancji wygasł.");
             dispatch({
                 type : ADD_PRODUCT_TO_SERVICE_FAILURE 
             })

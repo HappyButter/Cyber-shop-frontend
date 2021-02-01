@@ -68,19 +68,56 @@ const ShippingForm = ({handleNext, handleBack}) => {
     useEffect( () => {
         dispatch(getUserAddresses({userId}));
         setAddressId(currentAddressState.addressId || -1);
-        setCountry(currentAddressState.country);
-        setCity(currentAddressState.city);
-        setPostcode(currentAddressState.postcode);
-        setStreet(currentAddressState.street);
-        setBuilding(currentAddressState.building);
-        setApartment(currentAddressState.apartment);
+        setCountry(currentAddressState.country || '');
+        setCity(currentAddressState.city || '');
+        setPostcode(currentAddressState.postcode || '');
+        setStreet(currentAddressState.street || '');
+        setBuilding(currentAddressState.building || '');
+        setApartment(currentAddressState.apartment || '');
         setShippingMethod(currentAddressState.shippingMethod || shippingMethods[0].name);
         setShippingValue(currentAddressState.shippingValue || shippingMethods[0].price);
     },[currentAddressState, dispatch, userId]);
 
+
+    const validateCountry = () => {
+      const regName = /[0-9]+/g;
+      return ( !regName.test(country) && country.length > 2 )
+    }
+
+    const validatePostCode = () => {
+      const regPhoneNumber = /[0-9]{2}-[0-9]{3}/;
+      return (regPhoneNumber.test(postcode) && postcode.length === 6);
+    }
+
+    const validateCity = () => {
+      const regName = /[0-9]+/g;
+      return ( !regName.test(city) && city.length > 2 )
+    }
+
+    const validateStreet = () => {
+      const regName = /[0-9]+/g;
+      return ( !regName.test(street) && street.length > 2 )
+    }
+
+    const validate = () => {
+      let isValid = validateCountry()
+              && validatePostCode()
+              && validateCity()
+              && validateStreet();
+
+      return isValid;
+    }
+
+
     const handleSubmit = (e) => {
       e.preventDefault();
-      dispatch(addAdress({ addressId, country, postcode, city, street, building, apartment, shippingMethod, shippingValue }));
+
+      if(validate()){
+        dispatch(addAdress({ addressId, country, postcode, city, street, building, apartment, shippingMethod, shippingValue }))
+      }else{
+        alert("wpisz poprawny adres");
+      }
+      
       handleNext();
     } 
 
@@ -88,12 +125,12 @@ const ShippingForm = ({handleNext, handleBack}) => {
       setAddressId(addressId);
       if(addressId !== -1){
         const address = userAddresses.filter(ad => ad.id === addressId)[0];
-        setCountry(address.country);
-        setCity(address.city);
-        setPostcode(address.postcode);
-        setStreet(address.street);
-        setBuilding(address.building);
-        setApartment(address.apartment);
+        setCountry(address.country || '');
+        setCity(address.city || '');
+        setPostcode(address.postcode || '');
+        setStreet(address.street || '');
+        setBuilding(address.building || '');
+        setApartment(address.apartment || '');
       }else{
         setCountry('');
         setCity('');
@@ -149,6 +186,8 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     name="country"
                     autoComplete="country"
                     autoFocus
+                    helperText={validateCountry() ? null : "Państwo musi mieć co najmnije 3 znaki i nie powinno zawierać cyfr"}
+                    error={!validateCountry()}
                     onChange={(event) => setCountry(event.target.value)}
                     />
                 </Grid>
@@ -163,6 +202,8 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     label="Kod pocztowy"
                     id="postcode"
                     autoComplete="postcode"
+                    helperText={validatePostCode() ? null :"format: 12-123"}
+                    error={!validatePostCode()}
                     onChange={(event) => setPostcode(event.target.value)}
                     />
                 </Grid>
@@ -177,6 +218,8 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     label="Miasto"
                     id="post_town"
                     autoComplete="post_town"
+                    helperText={validateCountry() ? null : "Miasto musi mieć co najmnije 3 znaki i nie powinno zawierać cyfr"}
+                    error={!validateCountry()}
                     onChange={(event) => setCity(event.target.value)}
                     />
                 </Grid>
@@ -191,6 +234,8 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     label="Ulica"
                     id="street"
                     autoComplete="street"
+                    helperText={validateStreet() ? null : "Ulica musi mieć co najmnije 3 znaki i nie powinno zawierać cyfr"}
+                    error={!validateStreet()}
                     onChange={(event) => setStreet(event.target.value)}
                     />
                 </Grid>
@@ -214,7 +259,6 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     value={apartment}
                     variant="filled"                    
                     margin="normal"
-                    required
                     fullWidth
                     name="apartment"
                     label="Nr mieszkania"

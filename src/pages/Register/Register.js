@@ -11,9 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { RegisterWrapper } from './register.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { register, clearNotification } from 'state/auth/authActions';
+import { submitRegister } from 'state/auth/authActions';
 import { Redirect } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,22 +45,50 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
-    
+
+    const validateName = () => {
+        const regName = /[0-9]+/g;
+        return ( !regName.test(name) && name.length > 2 )
+    }
+
+    const validateSurname = () => {
+        const regName = /[0-9]+/g;
+        return ( !regName.test(surname) && surname.length > 2 )
+    }
   
+    const validateEmail = () => {
+        const regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return (regEmail.test(email) && email.length > 1);
+    }
+
+    const validatePhoneNumber = () => {
+        const regPhoneNumber = /[0-9]{3}-[0-9]{3}-[0-9]{3}/;
+        return (regPhoneNumber.test(phoneNumber) && phoneNumber.length === 11);
+    }
+
+    const validatePassword = () => {
+        return password.length > 4 && password.length < 30;
+    }
+    
+    const validate = () => {
+        let isValid = validateName()
+                        && validateSurname()
+                        && validateEmail()
+                        && validatePhoneNumber()
+                        && validatePassword();
+        return isValid; 
+    }
+
+
     const auth = useSelector(state => state.auth);
     const dispatch = useDispatch();
-    const { enqueueSnackbar } = useSnackbar();
 
     const handleSubmitRegister = (e) => {
         e.preventDefault();
 
-        // TO DO: client validation
-        dispatch(register({ name, surname, phoneNumber, email, password }));
-    }
-
-    const snacks = (msg) => {
-        enqueueSnackbar(msg);
-        dispatch(clearNotification());
+        validate() 
+        ? dispatch(submitRegister({ name, surname, phoneNumber, email, password }))
+        : alert("Popraw dane i spróbuj ponownie")
     }
 
     return (
@@ -85,6 +112,8 @@ const Register = () => {
                                 id="name"
                                 label="Imię"
                                 autoFocus
+                                helperText={validateName() ? null : "Imię powinno być dłuższe niż 2 znaki i nie powinno zawierać cyfr"}
+                                error={!validateName()}
                                 onChange={(event) => setName(event.target.value)}
                             />
                         </Grid>
@@ -96,9 +125,12 @@ const Register = () => {
                                 id="lastName"
                                 label="Nazwisko"
                                 name="lastName"
+                                helperText={validateSurname() ? null : "Nazwisko powinno być dłuższe niż 2 znaki i nie powinno zawierać cyfr"}
+                                error={!validateSurname()}
                                 onChange={(event) => setSurname(event.target.value)}
                             />
                         </Grid>
+                        
                         <Grid item xs={12}>
                             <TextField
                                 required
@@ -107,9 +139,12 @@ const Register = () => {
                                 label="Email"
                                 name="email"
                                 autoComplete="email"
+                                helperText={validateEmail() ? null : "Wpisz poprawny email"}
+                                error={!validateEmail()}
                                 onChange={(event) => setEmail(event.target.value)}
                             />
                         </Grid>
+                        
                         <Grid item xs={12}>
                             <TextField
                                 required
@@ -117,11 +152,15 @@ const Register = () => {
                                 type="tel"
                                 name="phoneNumber"
                                 label="Numer telefonu"
+                                placeholder="format: 123-123-123"
+                                helperText={validatePhoneNumber() ? null :"format: 123-123-123"}
+                                error={!validatePhoneNumber()}
                                 id="phoneNumber"
                                 autoComplete="tel-national"
                                 onChange={(event) => setPhoneNumber(event.target.value)}
                             />
                         </Grid>
+                        
                         <Grid item xs={12}>
                             <TextField
                                 required
@@ -131,10 +170,12 @@ const Register = () => {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                helperText={validatePassword() ? null :"Hasło powinno zawierać co najmniej 4 znaki"}
+                                error={!validatePassword()}
                                 onChange={(event) => setPassword(event.target.value)}
                             />
                         </Grid>
-                    </Grid>
+                    </Grid> 
                     <Button
                         type="submit"
                         fullWidth
@@ -154,7 +195,7 @@ const Register = () => {
                 </form>
             </div>
             { auth.isLoggedIn === true ? <Redirect to="/" /> : null }
-            { auth.notification !== null ? snacks(auth.notification) : null }
+
         </RegisterWrapper>
     );
 }

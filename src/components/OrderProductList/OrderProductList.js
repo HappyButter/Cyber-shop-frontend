@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Row from './OrderProductListRow';
 import { ProductListWrapper } from './orderProductList.css';
 
-const OrderProductList = ({productList, auth}) => {
+const OrderProductList = ({productList, auth, fulfilmentDate=null}) => {
 
     productList.sort((a, b) => a.id - b.id);
 
@@ -32,7 +32,7 @@ const OrderProductList = ({productList, auth}) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        { productList.map(product => <Row productData={product} auth={auth}/>)}
+                        { productList.map(product => <Row productData={product} auth={auth} fulfilmentDate={fulfilmentDate} />)}
                     </TableBody>
                 </Table>
             </TableContainer>

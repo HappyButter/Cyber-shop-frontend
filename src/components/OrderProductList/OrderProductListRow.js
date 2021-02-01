@@ -8,15 +8,21 @@ import { Btn } from './orderProductList.css';
 
 import { addProductToService } from 'state/productsService/productsServiceActions';
 
-const Row = ({productData, auth}) => {
+const Row = ({productData, auth, fulfilmentDate=null}) => {
     const dispatch = useDispatch();
 
     const handleBtnService = (e) => {
         e.preventDefault();
-        dispatch(addProductToService({ 
-            orderLineId : productData.orderLineId,
-            description : '',
-            status : 'nowe' }))
+        if(fulfilmentDate){
+            dispatch(addProductToService({ 
+                orderLineId : productData.orderLineId,
+                description : '',
+                status : 'nowe' }))
+        } else { 
+            alert("Zamówienie musi być zrealizowane by dodać produkt do serwisu.")
+        }
+
+
     } 
 
     return (

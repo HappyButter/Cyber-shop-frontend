@@ -109,11 +109,13 @@ const MenuAppBar = (props) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleProfileMenuClick = (pageRoute) => {
+  const handleProfileMenuClick = (e, pageRoute) => {
+    e.preventDefault();
     history.push(pageRoute);
   };
 
-  const handleLogout = () => {
+  const handleLogout = (e) => {
+    e.preventDefault();
     dispatch(logout());
     dispatch(clearCart());
     setAnchorEl(null);
@@ -133,13 +135,13 @@ const MenuAppBar = (props) => {
       style={{
         color: 'black',}}
     >
-      { auth.isAdmin ? <MenuItem onClick={() => handleProfileMenuClick('/finaces')}>Finanse</MenuItem> : null }
-      { auth.isAdmin ? <MenuItem onClick={() => handleProfileMenuClick('/products')}>Zarządzaj produkatami</MenuItem> : null }
-      { auth.isAdmin ? <MenuItem onClick={() => handleProfileMenuClick('/management/promo')}>Zarządzaj promocjami</MenuItem> : null }
-      { auth.isAdmin ? <MenuItem onClick={() => handleProfileMenuClick('/service')}>Zarządzaj serwisem</MenuItem> : null }
-      <MenuItem onClick={() => handleProfileMenuClick('/orders')}>Zamówienia</MenuItem>
-      <MenuItem onClick={() => handleProfileMenuClick('/account')}>Konto</MenuItem>
-      <MenuItem onClick={() => handleLogout()}>Wyloguj</MenuItem>
+      { auth.isAdmin ? <MenuItem onClick={(e) => handleProfileMenuClick(e, '/finaces')}>Finanse</MenuItem> : null }
+      { auth.isAdmin ? <MenuItem onClick={(e) => handleProfileMenuClick(e, '/products')}>Zarządzaj produkatami</MenuItem> : null }
+      { auth.isAdmin ? <MenuItem onClick={(e) => handleProfileMenuClick(e, '/management/promo')}>Zarządzaj promocjami</MenuItem> : null }
+      { auth.isAdmin ? <MenuItem onClick={(e) => handleProfileMenuClick(e, '/service')}>Zarządzaj serwisem</MenuItem> : null }
+      <MenuItem onClick={(e) => handleProfileMenuClick(e, '/orders')}>Zamówienia</MenuItem>
+      <MenuItem onClick={(e) => handleProfileMenuClick(e, '/account')}>Konto</MenuItem>
+      <MenuItem onClick={(e) => handleLogout(e)}>Wyloguj</MenuItem>
     </Menu>
   );
 
@@ -153,8 +155,8 @@ const MenuAppBar = (props) => {
       open={isMenuOpen}
       onClose={() => setAnchorEl(null)}
     >
-      <MenuItem onClick={() => handleProfileMenuClick('/login')}>Zaloguj</MenuItem>
-      <MenuItem onClick={() => handleProfileMenuClick('/register')}>Zarejestruj się</MenuItem>
+      <MenuItem onClick={(e) => handleProfileMenuClick(e, '/login')}>Zaloguj</MenuItem>
+      <MenuItem onClick={(e) => handleProfileMenuClick(e, '/register')}>Zarejestruj się</MenuItem>
     </Menu>
   );
 
@@ -166,7 +168,7 @@ const MenuAppBar = (props) => {
             edge="start"
             className={classes.menuButton}
             color="inherit"
-            onClick={(e) => {e.preventDefault(); handleProfileMenuClick('/');}}
+            onClick={(e) => handleProfileMenuClick(e, '/')}
           >
             <Typography className={classes.title} variant="h6" noWrap>
             CyberShop
@@ -195,7 +197,7 @@ const MenuAppBar = (props) => {
                         color="inherit">
               <Badge badgeContent={count.length} color="secondary">
                 <ShoppingCartIcon 
-                onClick={(e) => {e.preventDefault(); handleProfileMenuClick('/cart');}}/>
+                onClick={(e) => handleProfileMenuClick(e, '/cart')}/>
               </Badge>
             </IconButton>
             <IconButton
@@ -216,7 +218,7 @@ const MenuAppBar = (props) => {
           <IconButton
               color="inherit"
               aria-label="open drawer"
-              onClick={() => history.push('/offer/1')}
+              onClick={(e) => handleProfileMenuClick(e, '/offer/1')}
           >
               <ComputerIcon/> 
               <Typography className={classes.categoriesTitle}>
@@ -227,7 +229,7 @@ const MenuAppBar = (props) => {
           <IconButton
                 color="inherit"
                 aria-label="open drawer"
-                onClick={() => history.push('/offer/2')}
+                onClick={(e) => handleProfileMenuClick(e, '/offer/2')}
             >
               <SmartphoneIcon/>  
               <Typography className={classes.categoriesTitle}>
@@ -238,7 +240,7 @@ const MenuAppBar = (props) => {
           <IconButton
                 color="inherit"
                 aria-label="open drawer"
-                onClick={() => history.push('/offer/3')}
+                onClick={(e) => handleProfileMenuClick(e, '/offer/3')}
             >
               <MemoryIcon/> 
               <Typography className={classes.categoriesTitle}>
