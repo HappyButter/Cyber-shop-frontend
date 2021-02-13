@@ -1,8 +1,7 @@
-import axios from '../../axios-config.js';
+import axios from 'axios-config.js';
 
 import { useState, useEffect } from 'react';
 import { Middlepane } from 'styles/Middlepane.css';
-import { AppBar} from 'components';
 
 import styled from 'styled-components';
 
@@ -91,7 +90,6 @@ const Finances = () => {
 
     return (
         <>
-            <AppBar></AppBar>
             <Middlepane>
                 
                 <Paragraph>saldo sklepu</Paragraph>

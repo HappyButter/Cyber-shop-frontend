@@ -23,7 +23,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.1"
   },
-  "homepage": "https://happybutter.github.io/Cyber-shop-frontend",
+  "homepage": "https://happybutter.github.io/Cyber-shop-frontend/",
   "scripts": {
     "predeploy":"npm run build",
     "deploy": "gh-pages -d build",

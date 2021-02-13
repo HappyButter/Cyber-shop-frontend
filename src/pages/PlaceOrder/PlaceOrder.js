@@ -4,7 +4,7 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import { AppBar, Cart, ShippingForm, PaymentForm } from 'components';
+import { Cart, ShippingForm, PaymentForm } from 'components';
 import { Middlepane } from 'styles/Middlepane.css';
 import { useDispatch, useSelector } from 'react-redux';
 import './placeOrder.css';
@@ -119,7 +119,6 @@ const PlaceOrder = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar />
       <Stepper activeStep={activeStep}
         style={{ backgroundColor: "gray" }}>
         {steps.map((label, index) => {

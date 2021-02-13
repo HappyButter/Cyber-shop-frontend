@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppBar, ProductGrid } from 'components';
+import { ProductGrid } from 'components';
 import { getPromoProducts } from 'state/products/productActions';
 import { Middlepane } from 'styles/Middlepane.css';
 
@@ -32,18 +32,15 @@ const Promo = () => {
         ));
 
     return (
-        <>
-            <AppBar></AppBar>
-            <Middlepane>
-                <hr/>
-                <br/>
-                {promoDetails}
-                <br/>
-                <hr/>
-                <br/>
-                <ProductGrid productsInfo={promoProducts}></ProductGrid>
-            </Middlepane>
-        </>
+        <Middlepane>
+            <hr/>
+            <br/>
+            {promoDetails}
+            <br/>
+            <hr/>
+            <br/>
+            <ProductGrid productsInfo={promoProducts}></ProductGrid>
+        </Middlepane>
     );
 };
 

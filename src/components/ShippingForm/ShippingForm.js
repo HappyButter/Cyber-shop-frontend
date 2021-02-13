@@ -113,12 +113,11 @@ const ShippingForm = ({handleNext, handleBack}) => {
       e.preventDefault();
 
       if(validate()){
-        dispatch(addAdress({ addressId, country, postcode, city, street, building, apartment, shippingMethod, shippingValue }))
+        dispatch(addAdress({ addressId, country, postcode, city, street, building, apartment, shippingMethod, shippingValue }));
+        handleNext();
       }else{
         alert("wpisz poprawny adres");
       }
-      
-      handleNext();
     } 
 
     const handleExistingAddressSelect = ({addressId}) => {

@@ -14,8 +14,8 @@ ReactDOM.render(
   <React.StrictMode>
       <Provider store={store}>
         <SnackbarProvider>
-              <App />
-          </SnackbarProvider>
+          <App />
+        </SnackbarProvider>
       </Provider>
   </React.StrictMode>,
   document.getElementById('root')

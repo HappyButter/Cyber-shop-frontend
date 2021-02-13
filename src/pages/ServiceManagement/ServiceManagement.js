@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { AppBar,  
-    ProductsInServiceList,
-    ProductInServiceForm } from 'components';
+import { ProductsInServiceList,
+         ProductInServiceForm } from 'components';
 import { Middlepane } from 'styles/Middlepane.css';
 
 import { getProductsInService } from 'state/productsService/productsServiceActions';
@@ -16,13 +15,10 @@ const ServiceManagement = () => {
     }, [dispatch])
 
     return (
-        <>
-            <AppBar/> 
-            <Middlepane>
-                <ProductsInServiceList/>
-                <ProductInServiceForm/>
-            </Middlepane>
-        </>
+        <Middlepane>
+            <ProductsInServiceList/>
+            <ProductInServiceForm/>
+        </Middlepane>
     )
 }
 

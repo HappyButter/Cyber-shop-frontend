@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsByCategoryId } from 'state/products/productActions';
-import { AppBar, ProductGrid } from 'components';
+import { ProductGrid } from 'components';
 import { Middlepane } from 'styles/Middlepane.css';
 
 const categoriesEnum = {
@@ -38,12 +38,9 @@ const Offer = () => {
     )
 
     return (
-        <>
-            <AppBar></AppBar>
-            <Middlepane>
-                {items}
-            </Middlepane>
-        </>
+        <Middlepane>
+            {items}
+        </Middlepane>
     );
 };
 

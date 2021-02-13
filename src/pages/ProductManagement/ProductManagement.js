@@ -1,4 +1,4 @@
-import { AppBar, ProductList, ProductForm } from 'components';
+import { ProductList, ProductForm } from 'components';
 import { Middlepane } from 'styles/Middlepane.css';
 import 'styles/verticalBoxes.css';
 import { getAllProducts } from 'state/products/productActions';
@@ -16,17 +16,14 @@ const ProductManagement = () => {
     },[dispatch] )
 
     return (
-        <>
-            <AppBar></AppBar>
-            <Middlepane>
-                <div className="left">
-                    <ProductList/>
-                </div>
-                <div className="right">
-                    <ProductForm/>
-                </div>
-            </Middlepane>
-        </>
+        <Middlepane>
+            <div className="left">
+                <ProductList/>
+            </div>
+            <div className="right">
+                <ProductForm/>
+            </div>
+        </Middlepane>
     )
 }
 

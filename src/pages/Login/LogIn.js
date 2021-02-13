@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { SignInWrapper } from './login.css';
-import { withRouter, Redirect } from 'react-router-dom';
+import { SignInWrapper, CustomLink } from './login.css';
+import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../state/auth/authActions';
 
@@ -46,7 +45,6 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-        // TO DO: client validation
     dispatch(login({email, password}));
   } 
 
@@ -96,9 +94,9 @@ const Login = () => {
 
           <Grid container>
             <Grid item>
-              <Link href="/register" variant="body1">
+              <CustomLink to="/register">
                 {"Nie masz konta? Zarejestruj się!"}
-              </Link>
+              </CustomLink>
             </Grid>
           </Grid>
         </form>
@@ -108,4 +106,4 @@ const Login = () => {
   );
 }
 
-export default withRouter(Login);
+export default Login;

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppBar, OrderList } from 'components';
+import { OrderList } from 'components';
 import { Middlepane } from 'styles/Middlepane.css';
 
 import { getAllOrders, getUserOrders } from 'state/orders/ordersActions';
@@ -18,12 +18,9 @@ const Orders = () => {
 
 
     return (
-        <>
-            <AppBar></AppBar>
-            <Middlepane>
-                <OrderList/>
-            </Middlepane>
-        </>
+        <Middlepane>
+            <OrderList/>
+        </Middlepane>
     );
 };
 

@@ -1,21 +1,19 @@
-
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { RegisterWrapper } from './register.css';
+import { AccountManagementWrapper, RedirectLink } from 'styles/AccountManagement.css'
+
 import { useSelector, useDispatch } from 'react-redux';
 import { submitRegister } from 'state/auth/authActions';
 import { Redirect } from 'react-router-dom';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     paper: {
         marginTop: theme.spacing(3),
         display: 'flex',
@@ -34,8 +32,9 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         height: 60,
         margin: theme.spacing(3, 0, 2),
-    },
+    },    
 }));
+
 
 const Register = () => {
     const classes = useStyles();
@@ -92,8 +91,7 @@ const Register = () => {
     }
 
     return (
-        <RegisterWrapper component="main" maxWidth="xs">
-            <CssBaseline />
+        <AccountManagementWrapper component="main" maxWidth="xs">
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <PersonAddRoundedIcon />
@@ -111,7 +109,6 @@ const Register = () => {
                                 fullWidth
                                 id="name"
                                 label="Imię"
-                                autoFocus
                                 helperText={validateName() ? null : "Imię powinno być dłuższe niż 2 znaki i nie powinno zawierać cyfr"}
                                 error={!validateName()}
                                 onChange={(event) => setName(event.target.value)}
@@ -187,16 +184,16 @@ const Register = () => {
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <Link href="/login" variant="body1">
+                            <RedirectLink to="/login" >
                                 Masz już konto? Zaloguj się!
-                            </Link>
+                            </RedirectLink>
                         </Grid>
                     </Grid>
                 </form>
             </div>
             { auth.isLoggedIn === true ? <Redirect to="/" /> : null }
 
-        </RegisterWrapper>
+        </AccountManagementWrapper>
     );
 }
 

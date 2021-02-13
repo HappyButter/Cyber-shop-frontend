@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { AppBar } from 'components';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -89,7 +88,6 @@ const Account = () => {
 
     return (
         <>
-            <AppBar></AppBar>
             <br/>
             <AccountDataWrapper component="main" maxWidth="xs">
             <CssBaseline />

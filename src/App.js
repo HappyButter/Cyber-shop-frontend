@@ -17,7 +17,7 @@ import {  Home,
           ServiceManagement,
           Finances } from './pages';
 
-import { ProtectedRoute } from './components';
+import { ProtectedRoute, AppBar } from './components';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPromos } from './state/promo/promoActions';
 import { getRecommendedProducts } from './state/products/productActions';
@@ -26,7 +26,7 @@ import './index.css';
 
 
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
@@ -44,7 +44,9 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
+        <div className="layout">
+          <AppBar/>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
@@ -102,6 +104,7 @@ const App = () => {
                           auth={auth.isLoggedIn}
           />
         </Switch>
+        </div>
       </Router>
       <GlobalStyles />
     </ThemeProvider>
