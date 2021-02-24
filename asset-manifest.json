@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Cyber-shop-frontend/static/css/main.76eb4c6b.chunk.css",
-    "main.js": "/Cyber-shop-frontend/static/js/main.c995b6de.chunk.js",
-    "main.js.map": "/Cyber-shop-frontend/static/js/main.c995b6de.chunk.js.map",
+    "main.js": "/Cyber-shop-frontend/static/js/main.31e043b6.chunk.js",
+    "main.js.map": "/Cyber-shop-frontend/static/js/main.31e043b6.chunk.js.map",
     "runtime-main.js": "/Cyber-shop-frontend/static/js/runtime-main.f6545bef.js",
     "runtime-main.js.map": "/Cyber-shop-frontend/static/js/runtime-main.f6545bef.js.map",
     "static/css/2.8078bc71.chunk.css": "/Cyber-shop-frontend/static/css/2.8078bc71.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.8078bc71.chunk.css",
     "static/js/2.882b2a6e.chunk.js",
     "static/css/main.76eb4c6b.chunk.css",
-    "static/js/main.c995b6de.chunk.js"
+    "static/js/main.31e043b6.chunk.js"
   ]
 }
