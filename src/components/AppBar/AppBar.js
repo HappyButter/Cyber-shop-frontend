@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { logout } from 'state/auth/authActions';
 import { clearCart } from 'state/cart/cartActions';
 import { useDispatch } from 'react-redux';
+import { useSnackbar } from 'notistack';
 import SmartphoneIcon from '@material-ui/icons/Smartphone';
 import ComputerIcon from '@material-ui/icons/Computer';
 import MemoryIcon from '@material-ui/icons/Memory';
@@ -102,6 +103,7 @@ const MenuAppBar = (props) => {
   const auth = state.auth;
 
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
 
   const handleProfileMenuOpen = (event) => {
@@ -115,7 +117,7 @@ const MenuAppBar = (props) => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    dispatch(logout());
+    dispatch(logout({enqueueSnackbar}));
     dispatch(clearCart());
     setAnchorEl(null);
     history.push('/');

@@ -5,10 +5,12 @@ import { getAllProducts } from 'state/products/productActions';
 import { getAllCategories } from 'state/categories/categoriesActions';
 
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const ProductManagement = () => {
     const dispatch = useDispatch();
+    const [detailsFormOpen, setDetailsFromOpen] = useState(false);
+
 
     useEffect( () => {
         dispatch(getAllProducts());
@@ -18,10 +20,15 @@ const ProductManagement = () => {
     return (
         <Middlepane>
             <div className="left">
-                <ProductList/>
+                <ProductList
+                    setDetailsFromOpen={setDetailsFromOpen}
+                />
             </div>
             <div className="right">
-                <ProductForm/>
+                <ProductForm 
+                    detailsFormOpen={detailsFormOpen}
+                    setDetailsFromOpen={setDetailsFromOpen}             
+                />
             </div>
         </Middlepane>
     )

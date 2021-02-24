@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { updateProduct } from 'state/products/productActions';
 import './addProductForm.css';
 
-const EditProductDetailsForm = () => {
+const EditProductDetailsForm = ({ enqueueSnackbar }) => {
     const dispatch = useDispatch();
 
     const [name, setName] = useState('');
@@ -50,7 +50,8 @@ const EditProductDetailsForm = () => {
             warranty, 
             promo_id : (promo_id === -1 ? null : promo_id), 
             category_id
-        }));
+        }, enqueueSnackbar
+        ));
     } 
 
     return (

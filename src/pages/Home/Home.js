@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux'
 import { Paragraph } from './home.css';
 import { MiddlepaneOffer } from 'styles/Middlepane.css';
 import { AdsCarousel, ProductGrid } from 'components';
-
+import { useSnackbar } from 'notistack';
 
 
 const Home = () => {
     const recommendedProducts = useSelector(state => state.products.recommended);
+    const { enqueueSnackbar } = useSnackbar();
 
     return (
         <MiddlepaneOffer>
@@ -19,7 +20,10 @@ const Home = () => {
             <AdsCarousel/>
             <br/><br/>
             <Paragraph>Polecane</Paragraph>
-            <ProductGrid productsInfo={recommendedProducts}/>
+            <ProductGrid 
+                productsInfo={recommendedProducts} 
+                enqueueSnackbar={enqueueSnackbar}
+            />
         </MiddlepaneOffer>
     );
 };

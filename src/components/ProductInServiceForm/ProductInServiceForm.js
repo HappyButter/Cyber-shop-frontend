@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSnackbar } from 'notistack';
 
 import { updateProductStatusInService } from 'state/productsService/productsServiceActions';
 import './productsInServiceForm.css';
@@ -7,6 +8,7 @@ import './productsInServiceForm.css';
 
 const ProductInServiceForm = () => {
     const dispatch = useDispatch();
+    const { enqueueSnackbar } = useSnackbar();    
 
     const [status, setStatus] = useState('');
     const [description, setDescription] = useState('');
@@ -24,7 +26,8 @@ const ProductInServiceForm = () => {
         dispatch(updateProductStatusInService({ 
             serviceId : serviceEdit.id,
             description,
-            status 
+            status, 
+            enqueueSnackbar 
         }));
     } 
     

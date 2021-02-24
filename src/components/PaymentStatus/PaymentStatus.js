@@ -39,7 +39,7 @@ const orderStatusList = [
     }
 ]
 
-const PaymentStatus = ({orderId, auth}) => {
+const PaymentStatus = ({orderId, auth, enqueueSnackbar}) => {
     const dispatch = useDispatch();
 
     const [isPaid, setIsPaid] = useState(false);
@@ -53,13 +53,13 @@ const PaymentStatus = ({orderId, auth}) => {
     ); 
 
 
-    const orderStatusKeyToValue = (k) => {
-        const res = orderStatusList.find(stat => stat.key === k);
+    const orderStatusKeyToValue = (key) => {
+        const res = orderStatusList.find(stat => stat.key === key);
         return res.value;
     }
 
-    const orderStatusValueToKey = (v) => {
-        const res = orderStatusList.find(stat => stat.value === v);
+    const orderStatusValueToKey = (value) => {
+        const res = orderStatusList.find(stat => stat.value === value);
         return res.key;
     }
 
@@ -74,7 +74,7 @@ const PaymentStatus = ({orderId, auth}) => {
         e.preventDefault();
 
         if(currentlyWatched.isPaid !== isPaid){
-            dispatch(updatePaymentStatus({isPaid, orderId}));
+            dispatch(updatePaymentStatus({isPaid, orderId, enqueueSnackbar}));
         }
     } 
 
@@ -84,7 +84,7 @@ const PaymentStatus = ({orderId, auth}) => {
         const status = orderStatusKeyToValue(orderStatus);
 
         if(currentlyWatched.orderStatus !== status){
-            dispatch(updateOrderStatus({status, orderId}));
+            dispatch(updateOrderStatus({status, orderId, enqueueSnackbar}));
         }
     } 
 

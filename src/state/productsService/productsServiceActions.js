@@ -35,32 +35,59 @@ export const getProductsInService = () => async dispatch => {
     })
 }
 
-export const addProductToService = ({ orderLineId, description, status }) => async dispatch => {
+export const addProductToService = ({ orderLineId, description, status, enqueueSnackbar }) => async dispatch => {
     axios.put('/service/create', { orderLineId, description, status })
         .then(res => {
+            const message='Produkt dodany do serwisu. Sprawdź zakładkę "zarządzaj serwisem"';  
+            enqueueSnackbar(
+                message, {
+                    variant: 'success',
+                }
+            );
+
             dispatch({
                 type : ADD_PRODUCT_TO_SERVICE_SUCCESS,
                 payload : res.data
             })
         })
         .catch(err => {
-            alert("Produkt jest już w serwisie lub jego okres gwarancji wygasł.");
+            const message='Produkt znajduje się już w serwisie lub jego okres gwarancji wygasł';  
+            enqueueSnackbar(
+                message, {
+                    variant: 'warning',
+                }
+            );
+
             dispatch({
                 type : ADD_PRODUCT_TO_SERVICE_FAILURE 
             })
         })
 }
 
-export const updateProductStatusInService = ({ serviceId, description, status }) => async dispatch => {
+export const updateProductStatusInService = ({ serviceId, description, status, enqueueSnackbar }) => async dispatch => {
     console.log({ serviceId, description, status });
     axios.post(`/service/update/${serviceId}`, { description, status })
         .then(res => {
+            const message='Zaktualizowano status produktu w serwisie';  
+            enqueueSnackbar(
+                message, {
+                    variant: 'success',
+                }
+            );
+
             dispatch({
                 type : PRODUCT_IN_SERVICE_STATUS_UPDATE_SUCCESS,
                 payload : res.data
             })
         })
         .catch(err => {
+            const message='Aktualizacja statusu produktu nie powiodła się';  
+            enqueueSnackbar(
+                message, {
+                    variant: 'error',
+                }
+            );
+
             dispatch({
                 type : PRODUCT_IN_SERVICE_STATUS_UPDATE_FAILURE 
             })

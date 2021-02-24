@@ -6,11 +6,14 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { useSnackbar } from 'notistack';
 
 import Row from './OrderProductListRow';
 import { ProductListWrapper } from './orderProductList.css';
 
 const OrderProductList = ({productList, auth, fulfilmentDate=null}) => {
+    
+    const { enqueueSnackbar } = useSnackbar();    
 
     productList.sort((a, b) => a.id - b.id);
 
@@ -22,7 +25,7 @@ const OrderProductList = ({productList, auth, fulfilmentDate=null}) => {
                         <TableRow key="head">
                             {
                                 auth 
-                                ? <TableCell>SERWIS</TableCell>
+                                ? <TableCell>Dodaj produkt do serwisu</TableCell>
                                 : null
                             }
                             <TableCell align="left">Nazwa</TableCell>
@@ -32,7 +35,11 @@ const OrderProductList = ({productList, auth, fulfilmentDate=null}) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        { productList.map(product => <Row productData={product} auth={auth} fulfilmentDate={fulfilmentDate} />)}
+                        { productList.map(product => <Row 
+                            productData={product} 
+                            auth={auth} 
+                            fulfilmentDate={fulfilmentDate}
+                            enqueueSnackbar={enqueueSnackbar} />)}
                     </TableBody>
                 </Table>
             </TableContainer>

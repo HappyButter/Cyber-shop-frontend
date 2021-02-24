@@ -33,7 +33,7 @@ export const getUserAddresses = ({userId}) => async dispatch => {
 }
 
 
-export const placeOrder = ({ userId, cart, clientComments }) => async dispatch => {
+export const placeOrder = ({ userId, cart, clientComments, enqueueSnackbar }) => async dispatch => {
     const body = { 
         userId,
         shippmentMethod: cart.address.shippingMethod,
@@ -55,13 +55,26 @@ export const placeOrder = ({ userId, cart, clientComments }) => async dispatch =
 
     axios.post('/orders', body)
       .then(res => {
-        alert("Zamówienie przyjęte do realizacji.");
+        const message='Zamówienie przyjęte do realizacji';  
+        enqueueSnackbar(
+          message, {
+              variant: 'success',
+          }
+        );
+
         dispatch({
           type: PLACE_ORDER_SUCCESS,
           payload: res.data
         })
       })
       .catch(err => {
+        const message='Coś podszło nie tak, spróbuj ponownie';  
+        enqueueSnackbar(
+          message, {
+              variant: 'error',
+          }
+        );
+
         dispatch({
           type: PLACE_ORDER_FAILURE,
           payload: err.message
@@ -99,7 +112,15 @@ export const clearCart = () => {
     }
 }
 
-export const addProductToCart = ({ productId, productName, price }) => {
+export const addProductToCart = ({ productId, productName, price, enqueueSnackbar }) => {
+    const message=productName ? `Dodano ${productName} do koszyka` 
+                              : 'Dodano do koszyka';  
+    enqueueSnackbar(
+      message, {
+          variant: 'success',
+      }
+    );
+    
     return {
         type: ADD_PRODUCT_TO_CART,
         payload: {
@@ -109,7 +130,15 @@ export const addProductToCart = ({ productId, productName, price }) => {
         }
       }
 }
-export const removeProductFromCart = ({ productId }) => {
+
+export const removeProductFromCart = ({ productId, enqueueSnackbar }) => {
+    const message='Usunięto produkt z koszyka';  
+    enqueueSnackbar(
+      message, {
+          variant: 'warning',
+      }
+    );
+
     return {
         type: REMOVE_PRODUCT_FROM_CART,
         payload: {
@@ -118,7 +147,14 @@ export const removeProductFromCart = ({ productId }) => {
     }
 }
 
-export const reduceProductQuantityFromCart = ({ productId }) => {
+export const reduceProductQuantityFromCart = ({ productId, enqueueSnackbar }) => {
+    const message='Usunięto 1 produkt z koszyka';  
+    enqueueSnackbar(
+      message, {
+          variant: 'warning',
+      }
+    );
+
     return {
         type: REDUCE_PRODUCT_QUANTITY_FROM_CART,
         payload: {

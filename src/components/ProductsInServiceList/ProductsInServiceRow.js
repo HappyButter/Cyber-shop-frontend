@@ -4,24 +4,9 @@ import { setToEditProductInService } from 'state/productsService/productsService
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import EditIcon from '@material-ui/icons/Edit';
-import styled from 'styled-components';
+import IconButton from '@material-ui/core/IconButton';
 
-const Btn = styled.button`
-    background-color: Transparent;
-    background-repeat:no-repeat;
-    border: none;
-    cursor:pointer;
-    overflow: hidden;
-    outline:none;
-    color: darkgray;
-    font-size: large;
-
-    &:hover{
-        background-color: blue;
-    }
-`
-
-const Row = ({productData}) => {
+const Row = ({ productData }) => {
     const dispatch = useDispatch();
 
     const handleInfo = (e) => {
@@ -39,9 +24,10 @@ const Row = ({productData}) => {
             <TableCell align="center">{productData.inStock}</TableCell>
             <TableCell align="right">{productData.status}</TableCell>
             <TableCell align="right">
-                <Btn onClick={handleInfo}>           
-                    <EditIcon /> 
-                </Btn>
+                <IconButton aria-label="info"
+                            onClick={handleInfo}>
+                    <EditIcon style={{color:'#F08E02'}}/> 
+                </IconButton>
             </TableCell>
         </TableRow>
     );

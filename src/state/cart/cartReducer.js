@@ -131,7 +131,6 @@ const cartReducer = (state = initialState, action) => {
             );
             
             if(cartProduct.length === 0){
-                console.log("cannot reduce quantity of not existing product");
                 return state;
             }
 

@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { createProduct } from 'state/products/productActions';
 import './addProductForm.css';
 
-const AddProductForm = () => {
+const AddProductForm = ({ enqueueSnackbar }) => {
     const dispatch = useDispatch();
 
     const [name, setName] = useState('');
@@ -34,7 +34,8 @@ const AddProductForm = () => {
             warranty, 
             promo_id : (promo_id === -1 ? null : promo_id), 
             category_id
-        }));
+        }, enqueueSnackbar
+        ));
     } 
 
     return (

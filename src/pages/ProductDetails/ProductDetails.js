@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Comments } from 'components';
+import { useSnackbar } from 'notistack';
 import { getProductDetails } from 'state/products/productActions';
 import { addProductToCart } from 'state/cart/cartActions';
 import { Paragraph, Btn } from './productDetails.css';
@@ -17,14 +18,14 @@ import Rating from '@material-ui/lab/Rating';
 const ProductDetails = () => {
     const dispatch = useDispatch();
     const { productId } = useParams();
+    const { enqueueSnackbar } = useSnackbar();
 
     
     const productIcon = [
         <PhoneAndroidIcon style={{ fontSize: 200 }}/>,
         <WatchIcon style={{ fontSize: 200 }}/>,
         <CategoryIcon style={{ fontSize: 200 }}/>,
-        <ComputerIcon style={{ fontSize: 200 }}/>,
-        <CategoryIcon style={{ fontSize: 200 }}/>,
+        <ComputerIcon style={{ fontSize: 200 }}/>
     ]
 
     useEffect( () => {
@@ -40,6 +41,7 @@ const ProductDetails = () => {
             productId : product.id,
             productName : product.name,
             price : product.promo_id ? product.promo_price : product.price,
+            enqueueSnackbar
         }))
     }
 
@@ -47,7 +49,8 @@ const ProductDetails = () => {
         <Middlepane>
             <br/>
             <br/>
-            {productIcon[product.category_id]}
+            {productIcon[product.category_id] || 
+            <CategoryIcon style={{ fontSize: 200 }}/>}
             <br/>
             <br/>
             <hr/>

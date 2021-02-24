@@ -25,7 +25,7 @@ const OrderList = () => {
                         <TableCell align="right">Wartość</TableCell>
                         <TableCell align="right">Opłacone</TableCell>
                         <TableCell align="right">Status</TableCell>
-                        <TableCell />
+                        <TableCell >Szczegóły</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

@@ -13,7 +13,11 @@ import 'font/Cyberpunk.ttf';
 ReactDOM.render(
   <React.StrictMode>
       <Provider store={store}>
-        <SnackbarProvider>
+        <SnackbarProvider
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+          }}>
           <App />
         </SnackbarProvider>
       </Provider>

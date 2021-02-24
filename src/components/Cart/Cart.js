@@ -56,7 +56,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Cart = () => {
+const Cart = ({ enqueueSnackbar }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.productList);
@@ -67,12 +67,14 @@ const Cart = () => {
     switch (type) {
       case 'quantity': {
         return <ControllQuantity
-          productId={product.id}
-          quantity={product.quantity}
-        />
+                  productId={product.id}
+                  quantity={product.quantity}
+                  enqueueSnackbar={enqueueSnackbar}
+                />
       } case 'delete': {
         return <Btn onClick={e => dispatch(removeProductFromCart({
-          productId: product.id
+          productId: product.id,
+          enqueueSnackbar
         }))}><DeleteIcon /></Btn>
       } case 'price': {
         return product.price + " zł";

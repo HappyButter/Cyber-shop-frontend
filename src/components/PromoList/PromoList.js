@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 
-const PromoList = () => {
+const PromoList = ({ setEditFormOpen }) => {
     const classes = useStyles();
     const promos = useSelector(state => state.promos.promosList)
     promos.sort((a, b) => a.id - b.id);
@@ -36,7 +36,11 @@ const PromoList = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    { promos.map(promo => <Row promoData={promo}/>)}
+                    { promos.map(promo => 
+                        <Row 
+                            promoData={promo}
+                            setEditFormOpen={setEditFormOpen}
+                        />)}
                 </TableBody>
             </Table>
         </TableContainer>

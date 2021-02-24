@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './placeOrder.css';
 import { placeOrder } from 'state/cart/cartActions';
 import { Redirect } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 const PlaceOrder = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [commentText, setCommentText] = React.useState('');
@@ -52,6 +54,7 @@ const PlaceOrder = () => {
       userId: userId,
       cart: cart,
       clientComments: commentText,
+      enqueueSnackbar
     }));
     handleNext();
   }
@@ -76,7 +79,7 @@ const PlaceOrder = () => {
             <h3>Twój Koszyk</h3>
             <ShoppingBasketIcon  fontSize="large"/>
             <br /><br />
-            <Cart />
+            <Cart enqueueSnackbar={enqueueSnackbar}/>
             <br /><br />
           </>
         )

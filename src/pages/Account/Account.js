@@ -11,6 +11,7 @@ import { AccountDataWrapper } from './account.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateAccountData } from 'state/auth/authActions';
 import { Redirect } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,6 +40,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Account = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const { enqueueSnackbar } = useSnackbar();
     
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -75,15 +78,15 @@ const Account = () => {
         return isValid; 
     }
 
-    const dispatch = useDispatch();
+
     const handleSubmitRegister = (e) => {
         e.preventDefault();
 
         const userId = userData.id;
 
         validate()
-        ? dispatch(updateAccountData({ userId, name, surname, phoneNumber }))
-        : alert("Popraw dane i spróbuj ponownie");
+        ? dispatch(updateAccountData({ userId, name, surname, phoneNumber, enqueueSnackbar }))
+        : enqueueSnackbar("Popraw dane i spróbuj ponownie");
     }
 
     return (

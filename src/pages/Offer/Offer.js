@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProductsByCategoryId } from 'state/products/productActions';
 import { ProductGrid } from 'components';
+import { useSnackbar } from 'notistack';
 import { Middlepane } from 'styles/Middlepane.css';
 
 const categoriesEnum = {
@@ -14,6 +15,7 @@ const categoriesEnum = {
 const Offer = () => {
     const dispatch = useDispatch();
     const { categoryId } = useParams();
+    const { enqueueSnackbar } = useSnackbar();
     
     useEffect( () => {
         dispatch(getProductsByCategoryId(categoryId));
@@ -26,13 +28,15 @@ const Offer = () => {
 
     const items = currentCategories.map(cat => (
         <>
-            <hr/>
-            <br/>
+            <hr/><br/>
             <h2>{cat.category_group}</h2>
-            <br/>
-            <hr/>
-            <br/>
-            <ProductGrid productsInfo={categoryProducts.filter(prod => prod.category_id === cat.id)}/>
+            <br/><hr/><br/>
+
+            <ProductGrid 
+                productsInfo={categoryProducts.filter(prod => prod.category_id === cat.id)} 
+                enqueueSnackbar={enqueueSnackbar} 
+            />
+            
             <br/>
         </>)
     )

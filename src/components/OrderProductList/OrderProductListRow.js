@@ -1,14 +1,11 @@
 import { useDispatch } from 'react-redux';
-
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import OfflineBoltIcon from '@material-ui/icons/OfflineBolt';
-
-import { Btn } from './orderProductList.css';
-
+import IconButton from '@material-ui/core/IconButton';
 import { addProductToService } from 'state/productsService/productsServiceActions';
 
-const Row = ({productData, auth, fulfilmentDate=null}) => {
+const Row = ({ productData, auth, fulfilmentDate=null, enqueueSnackbar }) => {
     const dispatch = useDispatch();
 
     const handleBtnService = (e) => {
@@ -17,12 +14,11 @@ const Row = ({productData, auth, fulfilmentDate=null}) => {
             dispatch(addProductToService({ 
                 orderLineId : productData.orderLineId,
                 description : '',
-                status : 'nowe' }))
+                status : 'nowe',
+                enqueueSnackbar }))
         } else { 
-            alert("Zamówienie musi być zrealizowane by dodać produkt do serwisu.")
-        }
-
-
+            enqueueSnackbar('Zamówienie musi być zrealizowane by dodać produkt do serwisu', {variant: 'warning'})
+        }    
     } 
 
     return (
@@ -30,9 +26,9 @@ const Row = ({productData, auth, fulfilmentDate=null}) => {
             {
                 auth 
                 ? <TableCell align="center">
-                        <Btn onClick={handleBtnService}>
-                            <OfflineBoltIcon/>
-                        </Btn>
+                        <IconButton onClick={handleBtnService}>
+                            <OfflineBoltIcon style={{color: '#F02416'}}/>
+                        </IconButton>
                   </TableCell>
                 : null
             }

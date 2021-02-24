@@ -7,6 +7,7 @@ import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { AccountManagementWrapper, RedirectLink } from 'styles/AccountManagement.css'
+import { useSnackbar } from 'notistack';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { submitRegister } from 'state/auth/authActions';
@@ -44,6 +45,8 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
+
+    const { enqueueSnackbar } = useSnackbar();
 
     const validateName = () => {
         const regName = /[0-9]+/g;
@@ -86,8 +89,8 @@ const Register = () => {
         e.preventDefault();
 
         validate() 
-        ? dispatch(submitRegister({ name, surname, phoneNumber, email, password }))
-        : alert("Popraw dane i spróbuj ponownie")
+        ? dispatch(submitRegister({ name, surname, phoneNumber, email, password, enqueueSnackbar }))
+        : enqueueSnackbar("Popraw dane i spróbuj ponownie")
     }
 
     return (

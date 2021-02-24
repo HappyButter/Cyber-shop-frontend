@@ -5,7 +5,7 @@ import { addProductToCart,
 import { useDispatch } from 'react-redux';
 import { Btn, ControllBtn } from './cart.css';
 
-const ControllQuantity = ({productId, quantity}) => {
+const ControllQuantity = ({productId, quantity, enqueueSnackbar}) => {
     const dispatch = useDispatch();
     const [count, setCount] = useState(quantity);
 
@@ -16,7 +16,8 @@ const ControllQuantity = ({productId, quantity}) => {
                     className="minus"
                     onClick={ e => {
                         dispatch(reduceProductQuantityFromCart({
-                            productId
+                            productId,
+                            enqueueSnackbar
                         }));
                         setCount(count-1);
                     }
@@ -29,7 +30,8 @@ const ControllQuantity = ({productId, quantity}) => {
                     className="plus"
                     onClick={ e => {
                         dispatch(addProductToCart({
-                            productId
+                            productId,
+                            enqueueSnackbar
                         }));
                         setCount(count+1);
                     }

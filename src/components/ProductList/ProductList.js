@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 
-const ProductList = () => {
+const ProductList = ({ setDetailsFromOpen }) => {
     const classes = useStyles();
     const products = useSelector(state => state.products.allProducts);
 
@@ -39,7 +39,10 @@ const ProductList = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    { products.map(product => <Row productData={product}/>)}
+                    { products.map(product => 
+                        <Row productData={product}
+                             setDetailsFromOpen={setDetailsFromOpen}
+                    />)}
                 </TableBody>
             </Table>
         </TableContainer>

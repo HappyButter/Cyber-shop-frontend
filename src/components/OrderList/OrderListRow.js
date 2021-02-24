@@ -49,8 +49,8 @@ const Row = ({ rowData }) => {
                     ? <>
                         <TableCell align="right">
                             { rowData.isPaid
-                                ? <CheckCircleOutlineIcon />
-                                : <HighlightOffIcon />
+                                ? <CheckCircleOutlineIcon style={{color: '#22AB2B'}}/>
+                                : <HighlightOffIcon style={{color: '#F02416'}}/>
                             }
                         </TableCell>
                         <TableCell align="right">{rowData.orderStatus}</TableCell>
@@ -58,7 +58,7 @@ const Row = ({ rowData }) => {
                         <TableCell align="right">
                             <IconButton aria-label="info">
                                 <Link to={`/order/details/${rowData.order_id}`}>               
-                                    <InfoRoundedIcon />
+                                    <InfoRoundedIcon style={{color: '#3f51b5'}}/>
                                 </Link>         
                             </IconButton>    
                         </TableCell>

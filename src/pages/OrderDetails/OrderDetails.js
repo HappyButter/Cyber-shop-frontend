@@ -4,10 +4,12 @@ import { PaymentStatus, OrderAddressDetails, OrderProductList } from 'components
 import { Middlepane } from 'styles/Middlepane.css';
 import { ContentWrapper, ContentLeft, ContentMid, ContentRight, Paragraph, MidContentWrapper } from './orderDetails.css';
 import { useParams } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 
 const OrderDetails = () => {
     const { id } = useParams();
+    const { enqueueSnackbar } = useSnackbar();
     
     const auth = useSelector(state => state.auth);
     const order = useSelector(state => 
@@ -54,7 +56,11 @@ const OrderDetails = () => {
                     </MidContentWrapper>
                 </ContentMid> 
                 <ContentRight>
-                    <PaymentStatus orderId={id} auth={auth.isAdmin}/>
+                    <PaymentStatus 
+                        orderId={id} 
+                        auth={auth.isAdmin}
+                        enqueueSnackbar={enqueueSnackbar}
+                    />
                 </ContentRight>
             </ContentWrapper>
         </Middlepane>

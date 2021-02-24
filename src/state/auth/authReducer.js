@@ -4,25 +4,17 @@ import {
     LOGOUT_REQUEST,
     REGISTER_SUCCESS,
     REGISTER_FAILURE,
-    USER_ACCOUNT_UPDATE_SUCCESS,
-    CLEAR_NOTIFICATION
+    USER_ACCOUNT_UPDATE_SUCCESS
 } from './authActions';  
 
 const initialState = {
     user : JSON.parse(localStorage.getItem('user')) || null,
     isAdmin : localStorage.getItem('isAdmin') === 'true' || false, 
-    isLoggedIn : localStorage.getItem('isLoggedIn') === 'true' || false,
-    notification : null
+    isLoggedIn : localStorage.getItem('isLoggedIn') === 'true' || false
 }
 
 const authReducer = (state = initialState, action) => {
     switch(action.type) {
-        case CLEAR_NOTIFICATION: {
-            return {
-                ...state,
-                notification: null,
-            }
-        }
         case REGISTER_SUCCESS: {
             const user = action.payload;
 
@@ -76,8 +68,7 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 user : null,
                 isAdmin : false,
-                isLoggedIn : false,
-                notification : action.payload
+                isLoggedIn : false
             }
         }
         default:

@@ -12,7 +12,7 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-const ProductItem = ({ productInfo }) => {
+const ProductItem = ({ productInfo, enqueueSnackbar }) => {
     const dispatch = useDispatch();
     const getProductIcon = (category) => {
         switch (category) {
@@ -35,6 +35,7 @@ const ProductItem = ({ productInfo }) => {
             productId : productInfo.id,
             productName : productInfo.name,
             price : productInfo.promo_id ? productInfo.promo_price : productInfo.price,
+            enqueueSnackbar
         }))
     }
 

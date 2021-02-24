@@ -41,7 +41,7 @@ export const setToEditProduct = (product) => {
   }
 }
 
-export const updateStorage = ( updateData ) => async dispatch => {
+export const updateStorage = ( updateData, enqueueSnackbar ) => async dispatch => {
   axios.put('/orders/storage', {
     userId : updateData.userId,
     title : updateData.title,
@@ -52,6 +52,13 @@ export const updateStorage = ( updateData ) => async dispatch => {
     price : updateData.price,
   })
   .then(res => {
+    const message='Zaktualizowano stan magazynowy produktu';  
+    enqueueSnackbar(
+      message, {
+          variant: 'success',
+      }
+    );
+
     dispatch({
         type: UPDATE_STORAGE_SUCCESS,
         payload: {
@@ -61,6 +68,13 @@ export const updateStorage = ( updateData ) => async dispatch => {
       })
     })
     .catch(err => {
+      const message='Aktualizacja stanu magazynowego nie powiodła się';  
+      enqueueSnackbar(
+        message, {
+            variant: 'error',
+        }
+      );
+
       dispatch ({
         type: UPDATE_STORAGE_FAILURE,
         payload: err.message,
@@ -68,7 +82,7 @@ export const updateStorage = ( updateData ) => async dispatch => {
     })
 }
 
-export const updateProduct = ( productData ) => async dispatch => {
+export const updateProduct = ( productData, enqueueSnackbar ) => async dispatch => {
   axios.post(`/products/update/${productData.id}`, {
     name : productData.name, 
     description : productData.description, 
@@ -80,12 +94,26 @@ export const updateProduct = ( productData ) => async dispatch => {
     category_id : productData.category_id
   })
   .then(res => {
+    const message=`Zaktualizowano szczegóły produktu: ${productData.name}!`;  
+    enqueueSnackbar(
+      message, {
+        variant: 'success',
+      }
+    );
+
     dispatch({
         type: UPDATE_PRODUCT_SUCCESS,
         payload: res.data
       })
     })
     .catch(err => {
+      const message='Aktualizacja szczegółów produktu nie powiodła się';  
+      enqueueSnackbar(
+        message, {
+          variant: 'error',
+        }
+      );
+
       dispatch ({
         type: UPDATE_PRODUCT_FAILURE,
         payload: err.message,
@@ -93,7 +121,7 @@ export const updateProduct = ( productData ) => async dispatch => {
     })
 }
 
-export const createProduct = ( productData ) => async dispatch => {
+export const createProduct = ( productData, enqueueSnackbar ) => async dispatch => {
   axios.put('/products/create', {
     name : productData.name, 
     description : productData.description, 
@@ -105,12 +133,26 @@ export const createProduct = ( productData ) => async dispatch => {
     category_id : productData.category_id
   })
   .then(res => {
+    const message=`Dodano nowy produkt: ${productData.name}`;  
+    enqueueSnackbar(
+      message, {
+          variant: 'success',
+      }
+    );
+
     dispatch({
         type: CREATE_PRODUCT_SUCCESS,
         payload: res.data
       })
     })
-    .catch(err => {
+    .catch(err => {      
+      const message='Dodawanie produktu nie powiodło się';  
+      enqueueSnackbar(
+        message, {
+            variant: 'error',
+        }
+      );
+
       dispatch ({
         type: CREATE_PRODUCT_FAILURE,
         payload: err.message,

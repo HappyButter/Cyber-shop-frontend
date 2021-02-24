@@ -14,31 +14,61 @@ export const UPDATE_ORDER_STATUS_SUCCESS = 'UPDATE_ORDER_STATUS_SUCCESS';
 export const UPDATE_ORDER_STATUS_FAILURE = 'UPDATE_ORDER_STATUS_FAILURE'; 
 
 
-export const updateOrderStatus = ({status, orderId}) =>  async dispatch => {
+export const updateOrderStatus = ({status, orderId, enqueueSnackbar}) =>  async dispatch => {
     axios.put(`/orders/status/${orderId}`, { status })
         .then(res => {
+            const message=`Zmieniono status zamówienia nr ${orderId} na: ${status}!`;  
+            enqueueSnackbar(
+              message, {
+                  variant: 'success',
+              }
+            );
+
             dispatch({
                 type: UPDATE_ORDER_STATUS_SUCCESS,
                 payload: {status, orderId},
             })
         })
         .catch(err => {
-            console.log(err);
+            const message='Nie można zmienić statusu zamówienia. Spróbuj ponownie.';  
+            enqueueSnackbar(
+              message, {
+                  variant: 'error',
+              }
+            );
+
             dispatch({
                 type: UPDATE_ORDER_STATUS_FAILURE, 
             })
         })
 }
 
-export const updatePaymentStatus = ({isPaid, orderId}) => async dispatch => {
+export const updatePaymentStatus = ({isPaid, orderId, enqueueSnackbar}) => async dispatch => {
     axios.put(`/orders/payment/${orderId}`, { isPaid })
         .then(res => {
+
+            const paymentStatus = isPaid ? 'zapłacono' : 'nie zapłacono'; 
+            const message=`Zmieniono status płatności zamówienia nr ${orderId} na: ${paymentStatus}`;  
+
+            enqueueSnackbar(
+              message, {
+                  variant: 'success',
+              }
+            );
+
             dispatch({
                 type: UPDATE_PAYMENT_STATUS_SUCCESS,
                 payload: {isPaid, orderId},
             })
         })
         .catch(err => {
+            const message='Nie zmieniono statusu płatności. Spróbuj ponownie.';  
+            enqueueSnackbar(
+              message, {
+                  variant: 'error',
+              }
+            );
+
             dispatch({
                 type: UPDATE_PAYMENT_STATUS_FAILURE, 
             })

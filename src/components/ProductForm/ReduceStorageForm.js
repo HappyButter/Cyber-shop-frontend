@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateStorage, getAllProducts } from 'state/products/productActions';
 import './addProductForm.css';
 
-const ReduceStorageForm = () => {
+const ReduceStorageForm = ({ enqueueSnackbar }) => {
     const dispatch = useDispatch();
 
     const [name, setName] = useState('');
@@ -36,8 +36,9 @@ const ReduceStorageForm = () => {
             price,
             productsCost,
             shippmentPrice : 0,
-            quantity : -quantity
-        }));
+            quantity : -quantity            
+        }, enqueueSnackbar
+        ));
         
         dispatch(getAllProducts());
     } 

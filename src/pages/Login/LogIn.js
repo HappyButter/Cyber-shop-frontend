@@ -9,7 +9,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { SignInWrapper, CustomLink } from './login.css';
 import { Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../state/auth/authActions';
+import { useSnackbar } from 'notistack';
+import { login } from 'state/auth/authActions';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,12 +43,16 @@ const Login = () => {
   const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const classes = useStyles();
-
+  const { enqueueSnackbar } = useSnackbar();
+  
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    dispatch(login({email, password}));
+    dispatch(login({email, password, enqueueSnackbar}))  
   } 
+
+
 
   return (
     <SignInWrapper component="main" maxWidth="xs">

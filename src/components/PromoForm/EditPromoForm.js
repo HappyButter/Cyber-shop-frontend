@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { editPromo, deletePromo } from 'state/promo/promoActions';
 import './addPromoForm.css';
 
-const EditPromoForm = () => {
+const EditPromoForm = ({ enqueueSnackbar }) => {
     const dispatch = useDispatch();
 
     const [title, setTitle] = useState('');
@@ -26,7 +26,8 @@ const EditPromoForm = () => {
             id : promoEdit.id,
             title,
             description,
-            discountValue : parseFloat(discountValue / 100)
+            discountValue : parseFloat(discountValue / 100),
+            enqueueSnackbar
         }));
     } 
 
@@ -35,6 +36,7 @@ const EditPromoForm = () => {
         
         dispatch(deletePromo({
             id : promoEdit.id,
+            enqueueSnackbar
         }));
     } 
     
@@ -58,7 +60,7 @@ const EditPromoForm = () => {
             {"Wartość zniżki: "}
 
             <input type="number" name="discountValue" id="discountValue" value={discountValue} required 
-            onChange={(event) => setDiscountValue(event.target.value)}/> {"(%)"}
+            onChange={(event) => setDiscountValue(event.target.value)}/> {"(%)"}<br/><br/>
 
             <textarea name="description" id="description" value={description}
             onChange={(event) => setDescription(event.target.value)}></textarea>

@@ -26,7 +26,6 @@ const productsInServiceReducer = ( state=initialState, action ) => {
             }
         }        
         case ADD_PRODUCT_TO_SERVICE_SUCCESS: {
-            alert("Produkt dodany do serwisu. Sprawdź zakładkę 'zarządzaj serwisem'.")
             const added = action.payload;
             return {
                 ...state, 
@@ -34,7 +33,6 @@ const productsInServiceReducer = ( state=initialState, action ) => {
             };
         }
         case PRODUCT_IN_SERVICE_STATUS_UPDATE_SUCCESS: {
-            alert("Zmieniono status produktu w serwisie.")
             const updated = action.payload;
             const reducedState = state.productList.filter(product => product.id !== updated[0].id);
 

@@ -31,7 +31,8 @@ const ProductsInServiceList = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        { products.map(product => <Row productData={product}/>)}
+                        { products.map(product => 
+                            <Row productData={product} />)}
                     </TableBody>
                 </Table>
             </TableContainer>

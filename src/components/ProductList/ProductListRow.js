@@ -7,11 +7,12 @@ import IconButton from '@material-ui/core/IconButton';
 import { useDispatch } from 'react-redux';
 import { setToEditProduct } from 'state/products/productActions';
 
-const Row = ({productData}) => {
+const Row = ({productData, setDetailsFromOpen}) => {
     const dispatch = useDispatch();
 
     const handleInfoBtn = () => {
-        dispatch(setToEditProduct(productData))
+        dispatch(setToEditProduct(productData));
+        setDetailsFromOpen(true);
     }
 
     return (
@@ -26,7 +27,7 @@ const Row = ({productData}) => {
             <TableCell align="right">
                 <IconButton aria-label="info"
                             onClick={handleInfoBtn}>
-                    <InfoRoundedIcon />
+                    <InfoRoundedIcon style={{color: '#3f51b5'}}/>
                 </IconButton>    
             </TableCell>
         </TableRow>

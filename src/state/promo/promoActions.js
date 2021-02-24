@@ -16,15 +16,29 @@ export const DELETE_PROMO_SUCCESS = 'DELETE_PROMO_SUCCESS';
 export const DELETE_PROMO_FAILURE = 'DELETE_PROMO_FAILURE';
 
 
-export const deletePromo = ({id}) => async dispatch => {
+export const deletePromo = ({id, enqueueSnackbar}) => async dispatch => {
   axios.delete(`/promos/delete/${id}`)
     .then(res => {
+      const message='Usunięto promocję';  
+      enqueueSnackbar(
+        message, {
+            variant: 'success',
+        }
+      );
+
       dispatch({
         type: DELETE_PROMO_SUCCESS,
         payload : id,
       })
     })
     .catch(err => {
+      const message='Usunięcie promocji przebiegło niepomyślnie. Sprawdź połączenie internetowe i spróbuj ponownie.';  
+      enqueueSnackbar(
+      message, {
+          variant: 'error',
+      }
+    );
+
       dispatch({
         type: DELETE_PROMO_FAILURE,
         payload: {
@@ -34,15 +48,29 @@ export const deletePromo = ({id}) => async dispatch => {
     })
 } 
 
-export const editPromo = ({ id, title, description, discountValue }) => async dispatch => {
+export const editPromo = ({ id, title, description, discountValue, enqueueSnackbar }) => async dispatch => {
   axios.post(`/promos/update/${id}`, { title, description, discount:discountValue })
     .then(res => {
+      const message='Szczegóły promocji zostały zaktualizowane';  
+      enqueueSnackbar(
+        message, {
+            variant: 'success',
+        }
+      );
+
       dispatch({
         type : EDIT_PROMO_SUCCESS,
         payload : res.data,
       })
     })
     .catch(err => {
+      const message='Aktualizacja promocji nie powiodła się';  
+      enqueueSnackbar(
+        message, {
+            variant: 'error',
+        }
+      );
+
       dispatch({
         type: EDIT_PROMO_FAILURE,
         payload: {
@@ -59,15 +87,29 @@ export const setToEditionPromo = (promo) => {
   }
 }
 
-export const createPromo = ({title, description, discountValue}) => async dispatch => {
+export const createPromo = ({ title, description, discountValue, enqueueSnackbar }) => async dispatch => {
   axios.put('/promos/create', { title, description, discount:discountValue })
     .then(res => {
+      const message='Dodano nową promocję. Przejdź do sekcji "Zarządzaj produktami" by dodać produkt do promocji.';  
+      enqueueSnackbar(
+        message, {
+            variant: 'success',
+        }
+      );
+
       dispatch({
         type : CREATE_PROMO_SUCCESS,
         payload : res.data,
       })
     })
     .catch(err => {
+      const message='Tworzenie promocji nie powiodło się';  
+      enqueueSnackbar(
+        message, {
+            variant: 'error',
+        }
+      );
+
       dispatch({
         type: CREATE_PROMO_FAILURE,
         payload: {
