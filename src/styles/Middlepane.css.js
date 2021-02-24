@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const Middlepane = styled.div`
-	overflow: auto;
+	overflow-x: hidden;
 	width: 65vw;
 	background-color: rgb(32, 32, 32);
 	height: 100%;
-	min-height: auto;
 	text-align: center;
 	align-items: center;
 	margin: 0 auto;
@@ -17,6 +16,11 @@ export const Middlepane = styled.div`
 
 	font-family: BlenderProBold,sans-serif;
     font-weight: 700;
+
+	@media (max-width: 800px) { 
+		width: 100%;
+		padding: 20px;
+	}
 `;
 
 export const MiddlepaneOffer = styled(Middlepane)`

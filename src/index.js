@@ -15,8 +15,8 @@ ReactDOM.render(
       <Provider store={store}>
         <SnackbarProvider
             anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'center',
+              vertical: 'bottom',
+              horizontal: 'right',
           }}>
           <App />
         </SnackbarProvider>

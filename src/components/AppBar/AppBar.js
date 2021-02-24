@@ -19,6 +19,8 @@ import { useSnackbar } from 'notistack';
 import SmartphoneIcon from '@material-ui/icons/Smartphone';
 import ComputerIcon from '@material-ui/icons/Computer';
 import MemoryIcon from '@material-ui/icons/Memory';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -83,6 +85,11 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '1200px',
   },
   categories : {
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  categoriesDesktop : {
+    flexDirection: 'row',
     justifyContent: 'center',
   },
   categoriesTitle : {
@@ -104,7 +111,7 @@ const MenuAppBar = (props) => {
 
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
-
+  const desktop = useMediaQuery('(min-width:800px)');
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -215,7 +222,7 @@ const MenuAppBar = (props) => {
           </div>
         </Toolbar>
 
-        <Toolbar align="center" className={classes.categories}>
+        <Toolbar align="center" className={desktop ? classes.categoriesDesktop : classes.categories }>
           <IconButton
               color="inherit"
               aria-label="open drawer"
