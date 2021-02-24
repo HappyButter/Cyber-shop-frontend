@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useSnackbar } from 'notistack';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProductGrid } from 'components';
@@ -8,6 +9,7 @@ import { Middlepane } from 'styles/Middlepane.css';
 const Promo = () => {
     const dispatch = useDispatch();
     const { promoId } = useParams();
+    const { enqueueSnackbar } = useSnackbar();    
 
     useEffect( () => {
         dispatch(getPromoProducts(promoId));
@@ -33,13 +35,16 @@ const Promo = () => {
 
     return (
         <Middlepane>
-            <hr/>
-            <br/>
+
+            <hr/><br/>
             {promoDetails}
-            <br/>
-            <hr/>
-            <br/>
-            <ProductGrid productsInfo={promoProducts}></ProductGrid>
+            <br/><hr/><br/>
+
+            <ProductGrid 
+                productsInfo={promoProducts}
+                enqueueSnackbar={enqueueSnackbar}
+            />
+            
         </Middlepane>
     );
 };
