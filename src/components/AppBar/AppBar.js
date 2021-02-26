@@ -39,10 +39,10 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'CyberSans',
     fontSize: 40,
     fontWeight: 100,
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+    // display: 'none',
+    // [theme.breakpoints.up('sm')]: {
+    //   display: 'block',
+    // },
   },
   search: {
     position: 'relative',
@@ -179,8 +179,8 @@ const MenuAppBar = (props) => {
             onClick={(e) => handleProfileMenuClick(e, '/')}
           >
             <Typography className={classes.title} variant="h6" noWrap>
-            CyberShop
-          </Typography>
+              CyberShop
+            </Typography>
           </IconButton>
           
           {/* Search bar has to be posponed */}
@@ -200,26 +200,24 @@ const MenuAppBar = (props) => {
           </div> */}
 
           <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <IconButton aria-label="cart" 
-                        color="inherit">
-              <Badge badgeContent={count.length} color="secondary">
-                <ShoppingCartIcon 
-                onClick={(e) => handleProfileMenuClick(e, '/cart')}/>
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-              className={classes.menuButton}
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
+          <IconButton aria-label="cart" 
+                      color="inherit">
+            <Badge badgeContent={count.length} color="secondary">
+              <ShoppingCartIcon 
+              onClick={(e) => handleProfileMenuClick(e, '/cart')}/>
+            </Badge>
+          </IconButton>
+          <IconButton
+            edge="end"
+            aria-label="account of current user"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            onClick={handleProfileMenuOpen}
+            color="inherit"
+            className={classes.menuButton}
+          >
+            <AccountCircle />
+          </IconButton>
         </Toolbar>
 
         <Toolbar align="center" className={desktop ? classes.categoriesDesktop : classes.categories }>

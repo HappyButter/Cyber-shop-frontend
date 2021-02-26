@@ -56,7 +56,6 @@ const ProductDetails = () => {
             <hr/>
             <Paragraph>
                 {product.name}
-
             </Paragraph>
             <Rating 
                     value={parseFloat(product.rating)}

@@ -249,7 +249,6 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     label="Nr budynku"
                     name="building"
                     autoComplete="building"
-                    autoFocus
                     onChange={(event) => setBuilding(event.target.value)}
                     />
                 </Grid>

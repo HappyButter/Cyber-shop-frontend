@@ -4,7 +4,6 @@ export const Paragraph = styled.p`
     color: rgba(255,255,255,.75);
     font-size: 180%;
     text-align: center;
-    white-space: nowrap;
     overflow: hidden;
     font-family: 'Anonymous Pro', monospace;
 `;
