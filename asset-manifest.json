@@ -1,24 +1,24 @@
 {
   "files": {
     "main.css": "/Cyber-shop-frontend/static/css/main.76eb4c6b.chunk.css",
-    "main.js": "/Cyber-shop-frontend/static/js/main.d904471d.chunk.js",
-    "main.js.map": "/Cyber-shop-frontend/static/js/main.d904471d.chunk.js.map",
+    "main.js": "/Cyber-shop-frontend/static/js/main.1d1c22b7.chunk.js",
+    "main.js.map": "/Cyber-shop-frontend/static/js/main.1d1c22b7.chunk.js.map",
     "runtime-main.js": "/Cyber-shop-frontend/static/js/runtime-main.f6545bef.js",
     "runtime-main.js.map": "/Cyber-shop-frontend/static/js/runtime-main.f6545bef.js.map",
     "static/css/2.8078bc71.chunk.css": "/Cyber-shop-frontend/static/css/2.8078bc71.chunk.css",
-    "static/js/2.60374e6e.chunk.js": "/Cyber-shop-frontend/static/js/2.60374e6e.chunk.js",
-    "static/js/2.60374e6e.chunk.js.map": "/Cyber-shop-frontend/static/js/2.60374e6e.chunk.js.map",
+    "static/js/2.47455fa1.chunk.js": "/Cyber-shop-frontend/static/js/2.47455fa1.chunk.js",
+    "static/js/2.47455fa1.chunk.js.map": "/Cyber-shop-frontend/static/js/2.47455fa1.chunk.js.map",
     "index.html": "/Cyber-shop-frontend/index.html",
     "static/css/2.8078bc71.chunk.css.map": "/Cyber-shop-frontend/static/css/2.8078bc71.chunk.css.map",
     "static/css/main.76eb4c6b.chunk.css.map": "/Cyber-shop-frontend/static/css/main.76eb4c6b.chunk.css.map",
-    "static/js/2.60374e6e.chunk.js.LICENSE.txt": "/Cyber-shop-frontend/static/js/2.60374e6e.chunk.js.LICENSE.txt",
+    "static/js/2.47455fa1.chunk.js.LICENSE.txt": "/Cyber-shop-frontend/static/js/2.47455fa1.chunk.js.LICENSE.txt",
     "static/media/index.css": "/Cyber-shop-frontend/static/media/Cyberpunk.ce09ddf4.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.f6545bef.js",
     "static/css/2.8078bc71.chunk.css",
-    "static/js/2.60374e6e.chunk.js",
+    "static/js/2.47455fa1.chunk.js",
     "static/css/main.76eb4c6b.chunk.css",
-    "static/js/main.d904471d.chunk.js"
+    "static/js/main.1d1c22b7.chunk.js"
   ]
 }
