@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -7,12 +8,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { useSelector, useDispatch } from 'react-redux';
-
+import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+
 import { removeProductFromCart } from 'state/cart/cartActions';
 import ControllQuantity from './ControllQuantity';
-import { Btn } from './cart.css'
 
 const columns = [
   {
@@ -72,10 +72,14 @@ const Cart = ({ enqueueSnackbar }) => {
                   enqueueSnackbar={enqueueSnackbar}
                 />
       } case 'delete': {
-        return <Btn onClick={e => dispatch(removeProductFromCart({
-          productId: product.id,
-          enqueueSnackbar
-        }))}><DeleteIcon /></Btn>
+        return <IconButton aria-label="info"                                         
+                           onClick={ () => dispatch(removeProductFromCart({
+                      productId: product.id,
+                      enqueueSnackbar
+                    }))}
+                >
+                    <DeleteIcon style={{color: 'darkgray', fontSize: 20}} />
+                </IconButton> 
       } case 'price': {
         return product.price + " zł";
       }

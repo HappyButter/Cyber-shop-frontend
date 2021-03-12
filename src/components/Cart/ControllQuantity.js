@@ -3,7 +3,10 @@ import { addProductToCart,
          reduceProductQuantityFromCart} from 'state/cart/cartActions';
     
 import { useDispatch } from 'react-redux';
-import { Btn, ControllBtn } from './cart.css';
+
+import IconButton from '@material-ui/core/IconButton';
+import RemoveIcon from '@material-ui/icons/Remove';
+import AddIcon from '@material-ui/icons/Add';
 
 const ControllQuantity = ({productId, quantity, enqueueSnackbar}) => {
     const dispatch = useDispatch();
@@ -11,32 +14,31 @@ const ControllQuantity = ({productId, quantity, enqueueSnackbar}) => {
 
     return (
           <>
-              <Btn type="button" 
-                    value="-" 
-                    className="minus"
-                    onClick={ e => {
-                        dispatch(reduceProductQuantityFromCart({
-                            productId,
-                            enqueueSnackbar
-                        }));
-                        setCount(count-1);
-                    }
-                }
-                >-</Btn>
-                    
+                <IconButton aria-label="info" 
+                            onClick={ () => {
+                                            dispatch(reduceProductQuantityFromCart({
+                                                productId,
+                                                enqueueSnackbar
+                                            }));
+                                            setCount(count-1);
+                            }}
+                >
+                    <RemoveIcon style={{color: 'darkgray', fontSize: 20}} />
+                </IconButton>  
+
                 {count}
-                    
-              <ControllBtn type="button" 
-                    className="plus"
-                    onClick={ e => {
-                        dispatch(addProductToCart({
-                            productId,
-                            enqueueSnackbar
-                        }));
-                        setCount(count+1);
-                    }
-                }
-                >+</ControllBtn>
+                
+                <IconButton aria-label="info"                                         
+                            onClick={ () => {
+                                dispatch(addProductToCart({
+                                    productId,
+                                    enqueueSnackbar
+                                }));
+                                setCount(count+1);
+                            }}
+                >
+                    <AddIcon style={{color: 'darkgray', fontSize: 20}} />
+                </IconButton> 
           </>
       )
 }
