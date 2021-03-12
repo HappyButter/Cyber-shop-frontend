@@ -13,22 +13,16 @@ import Box from '@material-ui/core/Box';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const ProductItem = ({ productInfo, enqueueSnackbar }) => {
+    
     const dispatch = useDispatch();
-    const getProductIcon = (category) => {
-        switch (category) {
-            case 1:{
-                return  <PhoneAndroidIcon fontSize="large"/>;
-            }case 2:{
-                return  <WatchIcon fontSize="large"/>;
-            }case 3:{
-                return  <CategoryIcon fontSize="large"/>;
-            }case 4:{
-                return  <ComputerIcon fontSize="large"/>;
-            }default: {
-                return <CategoryIcon/>;
-            }
-        }
-    } 
+
+
+    const productIcon = [
+        <PhoneAndroidIcon style={{ fontSize: 50 }}/>,
+        <WatchIcon style={{ fontSize: 50 }}/>,
+        <CategoryIcon style={{ fontSize: 50 }}/>,
+        <ComputerIcon style={{ fontSize: 50 }}/>
+    ]
 
     const handleAddToCart = () => {
         dispatch(addProductToCart({
@@ -41,17 +35,22 @@ const ProductItem = ({ productInfo, enqueueSnackbar }) => {
 
     return (
         <GridElement key={productInfo.id}>
-            <br/>
+
             <CustomLink to={`/product/${productInfo.id}`}>
-                {getProductIcon(productInfo.category_id)}
+                {productIcon[productInfo.category_id-1] || 
+            <CategoryIcon style={{ fontSize: 50 }} />}
                 <br/><br/>
+
                 {productInfo.name}
                 <br/><br/>
+                
                 {productInfo.promo_id 
-                ? productInfo.promo_price + " zł" 
-                : productInfo.price + " zł"}
+                ? Number.parseFloat(productInfo.promo_price).toFixed(2) + " zł" 
+                : Number.parseFloat(productInfo.price).toFixed(2) + " zł"}
             </CustomLink>
+
             <br/><br/>
+            
             <Box component="fieldset" mb={1} borderColor="transparent">
                 <Rating name="read-only" 
                         value={parseFloat(productInfo.rating)}

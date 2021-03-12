@@ -1,4 +1,10 @@
 import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  HashRouter as Router,
+  Switch,
+  Route } from "react-router-dom";
+
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './global';
 import { theme } from './theme';
@@ -18,18 +24,11 @@ import {  Home,
           Finances } from './pages';
 
 import { ProtectedRoute, AppBar } from './components';
-import { useSelector, useDispatch } from 'react-redux';
 import { getPromos } from './state/promo/promoActions';
 import { getRecommendedProducts } from './state/products/productActions';
 import { getAllCategories } from './state/categories/categoriesActions';
 import './index.css';
 
-
-import {
-  HashRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
 
 
 const App = () => {

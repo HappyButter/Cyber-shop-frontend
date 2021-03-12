@@ -7,10 +7,10 @@ import Box from '@material-ui/core/Box';
 import { createCommentToProduct } from 'state/comments/commentsActions';
 
 
-const CommentForm = ({ userId, productId}) => {
+const CommentForm = ({ userId, userName, productId }) => {
     const dispatch = useDispatch();
 
-    const [nick, setNick] = useState('');
+    const [nick, setNick] = useState(userName || '');
     const [commentText, setCommentText] = useState('');
     const [rate, setRate] = useState(2);
 
@@ -31,10 +31,12 @@ const CommentForm = ({ userId, productId}) => {
 
     return (
         <>
-            <form id="comment" class="form" onSubmit={handleSubmit}>
+            <form id="comment" className="form" onSubmit={handleSubmit}>
 
-                <input type="text" name="nick" id="nick" placeholder="Nick" required 
+                <label htmlFor="nick">Nick</label><br/>
+                <input type="text" id="nick" name="nick" placeholder="Nick" value={nick} required 
                 onChange={(event) => setNick(event.target.value)}/>
+                
                 <Box component="fieldset" width={300}>
                     <Typography component="legend">Twoja ocena</Typography>
                     <Rating
@@ -46,10 +48,13 @@ const CommentForm = ({ userId, productId}) => {
                     />
                 </Box>
                 <br/>
+
                 <textarea name="commentText" id="commentText" placeholder="Twój komentarz"
                 onChange={(event) => setCommentText(event.target.value)}></textarea>
                 <br/>
+                
                 <button type="submit" id="addCommBtn">Dodaj komentarz</button>
+                <br/><br/>
             </form>
         </>
     );

@@ -25,6 +25,7 @@ const Comments = ({ productId }) => {
         <CommentsWrapper>
             {auth.isLoggedIn 
             ? <CommentForm userId={auth.user.id}
+                            userName={auth.user.name}
                             productId={productId}/> 
             : null}
             {commentsList}

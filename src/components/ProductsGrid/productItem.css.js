@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 export const GridElement = styled.div`
 	min-height: 300px;
+	padding: 15px 0;
 	background-color: rgba( 255, 255, 255, 0.1 );
 	position: relative;
 

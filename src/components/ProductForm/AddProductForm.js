@@ -41,8 +41,8 @@ const AddProductForm = ({ enqueueSnackbar }) => {
     return (
         <>
             <br/>
-            <h2><span class="productFormSpan">Szczegóły nowego produktu:</span></h2>
-            <form id="addProductForm" class="addProductForm" onSubmit={handleSubmit}>
+            <h2><span className="productFormSpan">Szczegóły nowego produktu:</span></h2>
+            <form id="addProductForm" className="addProductForm" onSubmit={handleSubmit}>
 
                 <input type="text" name="name-form" id="name-form" placeholder="Nazwa produktu" required 
                 onChange={(event) => setName(event.target.value)}/>
@@ -50,23 +50,23 @@ const AddProductForm = ({ enqueueSnackbar }) => {
                 <input type="text" name="producer" id="producer" placeholder="Producent" required 
                 onChange={(event) => setProducer(event.target.value)}/>
 
-                <span class="productFormSpan">Cena:</span>
+                <span className="productFormSpan">Cena:</span>
                 <input type="text" name="price" id="price" placeholder={1} required 
                 onChange={(event) => setPrice(event.target.value)}/> 
-                <span class="productFormSpan">[zł]</span>
+                <span className="productFormSpan">[zł]</span><br/>
 
-                <span class="productFormSpan">Marża:</span>
+                <span className="productFormSpan">Marża:</span>
                 <input type="number" name="profitMargin" id="profitMargin" placeholder={1} required 
                 onChange={(event) => setProfitMargin(event.target.value)}/> 
-                <span class="productFormSpan">[%]</span>
+                <span className="productFormSpan">[%]</span>
 
                 <textarea name="description" id="description" placeholder="Opis"
                 onChange={(event) => setDescription(event.target.value)}></textarea>
 
-                <span class="productFormSpan">Długość gwarancji:</span>
+                <span className="productFormSpan">Długość gwarancji:</span>
                 <input type="number" name="warranty" id="warranty" placeholder={1} required 
                 onChange={(event) => setWarranty(event.target.value)}/>
-                <span class="productFormSpan">[w miesiącach]</span> 
+                <span className="productFormSpan">[w miesiącach]</span> 
 
 
                 <br/><br/>

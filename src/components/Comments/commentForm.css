@@ -33,3 +33,7 @@
 button:hover {
   background-color: #45a049;
 }
+
+label[for="nick"]{
+  padding-left: 10px;
+}

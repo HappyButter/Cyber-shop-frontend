@@ -47,16 +47,15 @@ const ProductDetails = () => {
 
     return(
         <Middlepane>
-            <br/>
-            <br/>
-            {productIcon[product.category_id] || 
+            <br/><br/>
+            { productIcon[product.category_id-1] || 
             <CategoryIcon style={{ fontSize: 200 }}/>}
-            <br/>
-            <br/>
-            <hr/>
+            <br/><br/><hr/>
+
             <Paragraph>
                 {product.name}
             </Paragraph>
+            
             <Rating 
                     value={parseFloat(product.rating)}
                     readOnly
@@ -65,8 +64,8 @@ const ProductDetails = () => {
             <br/><br/>
             <h2>
                 {product.promo_id 
-                ? product.promo_price + " zł" 
-                : product.price + " zł"}
+                ? Number.parseFloat(product.promo_price).toFixed(2) + " zł" 
+                : Number.parseFloat(product.price).toFixed(2) + " zł"}
             </h2>
             <Btn onClick={handleAddToCart}>
                 <AddShoppingCartIcon/>
