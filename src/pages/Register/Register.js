@@ -46,6 +46,12 @@ const Register = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
 
+    const [isNameValid, setIsNameValid] = useState(true);
+    const [isSurnameValid, setIsSurnameValid] = useState(true);
+    const [isEmailValid, setIsEmailValid] = useState(true);
+    const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(true);
+    const [isPasswordValid, setIsPasswordValid] = useState(true);
+
     const { enqueueSnackbar } = useSnackbar();
 
     const validateName = () => {
@@ -59,7 +65,7 @@ const Register = () => {
     }
   
     const validateEmail = () => {
-        const regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const regEmail = /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return (regEmail.test(email) && email.length > 1);
     }
 
@@ -112,8 +118,9 @@ const Register = () => {
                                 fullWidth
                                 id="name"
                                 label="Imię"
-                                helperText={validateName() ? null : "Imię powinno być dłuższe niż 2 znaki i nie powinno zawierać cyfr"}
-                                error={!validateName()}
+                                onBlur={() => setIsNameValid(validateName())}
+                                helperText={isNameValid ? null : "Imię powinno być dłuższe niż 2 znaki i nie powinno zawierać cyfr"}
+                                error={!isNameValid}
                                 onChange={(event) => setName(event.target.value)}
                             />
                         </Grid>
@@ -125,8 +132,9 @@ const Register = () => {
                                 id="lastName"
                                 label="Nazwisko"
                                 name="lastName"
-                                helperText={validateSurname() ? null : "Nazwisko powinno być dłuższe niż 2 znaki i nie powinno zawierać cyfr"}
-                                error={!validateSurname()}
+                                onBlur={() => setIsSurnameValid(validateSurname())}
+                                helperText={isSurnameValid ? null : "Nazwisko powinno być dłuższe niż 2 znaki i nie powinno zawierać cyfr"}
+                                error={!isSurnameValid}
                                 onChange={(event) => setSurname(event.target.value)}
                             />
                         </Grid>
@@ -139,8 +147,9 @@ const Register = () => {
                                 label="Email"
                                 name="email"
                                 autoComplete="email"
-                                helperText={validateEmail() ? null : "Wpisz poprawny email"}
-                                error={!validateEmail()}
+                                onBlur={() => setIsEmailValid(validateEmail())}
+                                helperText={isEmailValid ? null : "Wpisz poprawny email"}
+                                error={!isEmailValid}
                                 onChange={(event) => setEmail(event.target.value)}
                             />
                         </Grid>
@@ -153,8 +162,9 @@ const Register = () => {
                                 name="phoneNumber"
                                 label="Numer telefonu"
                                 placeholder="format: 123-123-123"
-                                helperText={validatePhoneNumber() ? null :"format: 123-123-123"}
-                                error={!validatePhoneNumber()}
+                                onBlur={() => setIsPhoneNumberValid(validatePhoneNumber())}
+                                helperText={isPhoneNumberValid ? null :"format: 123-123-123"}
+                                error={!isPhoneNumberValid}
                                 id="phoneNumber"
                                 autoComplete="tel-national"
                                 onChange={(event) => setPhoneNumber(event.target.value)}
@@ -170,8 +180,9 @@ const Register = () => {
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
-                                helperText={validatePassword() ? null :"Hasło powinno zawierać co najmniej 4 znaki"}
-                                error={!validatePassword()}
+                                onBlur={() => setIsPasswordValid(validatePassword())}
+                                helperText={isPasswordValid ? null :"Hasło powinno zawierać co najmniej 4 znaki"}
+                                error={!isPasswordValid}
                                 onChange={(event) => setPassword(event.target.value)}
                             />
                         </Grid>

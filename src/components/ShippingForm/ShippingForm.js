@@ -58,6 +58,11 @@ const ShippingForm = ({handleNext, handleBack}) => {
     const [shippingMethod, setShippingMethod] = useState(shippingMethods[0].name);
     const [shippingValue, setShippingValue] = useState(shippingMethods[0].price);
 
+    const [isCountryValid, setIsCountryValid] = useState(true);
+    const [isPostcodeValid, setIsPostcodeValid] = useState(true);
+    const [isCityValid, setIsCityValid] = useState(true);
+    const [isStreetValid, setIsStreetValid] = useState(true);
+
     const dispatch = useDispatch();
     const classes = useStyles();
   
@@ -113,7 +118,16 @@ const ShippingForm = ({handleNext, handleBack}) => {
       e.preventDefault();
 
       if(validate()){
-        dispatch(addAdress({ addressId, country, postcode, city, street, building, apartment, shippingMethod, shippingValue }));
+        dispatch(addAdress({ 
+          addressId, 
+          country, 
+          postcode, 
+          city, 
+          street, 
+          building, 
+          apartment, 
+          shippingMethod, 
+          shippingValue }));
         handleNext();
       }else{
         alert("wpisz poprawny adres");
@@ -184,9 +198,9 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     label="Państwo"
                     name="country"
                     autoComplete="country"
-                    autoFocus
-                    helperText={validateCountry() ? null : "Państwo musi mieć co najmnije 3 znaki i nie powinno zawierać cyfr"}
-                    error={!validateCountry()}
+                    onBlur={() => setIsCountryValid(validateCountry())}
+                    helperText={isCountryValid ? null : "Państwo musi mieć co najmnije 3 znaki i nie powinno zawierać cyfr"}
+                    error={!isCountryValid}
                     onChange={(event) => setCountry(event.target.value)}
                     />
                 </Grid>
@@ -201,8 +215,9 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     label="Kod pocztowy"
                     id="postcode"
                     autoComplete="postcode"
-                    helperText={validatePostCode() ? null :"format: 12-123"}
-                    error={!validatePostCode()}
+                    onBlur={ () => setIsPostcodeValid(validatePostCode())}
+                    helperText={ isPostcodeValid ? null :"format: 12-123"}
+                    error={!isPostcodeValid}
                     onChange={(event) => setPostcode(event.target.value)}
                     />
                 </Grid>
@@ -217,8 +232,9 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     label="Miasto"
                     id="post_town"
                     autoComplete="post_town"
-                    helperText={validateCountry() ? null : "Miasto musi mieć co najmnije 3 znaki i nie powinno zawierać cyfr"}
-                    error={!validateCountry()}
+                    onBlur={() => setIsCityValid(validateCountry())}
+                    helperText={isCityValid ? null : "Miasto musi mieć co najmnije 3 znaki i nie powinno zawierać cyfr"}
+                    error={!isCityValid}
                     onChange={(event) => setCity(event.target.value)}
                     />
                 </Grid>
@@ -233,8 +249,9 @@ const ShippingForm = ({handleNext, handleBack}) => {
                     label="Ulica"
                     id="street"
                     autoComplete="street"
-                    helperText={validateStreet() ? null : "Ulica musi mieć co najmnije 3 znaki i nie powinno zawierać cyfr"}
-                    error={!validateStreet()}
+                    onBlur={() => setIsStreetValid(validateStreet())}
+                    helperText={isStreetValid ? null : "Ulica musi mieć co najmnije 3 znaki i nie powinno zawierać cyfr"}
+                    error={!isStreetValid}
                     onChange={(event) => setStreet(event.target.value)}
                     />
                 </Grid>
