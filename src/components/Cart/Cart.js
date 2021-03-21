@@ -63,6 +63,7 @@ const Cart = ({ enqueueSnackbar }) => {
   const cartValue = useSelector(state => state.cart.value);
   cartItems.sort((a, b) => a.id - b.id);
 
+
   const handleCellType = (type, product) => {
     switch (type) {
       case 'quantity': {
