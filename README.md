@@ -29,6 +29,9 @@ or... just create your own account!
 [admin] Promo management
 ![](https://github.com/HappyButter/Cyber-shop-frontend/blob/main/docs/promo-management.gif)
 
+## Database
+![](https://github.com/HappyButter/Cyber-shop-frontend/blob/main/docs/CyberShop.png)
+
 ## Tech-stack 
 Front-end: 
 - React.js
