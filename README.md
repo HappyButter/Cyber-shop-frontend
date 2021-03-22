@@ -1,6 +1,7 @@
 # CyberShop
 Consumer electronics store wtih some CyberPunk 2077 styling.
 #### Link [demo](https://happybutter.github.io/Cyber-shop-frontend)
+> Note: DB needs a few seconds to be woken up
 
 Login as an admin:
 ```
