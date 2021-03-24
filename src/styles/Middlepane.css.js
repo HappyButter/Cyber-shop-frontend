@@ -4,7 +4,6 @@ export const Middlepane = styled.div`
 	overflow-x: hidden;
 	width: 65vw;
 	background-color: rgb(32, 32, 32);
-	height: 100%;
 	text-align: center;
 	align-items: center;
 	margin: 0 auto;

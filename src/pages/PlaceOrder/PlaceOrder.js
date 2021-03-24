@@ -42,10 +42,10 @@ const PlaceOrder = () => {
     'I gotowe!'];
 
   const userId = useSelector(state => state.auth.user.id);
-  const cart = useSelector(state => state.cart);  
+  const cart = useSelector(state => state.cart);
 
   const handleNext = () => {
-    if(cart.productList.length > 0)
+    if (cart.productList.length > 0)
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -77,9 +77,9 @@ const PlaceOrder = () => {
         return (
           <>
             <h3>Twój Koszyk</h3>
-            <ShoppingBasketIcon  fontSize="large"/>
+            <ShoppingBasketIcon fontSize="large" />
             <br /><br />
-            <Cart enqueueSnackbar={enqueueSnackbar}/>
+            <Cart enqueueSnackbar={enqueueSnackbar} />
             <br /><br />
           </>
         )
@@ -117,7 +117,6 @@ const PlaceOrder = () => {
         return (<Redirect to="/" />);
     }
   }
-
 
 
   return (
