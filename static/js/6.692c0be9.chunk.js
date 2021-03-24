@@ -1,0 +1,2 @@
+(this.webpackJsonpfrontend=this.webpackJsonpfrontend||[]).push([[6],{303:function(e,t,n){},328:function(e,t,n){"use strict";n.r(t),n.d(t,"default",(function(){return d}));var s=n(1),c=n(9),r=n(0),i=n(43),a=n(112),d=(n(303),function(){var e=Object(r.useState)(!1),t=Object(c.a)(e,2),n=t[0],d=t[1];return Object(s.jsxs)(a.a,{children:[Object(s.jsx)("div",{className:"left",children:Object(s.jsx)(i.p,{setEditFormOpen:d})}),Object(s.jsx)("div",{className:"right",children:Object(s.jsx)(i.o,{editFormOpen:n,setEditFormOpen:d})})]})})}}]);
+//# sourceMappingURL=6.692c0be9.chunk.js.map

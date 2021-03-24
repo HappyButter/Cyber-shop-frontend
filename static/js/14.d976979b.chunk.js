@@ -1,0 +1,2 @@
+(this.webpackJsonpfrontend=this.webpackJsonpfrontend||[]).push([[14],{326:function(t,e,n){"use strict";n.r(e),n.d(e,"default",(function(){return b}));var c=n(1),r=n(0),u=n(6),s=n(43),f=n(112),i=n(60),b=function(){var t=Object(u.b)(),e=Object(u.c)((function(t){return t.auth}));return Object(r.useEffect)((function(){e.isAdmin?t(Object(i.e)()):t(Object(i.f)({userId:e.user.id}))}),[t,e]),Object(c.jsx)(f.a,{children:Object(c.jsx)(s.f,{})})}}}]);
+//# sourceMappingURL=14.d976979b.chunk.js.map
