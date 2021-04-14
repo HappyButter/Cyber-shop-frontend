@@ -18,16 +18,16 @@ or... just create your own account!
 ## Graphical interface
 > Due to project requirements graphical interface is written in Polish.
 
-[any user] Placing orders 
+#### Placing orders [any user] 
 ![](https://github.com/HappyButter/Cyber-shop-frontend/blob/main/docs/place-order.gif)
 
-[admin] Order management 
+#### Order management [admin]
 ![](https://github.com/HappyButter/Cyber-shop-frontend/blob/b9cae82d12becda65146128f98968e945ce3695f/docs/order-management.gif)
 
-[admin] Product management
+#### Product management [admin]
 ![](https://github.com/HappyButter/Cyber-shop-frontend/blob/main/docs/product-management.gif)
 
-[admin] Promo management
+#### Promo management [admin] 
 ![](https://github.com/HappyButter/Cyber-shop-frontend/blob/main/docs/promo-management.gif)
 
 ## Database
